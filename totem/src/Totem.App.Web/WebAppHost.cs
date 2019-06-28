@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
@@ -23,7 +24,7 @@ namespace Totem.App.Web
   /// <typeparam name="TArea">The type of timeline area hosted by the application</typeparam>
   internal sealed class WebAppHost<TArea> where TArea : TimelineArea, new()
   {
-    readonly IWebHostBuilder _builder = WebHost.CreateDefaultBuilder();
+    readonly IWebHostBuilder _builder = WebHost.CreateDefaultBuilder().UseEnvironment(Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT") ?? Microsoft.Extensions.Hosting.EnvironmentName.Development);
     readonly ConfigureWebApp _configure;
 
     internal WebAppHost(ConfigureWebApp configure)
@@ -90,7 +91,7 @@ namespace Totem.App.Web
       _builder.ConfigureServices((context, services) =>
       {
         services.AddTotemRuntime();
-
+        services.AddMvc().AddRazorRuntimeCompilation();
         services.AddTimelineClient<TArea>(timeline =>
         {
           var eventStore = timeline.AddEventStore().BindOptionsToConfiguration();
@@ -101,7 +102,7 @@ namespace Totem.App.Web
         });
 
         var mvc = services
-          .AddMvc()
+          .AddMvc(option => option.EnableEndpointRouting = false)
           .AddCommandsAndQueries()
           .AddApplicationPart(Assembly.GetEntryAssembly());
 
@@ -141,5 +142,16 @@ namespace Totem.App.Web
 
     void ConfigureHost() =>
       _configure.ConfigureHost(_builder);
-  }
+    void ConfigureHostConfiguration() =>
+      _builder.Configure
+            (hostConfiguration =>
+      {
+          var pairs = new Dictionary<string, string>
+          {
+              [HostDefaults.EnvironmentKey] = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT") ?? Microsoft.Extensions.Hosting.EnvironmentName.Development
+          };
+
+          //hostConfiguration.AddInMemoryCollection(pairs);
+      });
+    }
 }
