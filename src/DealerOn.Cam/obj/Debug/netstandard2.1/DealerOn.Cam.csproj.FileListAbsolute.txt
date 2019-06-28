@@ -1,8 +1,0 @@
-C:\projects\BlazorUI\src\DealerOn.Cam\obj\Debug\netstandard2.1\DealerOn.Cam.csproj.CoreCompileInputs.cache
-C:\projects\BlazorUI\src\DealerOn.Cam\obj\Debug\netstandard2.1\DealerOn.Cam.AssemblyInfoInputs.cache
-C:\projects\BlazorUI\src\DealerOn.Cam\obj\Debug\netstandard2.1\DealerOn.Cam.AssemblyInfo.cs
-C:\projects\BlazorUI\src\DealerOn.Cam\bin\Debug\netstandard2.1\DealerOn.Cam.deps.json
-C:\projects\BlazorUI\src\DealerOn.Cam\bin\Debug\netstandard2.1\DealerOn.Cam.dll
-C:\projects\BlazorUI\src\DealerOn.Cam\bin\Debug\netstandard2.1\DealerOn.Cam.pdb
-C:\projects\BlazorUI\src\DealerOn.Cam\obj\Debug\netstandard2.1\DealerOn.Cam.dll
-C:\projects\BlazorUI\src\DealerOn.Cam\obj\Debug\netstandard2.1\DealerOn.Cam.pdb
