@@ -35,6 +35,11 @@
     <PackageReference Include="Totem.Timeline.EventStore" Version="1.0.0-beta.32" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\totem\src\Totem.App.Service\Totem.App.Service.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem.Runtime\Totem.Runtime.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem.Timeline.EventStore\Totem.Timeline.EventStore.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem.Timeline\Totem.Timeline.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem\Totem.csproj" />
     <ProjectReference Include="..\DealerOn.Cam\DealerOn.Cam.csproj" />
   </ItemGroup>
 </Project>

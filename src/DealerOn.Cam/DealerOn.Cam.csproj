@@ -34,4 +34,10 @@
     <PackageReference Include="Totem.Timeline" Version="1.0.0-beta.32" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\totem\src\Totem.Runtime\Totem.Runtime.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem.Timeline\Totem.Timeline.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem\Totem.csproj" />
+  </ItemGroup>
+
 </Project>

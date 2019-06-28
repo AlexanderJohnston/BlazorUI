@@ -408,17 +408,19 @@
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
         }
       },
-      "Totem/1.0.0-beta.32": {
-        "type": "package",
+      "Totem/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "compile": {
-          "lib/netstandard2.0/Totem.dll": {}
+          "bin/placeholder/Totem.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.dll": {}
+          "bin/placeholder/Totem.dll": {}
         }
       },
-      "Totem.Runtime/1.0.0-beta.32": {
-        "type": "package",
+      "Totem.Runtime/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Binder": "2.2.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
@@ -426,29 +428,30 @@
           "Microsoft.Extensions.Logging.Abstractions": "2.2.0",
           "Microsoft.Extensions.Options": "2.2.0",
           "Newtonsoft.Json": "12.0.1",
-          "Totem": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta"
         },
         "compile": {
-          "lib/netstandard2.0/Totem.Runtime.dll": {}
+          "bin/placeholder/Totem.Runtime.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.Runtime.dll": {}
+          "bin/placeholder/Totem.Runtime.dll": {}
         }
       },
-      "Totem.Timeline/1.0.0-beta.32": {
-        "type": "package",
+      "Totem.Timeline/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
           "System.Reactive.Linq": "4.1.2",
           "System.Reactive.PlatformServices": "4.1.2",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta"
         },
         "compile": {
-          "lib/netstandard2.0/Totem.Timeline.dll": {}
+          "bin/placeholder/Totem.Timeline.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.Timeline.dll": {}
+          "bin/placeholder/Totem.Timeline.dll": {}
         }
       }
     }
@@ -1425,44 +1428,20 @@
         "version.txt"
       ]
     },
-    "Totem/1.0.0-beta.32": {
-      "sha512": "hOaxM+/C/9zuihB2oV3Pf10RUTufwJEAyEN3r2cZKRvm0NIGK4ZKBoIRjNYAXzWopl6rbG/qlW3XwSP7vheXnw==",
-      "type": "package",
-      "path": "totem/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.dll",
-        "lib/netstandard2.0/Totem.xml",
-        "totem.1.0.0-beta.32.nupkg.sha512",
-        "totem.nuspec"
-      ]
+    "Totem/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem/Totem.csproj",
+      "msbuildProject": "../../totem/src/Totem/Totem.csproj"
     },
-    "Totem.Runtime/1.0.0-beta.32": {
-      "sha512": "hud2BYPYxT1HRd24MsWe8DYjv5i8wBSmzbevYyFSIYl9n/2CqZsGfpkQtnoD8H453nmKshWFCcduJQK2jbWaBQ==",
-      "type": "package",
-      "path": "totem.runtime/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.Runtime.dll",
-        "lib/netstandard2.0/Totem.Runtime.xml",
-        "totem.runtime.1.0.0-beta.32.nupkg.sha512",
-        "totem.runtime.nuspec"
-      ]
+    "Totem.Runtime/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.Runtime/Totem.Runtime.csproj",
+      "msbuildProject": "../../totem/src/Totem.Runtime/Totem.Runtime.csproj"
     },
-    "Totem.Timeline/1.0.0-beta.32": {
-      "sha512": "hymp/VfqvHCVHTaZUhZhlh4fKqfbG1d8Q9xskMv1Yp0qKWL2YtVYShWwyKa0Qbct6xhC+PfbxYqdWfDXUqzZVA==",
-      "type": "package",
-      "path": "totem.timeline/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.Timeline.dll",
-        "lib/netstandard2.0/Totem.Timeline.xml",
-        "totem.timeline.1.0.0-beta.32.nupkg.sha512",
-        "totem.timeline.nuspec"
-      ]
+    "Totem.Timeline/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.Timeline/Totem.Timeline.csproj",
+      "msbuildProject": "../../totem/src/Totem.Timeline/Totem.Timeline.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1506,7 +1485,17 @@
       },
       "frameworks": {
         "netstandard2.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

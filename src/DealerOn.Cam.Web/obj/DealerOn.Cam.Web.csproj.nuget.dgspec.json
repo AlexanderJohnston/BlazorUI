@@ -34,6 +34,30 @@
             "projectReferences": {
               "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj": {
                 "projectPath": "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Service\\Totem.App.Service.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Service\\Totem.App.Service.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Web\\Totem.App.Web.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Web\\Totem.App.Web.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.Mvc\\Totem.Timeline.Mvc.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.Mvc\\Totem.Timeline.Mvc.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.SignalR\\Totem.Timeline.SignalR.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.SignalR\\Totem.Timeline.SignalR.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
               }
             }
           }
@@ -147,7 +171,17 @@
         },
         "frameworks": {
           "netstandard2.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -184,6 +218,719 @@
               "version": "[1.0.0-beta.32, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          }
+        }
+      }
+    },
+    "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Service\\Totem.App.Service.csproj": {
+      "version": "1.0.0-beta",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Service\\Totem.App.Service.csproj",
+        "projectName": "Totem.App.Service",
+        "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Service\\Totem.App.Service.csproj",
+        "packagesPath": "C:\\Users\\ajohnston\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ajohnston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.dealeron.us:8624/nuget/Mainline/": {},
+          "http://nuget.dealeron.us:8624/nuget/Upgrade/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5105"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration.CommandLine": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration.EnvironmentVariables": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration.UserSecrets": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "include": "None",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0-preview6-27804-01, )",
+              "autoReferenced": true
+            },
+            "Serilog.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Serilog.Settings.Configuration": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          }
+        }
+      }
+    },
+    "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Web\\Totem.App.Web.csproj": {
+      "version": "1.0.0-beta",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Web\\Totem.App.Web.csproj",
+        "projectName": "Totem.App.Web",
+        "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Web\\Totem.App.Web.csproj",
+        "packagesPath": "C:\\Users\\ajohnston\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Web\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ajohnston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.dealeron.us:8624/nuget/Mainline/": {},
+          "http://nuget.dealeron.us:8624/nuget/Upgrade/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.Mvc\\Totem.Timeline.Mvc.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.Mvc\\Totem.Timeline.Mvc.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.SignalR\\Totem.Timeline.SignalR.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.SignalR\\Totem.Timeline.SignalR.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5105"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "dependencies": {
+            "Microsoft.AspNetCore": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.AspNetCore.Hosting": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.AspNetCore.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.StaticFiles": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "include": "None",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0-preview6-27804-01, )",
+              "autoReferenced": true
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Serilog.Settings.Configuration": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          }
+        }
+      }
+    },
+    "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+      "version": "1.0.0-beta",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj",
+        "projectName": "Totem.Runtime",
+        "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj",
+        "packagesPath": "C:\\Users\\ajohnston\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ajohnston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.dealeron.us:8624/nuget/Mainline/": {},
+          "http://nuget.dealeron.us:8624/nuget/Upgrade/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5105"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          }
+        }
+      }
+    },
+    "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj": {
+      "version": "1.0.0-beta",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj",
+        "projectName": "Totem.Timeline.EventStore",
+        "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj",
+        "packagesPath": "C:\\Users\\ajohnston\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ajohnston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.dealeron.us:8624/nuget/Mainline/": {},
+          "http://nuget.dealeron.us:8624/nuget/Upgrade/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5105"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "EventStore.ClientAPI.NetCore": {
+              "target": "Package",
+              "version": "[4.1.0.23, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "System.Reactive.Linq": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          }
+        }
+      }
+    },
+    "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.Mvc\\Totem.Timeline.Mvc.csproj": {
+      "version": "1.0.0-beta",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.Mvc\\Totem.Timeline.Mvc.csproj",
+        "projectName": "Totem.Timeline.Mvc",
+        "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.Mvc\\Totem.Timeline.Mvc.csproj",
+        "packagesPath": "C:\\Users\\ajohnston\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.Mvc\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ajohnston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.dealeron.us:8624/nuget/Mainline/": {},
+          "http://nuget.dealeron.us:8624/nuget/Upgrade/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5105"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          }
+        }
+      }
+    },
+    "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.SignalR\\Totem.Timeline.SignalR.csproj": {
+      "version": "1.0.0-beta",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.SignalR\\Totem.Timeline.SignalR.csproj",
+        "projectName": "Totem.Timeline.SignalR",
+        "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.SignalR\\Totem.Timeline.SignalR.csproj",
+        "packagesPath": "C:\\Users\\ajohnston\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.SignalR\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ajohnston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.dealeron.us:8624/nuget/Mainline/": {},
+          "http://nuget.dealeron.us:8624/nuget/Upgrade/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5105"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.AspNetCore.SignalR": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Microsoft.AspNetCore.SignalR.Core": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          }
+        }
+      }
+    },
+    "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+      "version": "1.0.0-beta",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj",
+        "projectName": "Totem.Timeline",
+        "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj",
+        "packagesPath": "C:\\Users\\ajohnston\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ajohnston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.dealeron.us:8624/nuget/Mainline/": {},
+          "http://nuget.dealeron.us:8624/nuget/Upgrade/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+              },
+              "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5105"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "System.Reactive.Linq": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            },
+            "System.Reactive.PlatformServices": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          }
+        }
+      }
+    },
+    "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+      "version": "1.0.0-beta",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj",
+        "projectName": "Totem",
+        "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj",
+        "packagesPath": "C:\\Users\\ajohnston\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ajohnston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.dealeron.us:8624/nuget/Mainline/": {},
+          "http://nuget.dealeron.us:8624/nuget/Upgrade/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5105"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
           "imports": [
             "net461",
             "net462",

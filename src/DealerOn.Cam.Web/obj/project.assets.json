@@ -1083,10 +1083,10 @@
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.dll": {}
         }
       },
-      "Microsoft.Extensions.Configuration.CommandLine/2.1.1": {
+      "Microsoft.Extensions.Configuration.CommandLine/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Configuration": "2.1.1"
+          "Microsoft.Extensions.Configuration": "2.2.0"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.CommandLine.dll": {}
@@ -1095,10 +1095,10 @@
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.CommandLine.dll": {}
         }
       },
-      "Microsoft.Extensions.Configuration.EnvironmentVariables/2.1.1": {
+      "Microsoft.Extensions.Configuration.EnvironmentVariables/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Configuration": "2.1.1"
+          "Microsoft.Extensions.Configuration": "2.2.0"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll": {}
@@ -1107,11 +1107,11 @@
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll": {}
         }
       },
-      "Microsoft.Extensions.Configuration.FileExtensions/2.1.1": {
+      "Microsoft.Extensions.Configuration.FileExtensions/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Configuration": "2.1.1",
-          "Microsoft.Extensions.FileProviders.Physical": "2.1.1"
+          "Microsoft.Extensions.Configuration": "2.2.0",
+          "Microsoft.Extensions.FileProviders.Physical": "2.2.0"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.dll": {}
@@ -1120,11 +1120,11 @@
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.dll": {}
         }
       },
-      "Microsoft.Extensions.Configuration.Json/2.1.1": {
+      "Microsoft.Extensions.Configuration.Json/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Configuration": "2.1.1",
-          "Microsoft.Extensions.Configuration.FileExtensions": "2.1.1",
+          "Microsoft.Extensions.Configuration": "2.2.0",
+          "Microsoft.Extensions.Configuration.FileExtensions": "2.2.0",
           "Newtonsoft.Json": "11.0.2"
         },
         "compile": {
@@ -1134,10 +1134,10 @@
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.Json.dll": {}
         }
       },
-      "Microsoft.Extensions.Configuration.UserSecrets/2.1.1": {
+      "Microsoft.Extensions.Configuration.UserSecrets/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Json": "2.1.1"
+          "Microsoft.Extensions.Configuration.Json": "2.2.0"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
@@ -1149,10 +1149,10 @@
           "build/netstandard2.0/_._": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection/2.1.1": {
+      "Microsoft.Extensions.DependencyInjection/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.1"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0"
         },
         "compile": {
           "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.dll": {}
@@ -1210,11 +1210,11 @@
           "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Composite.dll": {}
         }
       },
-      "Microsoft.Extensions.FileProviders.Physical/2.1.1": {
+      "Microsoft.Extensions.FileProviders.Physical/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.FileProviders.Abstractions": "2.1.1",
-          "Microsoft.Extensions.FileSystemGlobbing": "2.1.1"
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0",
+          "Microsoft.Extensions.FileSystemGlobbing": "2.2.0"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Physical.dll": {}
@@ -1223,13 +1223,29 @@
           "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Physical.dll": {}
         }
       },
-      "Microsoft.Extensions.FileSystemGlobbing/2.1.1": {
+      "Microsoft.Extensions.FileSystemGlobbing/2.2.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Hosting/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "2.2.0",
+          "Microsoft.Extensions.DependencyInjection": "2.2.0",
+          "Microsoft.Extensions.FileProviders.Physical": "2.2.0",
+          "Microsoft.Extensions.Hosting.Abstractions": "2.2.0",
+          "Microsoft.Extensions.Logging": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Hosting.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Hosting.dll": {}
         }
       },
       "Microsoft.Extensions.Hosting.Abstractions/2.2.0": {
@@ -1271,13 +1287,13 @@
           "lib/netstandard2.0/Microsoft.Extensions.Localization.Abstractions.dll": {}
         }
       },
-      "Microsoft.Extensions.Logging/2.1.1": {
+      "Microsoft.Extensions.Logging/2.2.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Binder": "2.1.1",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.1",
-          "Microsoft.Extensions.Logging.Abstractions": "2.1.1",
-          "Microsoft.Extensions.Options": "2.1.1"
+          "Microsoft.Extensions.Configuration.Binder": "2.2.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
+          "Microsoft.Extensions.Logging.Abstractions": "2.2.0",
+          "Microsoft.Extensions.Options": "2.2.0"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Extensions.Logging.dll": {}
@@ -1802,6 +1818,22 @@
         },
         "runtime": {
           "lib/netstandard2.0/Serilog.AspNetCore.dll": {}
+        }
+      },
+      "Serilog.Extensions.Hosting/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0",
+          "Microsoft.Extensions.Hosting.Abstractions": "2.1.0",
+          "Microsoft.Extensions.Logging.Abstractions": "2.1.0",
+          "Serilog": "2.5.0",
+          "Serilog.Extensions.Logging": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Serilog.Extensions.Hosting.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Serilog.Extensions.Hosting.dll": {}
         }
       },
       "Serilog.Extensions.Logging/2.0.0": {
@@ -3262,17 +3294,63 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "Totem/1.0.0-beta.32": {
-        "type": "package",
+      "DealerOn.Cam/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1",
+          "System.Data.SqlClient": "4.6.0",
+          "System.Reactive.Linq": "4.1.2",
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta",
+          "Totem.Timeline": "1.0.0-beta"
+        },
         "compile": {
-          "lib/netstandard2.0/Totem.dll": {}
+          "bin/placeholder/DealerOn.Cam.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.dll": {}
+          "bin/placeholder/DealerOn.Cam.dll": {}
         }
       },
-      "Totem.App.Web/1.0.0-beta.32": {
-        "type": "package",
+      "Totem/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Totem.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Totem.dll": {}
+        }
+      },
+      "Totem.App.Service/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.0",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "2.2.0",
+          "Microsoft.Extensions.Configuration.CommandLine": "2.2.0",
+          "Microsoft.Extensions.Configuration.EnvironmentVariables": "2.2.0",
+          "Microsoft.Extensions.Configuration.Json": "2.2.0",
+          "Microsoft.Extensions.Configuration.UserSecrets": "2.2.0",
+          "Microsoft.Extensions.Hosting": "2.2.0",
+          "Microsoft.Extensions.Options": "2.2.0",
+          "Serilog.Extensions.Hosting": "2.0.0",
+          "Serilog.Settings.Configuration": "3.0.1",
+          "Serilog.Sinks.Console": "3.1.1",
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta",
+          "Totem.Timeline": "1.0.0-beta",
+          "Totem.Timeline.EventStore": "1.0.0-beta"
+        },
+        "compile": {
+          "bin/placeholder/Totem.App.Service.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Totem.App.Service.dll": {}
+        }
+      },
+      "Totem.App.Web/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.0",
         "dependencies": {
           "Microsoft.AspNetCore": "2.1.1",
           "Microsoft.AspNetCore.Hosting": "2.1.1",
@@ -3281,22 +3359,23 @@
           "Serilog.AspNetCore": "2.1.1",
           "Serilog.Settings.Configuration": "3.0.1",
           "Serilog.Sinks.Console": "3.1.1",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32",
-          "Totem.Timeline": "1.0.0-beta.32",
-          "Totem.Timeline.EventStore": "1.0.0-beta.32",
-          "Totem.Timeline.Mvc": "1.0.0-beta.32",
-          "Totem.Timeline.SignalR": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta",
+          "Totem.Timeline": "1.0.0-beta",
+          "Totem.Timeline.EventStore": "1.0.0-beta",
+          "Totem.Timeline.Mvc": "1.0.0-beta",
+          "Totem.Timeline.SignalR": "1.0.0-beta"
         },
         "compile": {
-          "lib/netcoreapp2.2/Totem.App.Web.dll": {}
+          "bin/placeholder/Totem.App.Web.dll": {}
         },
         "runtime": {
-          "lib/netcoreapp2.2/Totem.App.Web.dll": {}
+          "bin/placeholder/Totem.App.Web.dll": {}
         }
       },
-      "Totem.Runtime/1.0.0-beta.32": {
-        "type": "package",
+      "Totem.Runtime/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Binder": "2.2.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
@@ -3304,98 +3383,84 @@
           "Microsoft.Extensions.Logging.Abstractions": "2.2.0",
           "Microsoft.Extensions.Options": "2.2.0",
           "Newtonsoft.Json": "12.0.1",
-          "Totem": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta"
         },
         "compile": {
-          "lib/netstandard2.0/Totem.Runtime.dll": {}
+          "bin/placeholder/Totem.Runtime.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.Runtime.dll": {}
+          "bin/placeholder/Totem.Runtime.dll": {}
         }
       },
-      "Totem.Timeline/1.0.0-beta.32": {
-        "type": "package",
+      "Totem.Timeline/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
           "System.Reactive.Linq": "4.1.2",
           "System.Reactive.PlatformServices": "4.1.2",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta"
         },
         "compile": {
-          "lib/netstandard2.0/Totem.Timeline.dll": {}
+          "bin/placeholder/Totem.Timeline.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.Timeline.dll": {}
+          "bin/placeholder/Totem.Timeline.dll": {}
         }
       },
-      "Totem.Timeline.EventStore/1.0.0-beta.32": {
-        "type": "package",
+      "Totem.Timeline.EventStore/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "EventStore.ClientAPI.NetCore": "4.1.0.23",
           "Microsoft.Extensions.Configuration": "2.2.0",
           "System.Reactive.Linq": "4.1.2",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32",
-          "Totem.Timeline": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta",
+          "Totem.Timeline": "1.0.0-beta"
         },
         "compile": {
-          "lib/netstandard2.0/Totem.Timeline.EventStore.dll": {}
+          "bin/placeholder/Totem.Timeline.EventStore.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.Timeline.EventStore.dll": {}
+          "bin/placeholder/Totem.Timeline.EventStore.dll": {}
         }
       },
-      "Totem.Timeline.Mvc/1.0.0-beta.32": {
-        "type": "package",
+      "Totem.Timeline.Mvc/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc": "2.1.1",
           "Microsoft.AspNetCore.Mvc.Core": "2.1.1",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32",
-          "Totem.Timeline": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta",
+          "Totem.Timeline": "1.0.0-beta"
         },
         "compile": {
-          "lib/netstandard2.0/Totem.Timeline.Mvc.dll": {}
+          "bin/placeholder/Totem.Timeline.Mvc.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.Timeline.Mvc.dll": {}
+          "bin/placeholder/Totem.Timeline.Mvc.dll": {}
         }
       },
-      "Totem.Timeline.SignalR/1.0.0-beta.32": {
-        "type": "package",
+      "Totem.Timeline.SignalR/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc": "2.1.1",
           "Microsoft.AspNetCore.Mvc.Core": "2.1.1",
           "Microsoft.AspNetCore.SignalR": "1.1.0",
           "Microsoft.AspNetCore.SignalR.Core": "1.1.0",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32",
-          "Totem.Timeline": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta",
+          "Totem.Timeline": "1.0.0-beta"
         },
         "compile": {
-          "lib/netstandard2.0/Totem.Timeline.SignalR.dll": {}
+          "bin/placeholder/Totem.Timeline.SignalR.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.Timeline.SignalR.dll": {}
-        }
-      },
-      "DealerOn.Cam/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.1",
-        "dependencies": {
-          "Newtonsoft.Json": "12.0.1",
-          "System.Data.SqlClient": "4.6.0",
-          "System.Reactive.Linq": "4.1.2",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32",
-          "Totem.Timeline": "1.0.0-beta.32"
-        },
-        "compile": {
-          "bin/placeholder/DealerOn.Cam.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DealerOn.Cam.dll": {}
+          "bin/placeholder/Totem.Timeline.SignalR.dll": {}
         }
       }
     }
@@ -4435,62 +4500,62 @@
         "microsoft.extensions.configuration.binder.nuspec"
       ]
     },
-    "Microsoft.Extensions.Configuration.CommandLine/2.1.1": {
-      "sha512": "ZFEOXcp9gZdOoINRGg6sUYqEUU6X4HRShPPLbY9tY/r+PTWyVBwucYzuueHLE7k5yxJTNBnIHpxtJ8PMvxjjBQ==",
+    "Microsoft.Extensions.Configuration.CommandLine/2.2.0": {
+      "sha512": "4kJIGOSRqD1Ccqerst4t/zsNs51plR7BIxbdKO1J/9rL+2DuNT+ieAuEv+HROelqTam3yOpKFR7TtHBt3oLpOA==",
       "type": "package",
-      "path": "microsoft.extensions.configuration.commandline/2.1.1",
+      "path": "microsoft.extensions.configuration.commandline/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.CommandLine.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.CommandLine.xml",
-        "microsoft.extensions.configuration.commandline.2.1.1.nupkg.sha512",
+        "microsoft.extensions.configuration.commandline.2.2.0.nupkg.sha512",
         "microsoft.extensions.configuration.commandline.nuspec"
       ]
     },
-    "Microsoft.Extensions.Configuration.EnvironmentVariables/2.1.1": {
-      "sha512": "6xMxFIfKL+7J/jwlk8zV8I61sF3+DRG19iKQxnSfYQU+iMMjGbcWNCHFF/3MHf3o4sTZPZ8D6Io+GwKFc3TIZA==",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables/2.2.0": {
+      "sha512": "gIqt9PkKO01hZ0zmHnWrZ1E45MDreZTVoyDbL1kMWKtDgxxWTJpYtESTEcgpvR1uB1iex1zKGYzJpOMgmuP5TQ==",
       "type": "package",
-      "path": "microsoft.extensions.configuration.environmentvariables/2.1.1",
+      "path": "microsoft.extensions.configuration.environmentvariables/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.EnvironmentVariables.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.EnvironmentVariables.xml",
-        "microsoft.extensions.configuration.environmentvariables.2.1.1.nupkg.sha512",
+        "microsoft.extensions.configuration.environmentvariables.2.2.0.nupkg.sha512",
         "microsoft.extensions.configuration.environmentvariables.nuspec"
       ]
     },
-    "Microsoft.Extensions.Configuration.FileExtensions/2.1.1": {
-      "sha512": "CDk5CwG0YzlRgvl65J0iK6ahrX12yMRrEat3yVTXjWC+GN9Jg9zHZu2IE4cQIPAMA/IiAI5KjgL08fhP3fPCkw==",
+    "Microsoft.Extensions.Configuration.FileExtensions/2.2.0": {
+      "sha512": "H1qCpWBC8Ed4tguTR/qYkbb3F6DI5Su3t8xyFo3/5MzAd8PwPpHzgX8X04KbBxKmk173Pb64x7xMHarczVFQUA==",
       "type": "package",
-      "path": "microsoft.extensions.configuration.fileextensions/2.1.1",
+      "path": "microsoft.extensions.configuration.fileextensions/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.xml",
-        "microsoft.extensions.configuration.fileextensions.2.1.1.nupkg.sha512",
+        "microsoft.extensions.configuration.fileextensions.2.2.0.nupkg.sha512",
         "microsoft.extensions.configuration.fileextensions.nuspec"
       ]
     },
-    "Microsoft.Extensions.Configuration.Json/2.1.1": {
-      "sha512": "IFpONpvdhVEE3S3F4fTYkpT/GyIHtumy2m0HniQanJ80Pj/pUF3Z4wjrHEp1G78rPD+WTo5fRlhdJfuU1Tv2GQ==",
+    "Microsoft.Extensions.Configuration.Json/2.2.0": {
+      "sha512": "jUDdmLyFmLf9V3mqnMzSAzAv4QigJ67tZh5Q7HBXeBnESL2UyeesNG6jSBti+b63JpxZf+EDyn+anx3gyrNxug==",
       "type": "package",
-      "path": "microsoft.extensions.configuration.json/2.1.1",
+      "path": "microsoft.extensions.configuration.json/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.Json.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.Json.xml",
-        "microsoft.extensions.configuration.json.2.1.1.nupkg.sha512",
+        "microsoft.extensions.configuration.json.2.2.0.nupkg.sha512",
         "microsoft.extensions.configuration.json.nuspec"
       ]
     },
-    "Microsoft.Extensions.Configuration.UserSecrets/2.1.1": {
-      "sha512": "/HeMnhc9a6Ou9V+QIdGYHtYuOf0t0RQ//odFUrJ249F6W78pJyVDZY7RnhH4UMF+WLOJpo6hh010DIlW2nqqSA==",
+    "Microsoft.Extensions.Configuration.UserSecrets/2.2.0": {
+      "sha512": "2/N2xo6/sNbVshnKktmq5lwaQbsAR2SrzCVrJEeMP8OKZVI7SzT8P6/WXZF8/YC7dTYsMe3nrHzgl1cF9i5ZKQ==",
       "type": "package",
-      "path": "microsoft.extensions.configuration.usersecrets/2.1.1",
+      "path": "microsoft.extensions.configuration.usersecrets/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4498,14 +4563,14 @@
         "build/netstandard2.0/Microsoft.Extensions.Configuration.UserSecrets.targets",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.UserSecrets.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Configuration.UserSecrets.xml",
-        "microsoft.extensions.configuration.usersecrets.2.1.1.nupkg.sha512",
+        "microsoft.extensions.configuration.usersecrets.2.2.0.nupkg.sha512",
         "microsoft.extensions.configuration.usersecrets.nuspec"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection/2.1.1": {
-      "sha512": "RVdgNWT/73M0eCpreGpWv5NmbHFGQzzW+G7nChK8ej84m+d1nzeWrtqcRYnEpKNx3B8V/Uek4tNP0WCaCNjYnQ==",
+    "Microsoft.Extensions.DependencyInjection/2.2.0": {
+      "sha512": "MZtBIwfDFork5vfjpJdG5g8wuJFt7d/y3LOSVVtDK/76wlbtz6cjltfKHqLx2TKVqTj5/c41t77m1+h20zqtPA==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection/2.1.1",
+      "path": "microsoft.extensions.dependencyinjection/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4515,7 +4580,7 @@
         "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.xml",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.dll",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.xml",
-        "microsoft.extensions.dependencyinjection.2.1.1.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.2.2.0.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.nuspec"
       ]
     },
@@ -4574,30 +4639,43 @@
         "microsoft.extensions.fileproviders.composite.nuspec"
       ]
     },
-    "Microsoft.Extensions.FileProviders.Physical/2.1.1": {
-      "sha512": "kVCvLm1ePchUgRrQZrno07Mn6knDAzR7vl6eRaI/fem0u6ODg+RTwOYLs4XL39Ttuu+BzEwqzHu3DtDgXT8+vQ==",
+    "Microsoft.Extensions.FileProviders.Physical/2.2.0": {
+      "sha512": "tbDHZnBJkjYd9NjlRZ9ondDiv1Te3KYCTW2RWpR1B0e1Z8+EnFRo7qNnHkkSCixLdlPZzhjlX24d/PixQ7w2dA==",
       "type": "package",
-      "path": "microsoft.extensions.fileproviders.physical/2.1.1",
+      "path": "microsoft.extensions.fileproviders.physical/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Physical.dll",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Physical.xml",
-        "microsoft.extensions.fileproviders.physical.2.1.1.nupkg.sha512",
+        "microsoft.extensions.fileproviders.physical.2.2.0.nupkg.sha512",
         "microsoft.extensions.fileproviders.physical.nuspec"
       ]
     },
-    "Microsoft.Extensions.FileSystemGlobbing/2.1.1": {
-      "sha512": "4QDzyCN8cJnThY6mK9SnzovyCZ8KCG9jmC9KqHfFGtazJvmNZP1gcyBkPmqMjP0qwbmEUUyqyA9LLn3FrYXTGw==",
+    "Microsoft.Extensions.FileSystemGlobbing/2.2.0": {
+      "sha512": "ZSsHZp3PyW6vk37tDEdypjgGlNtpJ0EixBMOfUod2Thx7GtwfFSAQXUQx8a8BN8vfWKGGMbp7jPWdoHx/At4wQ==",
       "type": "package",
-      "path": "microsoft.extensions.filesystemglobbing/2.1.1",
+      "path": "microsoft.extensions.filesystemglobbing/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll",
         "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.xml",
-        "microsoft.extensions.filesystemglobbing.2.1.1.nupkg.sha512",
+        "microsoft.extensions.filesystemglobbing.2.2.0.nupkg.sha512",
         "microsoft.extensions.filesystemglobbing.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Hosting/2.2.0": {
+      "sha512": "PxZPd5QbWr8+3JN2segEaD7IAYI+mR8ZmMqgo6GOk+E+UKnRcbC3RSQgJrZYuWVQwJCvdxesO5e64LSHC1zC8g==",
+      "type": "package",
+      "path": "microsoft.extensions.hosting/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.Extensions.Hosting.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Hosting.xml",
+        "microsoft.extensions.hosting.2.2.0.nupkg.sha512",
+        "microsoft.extensions.hosting.nuspec"
       ]
     },
     "Microsoft.Extensions.Hosting.Abstractions/2.2.0": {
@@ -4639,16 +4717,16 @@
         "microsoft.extensions.localization.abstractions.nuspec"
       ]
     },
-    "Microsoft.Extensions.Logging/2.1.1": {
-      "sha512": "hh+mkOAQDTp6XH80xJt3+wwYVzkbwYQl9XZRCz4Um0JjP/o7N9vHM3rZ6wwwtr+BBe/L6iBO2sz0px6OWBzqZQ==",
+    "Microsoft.Extensions.Logging/2.2.0": {
+      "sha512": "Nxqhadc9FCmFHzU+fz3oc8sFlE6IadViYg8dfUdGzJZ2JUxnCsRghBhhOWdM4B2zSZqEc+0BjliBh/oNdRZuig==",
       "type": "package",
-      "path": "microsoft.extensions.logging/2.1.1",
+      "path": "microsoft.extensions.logging/2.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.xml",
-        "microsoft.extensions.logging.2.1.1.nupkg.sha512",
+        "microsoft.extensions.logging.2.2.0.nupkg.sha512",
         "microsoft.extensions.logging.nuspec"
       ]
     },
@@ -5289,6 +5367,19 @@
         "lib/netstandard2.0/Serilog.AspNetCore.xml",
         "serilog.aspnetcore.2.1.1.nupkg.sha512",
         "serilog.aspnetcore.nuspec"
+      ]
+    },
+    "Serilog.Extensions.Hosting/2.0.0": {
+      "sha512": "sZP1U5YV7UrHeR0+pPnmLGTeOmJqhSAnt4xyxcPXIeGq7A5ftKNdR5fnH4Hh1M2q3ms6YPQDALD9pO56iTYxrw==",
+      "type": "package",
+      "path": "serilog.extensions.hosting/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Serilog.Extensions.Hosting.dll",
+        "lib/netstandard2.0/Serilog.Extensions.Hosting.xml",
+        "serilog.extensions.hosting.2.0.0.nupkg.sha512",
+        "serilog.extensions.hosting.nuspec"
       ]
     },
     "Serilog.Extensions.Logging/2.0.0": {
@@ -9629,101 +9720,50 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
-    "Totem/1.0.0-beta.32": {
-      "sha512": "hOaxM+/C/9zuihB2oV3Pf10RUTufwJEAyEN3r2cZKRvm0NIGK4ZKBoIRjNYAXzWopl6rbG/qlW3XwSP7vheXnw==",
-      "type": "package",
-      "path": "totem/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.dll",
-        "lib/netstandard2.0/Totem.xml",
-        "totem.1.0.0-beta.32.nupkg.sha512",
-        "totem.nuspec"
-      ]
-    },
-    "Totem.App.Web/1.0.0-beta.32": {
-      "sha512": "Ufpp+J4613WFVvhbcCV3L6fSi4swDaefAukJgP8aFXXXzaqOa88QehcOR+3GdkR0S5GwHYnBF604qmPMKvPSVA==",
-      "type": "package",
-      "path": "totem.app.web/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netcoreapp2.2/Totem.App.Web.dll",
-        "lib/netcoreapp2.2/Totem.App.Web.xml",
-        "totem.app.web.1.0.0-beta.32.nupkg.sha512",
-        "totem.app.web.nuspec"
-      ]
-    },
-    "Totem.Runtime/1.0.0-beta.32": {
-      "sha512": "hud2BYPYxT1HRd24MsWe8DYjv5i8wBSmzbevYyFSIYl9n/2CqZsGfpkQtnoD8H453nmKshWFCcduJQK2jbWaBQ==",
-      "type": "package",
-      "path": "totem.runtime/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.Runtime.dll",
-        "lib/netstandard2.0/Totem.Runtime.xml",
-        "totem.runtime.1.0.0-beta.32.nupkg.sha512",
-        "totem.runtime.nuspec"
-      ]
-    },
-    "Totem.Timeline/1.0.0-beta.32": {
-      "sha512": "hymp/VfqvHCVHTaZUhZhlh4fKqfbG1d8Q9xskMv1Yp0qKWL2YtVYShWwyKa0Qbct6xhC+PfbxYqdWfDXUqzZVA==",
-      "type": "package",
-      "path": "totem.timeline/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.Timeline.dll",
-        "lib/netstandard2.0/Totem.Timeline.xml",
-        "totem.timeline.1.0.0-beta.32.nupkg.sha512",
-        "totem.timeline.nuspec"
-      ]
-    },
-    "Totem.Timeline.EventStore/1.0.0-beta.32": {
-      "sha512": "IE7Yhwo68UmWyIeDFIudOziuf0Yj1rF22jKhm9+ueWmOANn326vICPzIDO6My+QBf8O+voLQaOXfSlV0zu6HHg==",
-      "type": "package",
-      "path": "totem.timeline.eventstore/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.Timeline.EventStore.dll",
-        "lib/netstandard2.0/Totem.Timeline.EventStore.xml",
-        "totem.timeline.eventstore.1.0.0-beta.32.nupkg.sha512",
-        "totem.timeline.eventstore.nuspec"
-      ]
-    },
-    "Totem.Timeline.Mvc/1.0.0-beta.32": {
-      "sha512": "8mrfflg6KTJ3caTPK+ZR5UzbZ2eQtTESNtuGvKQgWyDEpRG4u0u/mu8/Rf79+IkAgw3eCn3S3o4MsNRauPT8XA==",
-      "type": "package",
-      "path": "totem.timeline.mvc/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.Timeline.Mvc.dll",
-        "lib/netstandard2.0/Totem.Timeline.Mvc.xml",
-        "totem.timeline.mvc.1.0.0-beta.32.nupkg.sha512",
-        "totem.timeline.mvc.nuspec"
-      ]
-    },
-    "Totem.Timeline.SignalR/1.0.0-beta.32": {
-      "sha512": "nJa3t1DUHfFLMr4h/N7XV8IBXn9l9Cm34OK41tSj8wNSDJqs95yzOCRIuW5qzkwp96mci+H9QUGE/61HuVd3uw==",
-      "type": "package",
-      "path": "totem.timeline.signalr/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.Timeline.SignalR.dll",
-        "lib/netstandard2.0/Totem.Timeline.SignalR.xml",
-        "totem.timeline.signalr.1.0.0-beta.32.nupkg.sha512",
-        "totem.timeline.signalr.nuspec"
-      ]
-    },
     "DealerOn.Cam/1.0.0": {
       "type": "project",
       "path": "../DealerOn.Cam/DealerOn.Cam.csproj",
       "msbuildProject": "../DealerOn.Cam/DealerOn.Cam.csproj"
+    },
+    "Totem/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem/Totem.csproj",
+      "msbuildProject": "../../totem/src/Totem/Totem.csproj"
+    },
+    "Totem.App.Service/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.App.Service/Totem.App.Service.csproj",
+      "msbuildProject": "../../totem/src/Totem.App.Service/Totem.App.Service.csproj"
+    },
+    "Totem.App.Web/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.App.Web/Totem.App.Web.csproj",
+      "msbuildProject": "../../totem/src/Totem.App.Web/Totem.App.Web.csproj"
+    },
+    "Totem.Runtime/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.Runtime/Totem.Runtime.csproj",
+      "msbuildProject": "../../totem/src/Totem.Runtime/Totem.Runtime.csproj"
+    },
+    "Totem.Timeline/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.Timeline/Totem.Timeline.csproj",
+      "msbuildProject": "../../totem/src/Totem.Timeline/Totem.Timeline.csproj"
+    },
+    "Totem.Timeline.EventStore/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.Timeline.EventStore/Totem.Timeline.EventStore.csproj",
+      "msbuildProject": "../../totem/src/Totem.Timeline.EventStore/Totem.Timeline.EventStore.csproj"
+    },
+    "Totem.Timeline.Mvc/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.Timeline.Mvc/Totem.Timeline.Mvc.csproj",
+      "msbuildProject": "../../totem/src/Totem.Timeline.Mvc/Totem.Timeline.Mvc.csproj"
+    },
+    "Totem.Timeline.SignalR/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.Timeline.SignalR/Totem.Timeline.SignalR.csproj",
+      "msbuildProject": "../../totem/src/Totem.Timeline.SignalR/Totem.Timeline.SignalR.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -9735,6 +9775,7 @@
       "Serilog.Sinks.Console >= 3.1.1",
       "System.Reactive.Linq >= 4.1.2",
       "Totem >= 1.0.0-beta.32",
+      "Totem.App.Service >= 1.0.0-beta",
       "Totem.App.Web >= 1.0.0-beta.32",
       "Totem.Runtime >= 1.0.0-beta.32",
       "Totem.Timeline >= 1.0.0-beta.32",
@@ -9777,6 +9818,30 @@
           "projectReferences": {
             "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj": {
               "projectPath": "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Service\\Totem.App.Service.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Service\\Totem.App.Service.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Web\\Totem.App.Web.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Web\\Totem.App.Web.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.Mvc\\Totem.Timeline.Mvc.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.Mvc\\Totem.Timeline.Mvc.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.SignalR\\Totem.Timeline.SignalR.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.SignalR\\Totem.Timeline.SignalR.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
             }
           }
         }

@@ -60,6 +60,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\totem\src\Totem.App.Service\Totem.App.Service.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem.App.Web\Totem.App.Web.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem.Runtime\Totem.Runtime.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem.Timeline.EventStore\Totem.Timeline.EventStore.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem.Timeline.Mvc\Totem.Timeline.Mvc.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem.Timeline.SignalR\Totem.Timeline.SignalR.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem.Timeline\Totem.Timeline.csproj" />
+    <ProjectReference Include="..\..\totem\src\Totem\Totem.csproj" />
     <ProjectReference Include="..\DealerOn.Cam\DealerOn.Cam.csproj" />
   </ItemGroup>
 

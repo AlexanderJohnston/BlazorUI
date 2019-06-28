@@ -1979,17 +1979,37 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Totem/1.0.0-beta.32": {
-        "type": "package",
+      "DealerOn.Cam/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1",
+          "System.Data.SqlClient": "4.6.0",
+          "System.Reactive.Linq": "4.1.2",
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta",
+          "Totem.Timeline": "1.0.0-beta"
+        },
         "compile": {
-          "lib/netstandard2.0/Totem.dll": {}
+          "bin/placeholder/DealerOn.Cam.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.dll": {}
+          "bin/placeholder/DealerOn.Cam.dll": {}
         }
       },
-      "Totem.App.Service/1.0.0-beta.32": {
-        "type": "package",
+      "Totem/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Totem.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Totem.dll": {}
+        }
+      },
+      "Totem.App.Service/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.0",
         "dependencies": {
           "Microsoft.Extensions.Configuration": "2.2.0",
           "Microsoft.Extensions.Configuration.CommandLine": "2.2.0",
@@ -2001,20 +2021,21 @@
           "Serilog.Extensions.Hosting": "2.0.0",
           "Serilog.Settings.Configuration": "3.0.1",
           "Serilog.Sinks.Console": "3.1.1",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32",
-          "Totem.Timeline": "1.0.0-beta.32",
-          "Totem.Timeline.EventStore": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta",
+          "Totem.Timeline": "1.0.0-beta",
+          "Totem.Timeline.EventStore": "1.0.0-beta"
         },
         "compile": {
-          "lib/netcoreapp2.2/Totem.App.Service.dll": {}
+          "bin/placeholder/Totem.App.Service.dll": {}
         },
         "runtime": {
-          "lib/netcoreapp2.2/Totem.App.Service.dll": {}
+          "bin/placeholder/Totem.App.Service.dll": {}
         }
       },
-      "Totem.Runtime/1.0.0-beta.32": {
-        "type": "package",
+      "Totem.Runtime/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Binder": "2.2.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
@@ -2022,64 +2043,48 @@
           "Microsoft.Extensions.Logging.Abstractions": "2.2.0",
           "Microsoft.Extensions.Options": "2.2.0",
           "Newtonsoft.Json": "12.0.1",
-          "Totem": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta"
         },
         "compile": {
-          "lib/netstandard2.0/Totem.Runtime.dll": {}
+          "bin/placeholder/Totem.Runtime.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.Runtime.dll": {}
+          "bin/placeholder/Totem.Runtime.dll": {}
         }
       },
-      "Totem.Timeline/1.0.0-beta.32": {
-        "type": "package",
+      "Totem.Timeline/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0",
           "System.Reactive.Linq": "4.1.2",
           "System.Reactive.PlatformServices": "4.1.2",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta"
         },
         "compile": {
-          "lib/netstandard2.0/Totem.Timeline.dll": {}
+          "bin/placeholder/Totem.Timeline.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.Timeline.dll": {}
+          "bin/placeholder/Totem.Timeline.dll": {}
         }
       },
-      "Totem.Timeline.EventStore/1.0.0-beta.32": {
-        "type": "package",
+      "Totem.Timeline.EventStore/1.0.0-beta": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "EventStore.ClientAPI.NetCore": "4.1.0.23",
           "Microsoft.Extensions.Configuration": "2.2.0",
           "System.Reactive.Linq": "4.1.2",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32",
-          "Totem.Timeline": "1.0.0-beta.32"
+          "Totem": "1.0.0-beta",
+          "Totem.Runtime": "1.0.0-beta",
+          "Totem.Timeline": "1.0.0-beta"
         },
         "compile": {
-          "lib/netstandard2.0/Totem.Timeline.EventStore.dll": {}
+          "bin/placeholder/Totem.Timeline.EventStore.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Totem.Timeline.EventStore.dll": {}
-        }
-      },
-      "DealerOn.Cam/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.1",
-        "dependencies": {
-          "Newtonsoft.Json": "12.0.1",
-          "System.Data.SqlClient": "4.6.0",
-          "System.Reactive.Linq": "4.1.2",
-          "Totem": "1.0.0-beta.32",
-          "Totem.Runtime": "1.0.0-beta.32",
-          "Totem.Timeline": "1.0.0-beta.32"
-        },
-        "compile": {
-          "bin/placeholder/DealerOn.Cam.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DealerOn.Cam.dll": {}
+          "bin/placeholder/Totem.Timeline.EventStore.dll": {}
         }
       }
     }
@@ -6752,75 +6757,35 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Totem/1.0.0-beta.32": {
-      "sha512": "hOaxM+/C/9zuihB2oV3Pf10RUTufwJEAyEN3r2cZKRvm0NIGK4ZKBoIRjNYAXzWopl6rbG/qlW3XwSP7vheXnw==",
-      "type": "package",
-      "path": "totem/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.dll",
-        "lib/netstandard2.0/Totem.xml",
-        "totem.1.0.0-beta.32.nupkg.sha512",
-        "totem.nuspec"
-      ]
-    },
-    "Totem.App.Service/1.0.0-beta.32": {
-      "sha512": "tfjkW8YTRggB1a77RiAw0g3TEpG4WUJHd4bnn/cJVbJkq5VV8bz42VXScrkcTWgX5k5NjS2vfFmRvt1U2YU96w==",
-      "type": "package",
-      "path": "totem.app.service/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netcoreapp2.2/Totem.App.Service.dll",
-        "lib/netcoreapp2.2/Totem.App.Service.xml",
-        "totem.app.service.1.0.0-beta.32.nupkg.sha512",
-        "totem.app.service.nuspec"
-      ]
-    },
-    "Totem.Runtime/1.0.0-beta.32": {
-      "sha512": "hud2BYPYxT1HRd24MsWe8DYjv5i8wBSmzbevYyFSIYl9n/2CqZsGfpkQtnoD8H453nmKshWFCcduJQK2jbWaBQ==",
-      "type": "package",
-      "path": "totem.runtime/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.Runtime.dll",
-        "lib/netstandard2.0/Totem.Runtime.xml",
-        "totem.runtime.1.0.0-beta.32.nupkg.sha512",
-        "totem.runtime.nuspec"
-      ]
-    },
-    "Totem.Timeline/1.0.0-beta.32": {
-      "sha512": "hymp/VfqvHCVHTaZUhZhlh4fKqfbG1d8Q9xskMv1Yp0qKWL2YtVYShWwyKa0Qbct6xhC+PfbxYqdWfDXUqzZVA==",
-      "type": "package",
-      "path": "totem.timeline/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.Timeline.dll",
-        "lib/netstandard2.0/Totem.Timeline.xml",
-        "totem.timeline.1.0.0-beta.32.nupkg.sha512",
-        "totem.timeline.nuspec"
-      ]
-    },
-    "Totem.Timeline.EventStore/1.0.0-beta.32": {
-      "sha512": "IE7Yhwo68UmWyIeDFIudOziuf0Yj1rF22jKhm9+ueWmOANn326vICPzIDO6My+QBf8O+voLQaOXfSlV0zu6HHg==",
-      "type": "package",
-      "path": "totem.timeline.eventstore/1.0.0-beta.32",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Totem.Timeline.EventStore.dll",
-        "lib/netstandard2.0/Totem.Timeline.EventStore.xml",
-        "totem.timeline.eventstore.1.0.0-beta.32.nupkg.sha512",
-        "totem.timeline.eventstore.nuspec"
-      ]
-    },
     "DealerOn.Cam/1.0.0": {
       "type": "project",
       "path": "../DealerOn.Cam/DealerOn.Cam.csproj",
       "msbuildProject": "../DealerOn.Cam/DealerOn.Cam.csproj"
+    },
+    "Totem/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem/Totem.csproj",
+      "msbuildProject": "../../totem/src/Totem/Totem.csproj"
+    },
+    "Totem.App.Service/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.App.Service/Totem.App.Service.csproj",
+      "msbuildProject": "../../totem/src/Totem.App.Service/Totem.App.Service.csproj"
+    },
+    "Totem.Runtime/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.Runtime/Totem.Runtime.csproj",
+      "msbuildProject": "../../totem/src/Totem.Runtime/Totem.Runtime.csproj"
+    },
+    "Totem.Timeline/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.Timeline/Totem.Timeline.csproj",
+      "msbuildProject": "../../totem/src/Totem.Timeline/Totem.Timeline.csproj"
+    },
+    "Totem.Timeline.EventStore/1.0.0-beta": {
+      "type": "project",
+      "path": "../../totem/src/Totem.Timeline.EventStore/Totem.Timeline.EventStore.csproj",
+      "msbuildProject": "../../totem/src/Totem.Timeline.EventStore/Totem.Timeline.EventStore.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6881,6 +6846,21 @@
           "projectReferences": {
             "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj": {
               "projectPath": "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Service\\Totem.App.Service.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.App.Service\\Totem.App.Service.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Runtime\\Totem.Runtime.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline.EventStore\\Totem.Timeline.EventStore.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem.Timeline\\Totem.Timeline.csproj"
+            },
+            "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj": {
+              "projectPath": "C:\\projects\\BlazorUI\\totem\\src\\Totem\\Totem.csproj"
             }
           }
         }
