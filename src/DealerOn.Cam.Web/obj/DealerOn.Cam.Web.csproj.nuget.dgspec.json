@@ -1,0 +1,206 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\projects\\BlazorUI\\src\\DealerOn.Cam.Web\\DealerOn.Cam.Web.csproj": {}
+  },
+  "projects": {
+    "C:\\projects\\BlazorUI\\src\\DealerOn.Cam.Web\\DealerOn.Cam.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\BlazorUI\\src\\DealerOn.Cam.Web\\DealerOn.Cam.Web.csproj",
+        "projectName": "DealerOn.Cam.Web",
+        "projectPath": "C:\\projects\\BlazorUI\\src\\DealerOn.Cam.Web\\DealerOn.Cam.Web.csproj",
+        "packagesPath": "C:\\Users\\ajohnston\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\BlazorUI\\src\\DealerOn.Cam.Web\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ajohnston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.dealeron.us:8624/nuget/Mainline/": {},
+          "http://nuget.dealeron.us:8624/nuget/Upgrade/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {
+              "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj": {
+                "projectPath": "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "include": "None",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0-preview6-27804-01, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "System.Reactive.Linq": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            },
+            "Totem": {
+              "target": "Package",
+              "version": "[1.0.0-beta.32, )"
+            },
+            "Totem.App.Web": {
+              "target": "Package",
+              "version": "[1.0.0-beta.32, )"
+            },
+            "Totem.Runtime": {
+              "target": "Package",
+              "version": "[1.0.0-beta.32, )"
+            },
+            "Totem.Timeline": {
+              "target": "Package",
+              "version": "[1.0.0-beta.32, )"
+            },
+            "Totem.Timeline.EventStore": {
+              "target": "Package",
+              "version": "[1.0.0-beta.32, )"
+            },
+            "Totem.Timeline.Mvc": {
+              "target": "Package",
+              "version": "[1.0.0-beta.32, )"
+            },
+            "Totem.Timeline.SignalR": {
+              "target": "Package",
+              "version": "[1.0.0-beta.32, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          }
+        }
+      }
+    },
+    "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj",
+        "projectName": "DealerOn.Cam",
+        "projectPath": "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\DealerOn.Cam.csproj",
+        "packagesPath": "C:\\Users\\ajohnston\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\BlazorUI\\src\\DealerOn.Cam\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ajohnston\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.dealeron.us:8624/nuget/Mainline/": {},
+          "http://nuget.dealeron.us:8624/nuget/Upgrade/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "System.Reactive.Linq": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            },
+            "Totem": {
+              "target": "Package",
+              "version": "[1.0.0-beta.32, )"
+            },
+            "Totem.Runtime": {
+              "target": "Package",
+              "version": "[1.0.0-beta.32, )"
+            },
+            "Totem.Timeline": {
+              "target": "Package",
+              "version": "[1.0.0-beta.32, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          }
+        }
+      }
+    }
+  }
+}
