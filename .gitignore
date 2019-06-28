@@ -31,5 +31,5 @@ dist/
 *.razor.g.cs
 *.dll
 /bin/*
-/cam/*
-/obj/*
+cam/*
+*/obj
