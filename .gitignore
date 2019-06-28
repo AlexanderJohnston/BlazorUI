@@ -28,3 +28,4 @@ nuget.exe
 *.metaproj*
 node_modules/
 dist/
+*.razor.g.cs
