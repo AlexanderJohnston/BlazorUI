@@ -29,3 +29,5 @@ nuget.exe
 node_modules/
 dist/
 *.razor.g.cs
+*.dll
+/bin/*
