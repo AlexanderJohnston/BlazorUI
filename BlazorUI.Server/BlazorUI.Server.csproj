@@ -13,6 +13,8 @@
   <ItemGroup>
     <ProjectReference Include="..\BlazorUI.Client\BlazorUI.Client.csproj" />
     <ProjectReference Include="..\BlazorUI.Shared\BlazorUI.Shared.csproj" />
+    <ProjectReference Include="..\totem\src\Totem.App.Web\Totem.App.Web.csproj" />
+    <ProjectReference Include="..\totem\src\Totem\Totem.csproj" />
   </ItemGroup>
 
 </Project>

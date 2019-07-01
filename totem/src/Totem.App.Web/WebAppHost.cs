@@ -13,7 +13,6 @@ using Serilog.Events;
 using Totem.Runtime.Hosting;
 using Totem.Timeline.EventStore.Hosting;
 using Totem.Timeline.Hosting;
-using Totem.Timeline.Mvc.Hosting;
 using Totem.Timeline.SignalR.Hosting;
 
 namespace Totem.App.Web
@@ -34,30 +33,32 @@ namespace Totem.App.Web
 
     internal Task Run()
     {
-      SetStartupAssembly();
+      var asm = Assembly.GetAssembly(typeof(BlazorUI.Client.Program));
+
+      SetStartupAssembly(asm);
       SetWebRoot();
 
-      ConfigureAppConfiguration();
+      ConfigureAppConfiguration(asm);
       ConfigureApp();
-      ConfigureServices();
+      ConfigureServices(asm);
       ConfigureSerilog();
       ConfigureHost();
       
       return _builder.Build().RunAsync();
     }
 
-    void SetStartupAssembly() =>
-      _builder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, Assembly.GetEntryAssembly().FullName);
+    void SetStartupAssembly(Assembly asm) =>
+      _builder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, asm.FullName);
 
     void SetWebRoot() =>
       _builder.UseWebRoot("wwwroot/dist");
 
-    void ConfigureAppConfiguration() =>
+        void ConfigureAppConfiguration(Assembly asm) =>
       _builder.ConfigureAppConfiguration((context, appConfiguration) =>
       {
         if(context.HostingEnvironment.IsDevelopment())
         {
-          appConfiguration.AddUserSecrets(Assembly.GetEntryAssembly(), optional: true);
+          appConfiguration.AddUserSecrets(asm, optional: true);
         }
 
         _configure.ConfigureAppConfiguration(context, appConfiguration);
@@ -71,27 +72,49 @@ namespace Totem.App.Web
         if(environment.IsDevelopment())
         {
           app.UseDeveloperExceptionPage();
+          app.UseBlazorDebugging();
         }
+
+          //var assembly = Assembly.GetEntryAssembly();
+          //var native = assembly.GetType("Client.Startup");
+          //var blazor = typeof(BlazorHostingApplicationBuilderExtensions);
+          //var genMethods = blazor.GetMethods();
+          //var builderType = genMethods[0].GetType();
+          //var genType = builderType.MakeGenericType(native.GetType());
+
+          //var instance = (INativeBlazor)Activator.CreateInstance(genType);
+
+          //Type myType = instance.GetType();
+          //Type genericType = myType.GetGenericTypeDefinition();
+
+          app.UseClientSideBlazorFiles <BlazorUI.Client.Startup> ();
 
         app.UseStaticFiles();
 
         app.UseMvc(_configure.ConfigureMvcRoutes);
 
-        app.UseSignalR(routes =>
-        {
-          routes.MapQueryHub();
+          app.UseSignalR(routes =>
+          {
+              routes.MapQueryHub();
 
-          _configure.ConfigureSignalRRoutes(routes);
-        });
+              _configure.ConfigureSignalRRoutes(routes);
+          });
 
-        _configure.ConfigureApp(app);
+          app.UseRouting();
+
+          app.UseEndpoints(endpoints =>
+          {
+              endpoints.MapDefaultControllerRoute();
+              endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
+          });
+
+          _configure.ConfigureApp(app);
       });
 
-    void ConfigureServices() =>
+    void ConfigureServices(Assembly asm) =>
       _builder.ConfigureServices((context, services) =>
       {
         services.AddTotemRuntime();
-        services.AddMvc().AddRazorRuntimeCompilation();
         services.AddTimelineClient<TArea>(timeline =>
         {
           var eventStore = timeline.AddEventStore().BindOptionsToConfiguration();
@@ -103,8 +126,9 @@ namespace Totem.App.Web
 
         var mvc = services
           .AddMvc(option => option.EnableEndpointRouting = false)
-          .AddCommandsAndQueries()
-          .AddApplicationPart(Assembly.GetEntryAssembly());
+          .AddRazorRuntimeCompilation()
+          //.AddCommandsAndQueries()
+          .AddApplicationPart(asm);
 
         _configure.ConfigureMvc(context, mvc);
 

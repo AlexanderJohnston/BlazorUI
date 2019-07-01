@@ -28,11 +28,6 @@
     <PackageReference Include="Serilog.Extensions.Hosting" Version="2.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="System.Reactive.Linq" Version="4.1.2" />
-    <PackageReference Include="Totem" Version="1.0.0-beta.32" />
-    <PackageReference Include="Totem.App.Service" Version="1.0.0-beta.32" />
-    <PackageReference Include="Totem.Runtime" Version="1.0.0-beta.32" />
-    <PackageReference Include="Totem.Timeline" Version="1.0.0-beta.32" />
-    <PackageReference Include="Totem.Timeline.EventStore" Version="1.0.0-beta.32" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\totem\src\Totem.App.Service\Totem.App.Service.csproj" />
