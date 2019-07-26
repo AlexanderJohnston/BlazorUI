@@ -1,8 +1,0 @@
-C:\projects\BlazorUI\BlazorUI.Shared\bin\Debug\netstandard2.0\BlazorUI.Shared.deps.json
-C:\projects\BlazorUI\BlazorUI.Shared\bin\Debug\netstandard2.0\BlazorUI.Shared.dll
-C:\projects\BlazorUI\BlazorUI.Shared\bin\Debug\netstandard2.0\BlazorUI.Shared.pdb
-C:\projects\BlazorUI\BlazorUI.Shared\obj\Debug\netstandard2.0\BlazorUI.Shared.csproj.CoreCompileInputs.cache
-C:\projects\BlazorUI\BlazorUI.Shared\obj\Debug\netstandard2.0\BlazorUI.Shared.AssemblyInfoInputs.cache
-C:\projects\BlazorUI\BlazorUI.Shared\obj\Debug\netstandard2.0\BlazorUI.Shared.AssemblyInfo.cs
-C:\projects\BlazorUI\BlazorUI.Shared\obj\Debug\netstandard2.0\BlazorUI.Shared.dll
-C:\projects\BlazorUI\BlazorUI.Shared\obj\Debug\netstandard2.0\BlazorUI.Shared.pdb
