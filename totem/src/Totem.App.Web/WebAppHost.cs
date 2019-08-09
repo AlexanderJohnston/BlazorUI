@@ -23,7 +23,7 @@ namespace Totem.App.Web
   /// <typeparam name="TArea">The type of timeline area hosted by the application</typeparam>
   internal sealed class WebAppHost<TArea> where TArea : TimelineArea, new()
   {
-    readonly IWebHostBuilder _builder = WebHost.CreateDefaultBuilder().UseEnvironment(Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT") ?? Microsoft.Extensions.Hosting.EnvironmentName.Development);
+    readonly IWebHostBuilder _builder = WebHost.CreateDefaultBuilder().UseEnvironment(Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT") ?? Microsoft.Extensions.Hosting.Environments.Development);
     readonly ConfigureWebApp _configure;
 
     internal WebAppHost(ConfigureWebApp configure)
@@ -67,7 +67,7 @@ namespace Totem.App.Web
     void ConfigureApp() =>
       _builder.Configure(app =>
       {
-        var environment = app.ApplicationServices.GetRequiredService<Microsoft.Extensions.Hosting.IHostingEnvironment>();
+        var environment = app.ApplicationServices.GetRequiredService<Microsoft.Extensions.Hosting.IHostEnvironment>();
 
         if(environment.IsDevelopment())
         {
@@ -172,7 +172,7 @@ namespace Totem.App.Web
       {
           var pairs = new Dictionary<string, string>
           {
-              [HostDefaults.EnvironmentKey] = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT") ?? Microsoft.Extensions.Hosting.EnvironmentName.Development
+              [HostDefaults.EnvironmentKey] = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT") ?? Microsoft.Extensions.Hosting.Environments.Development
           };
 
           //hostConfiguration.AddInMemoryCollection(pairs);
