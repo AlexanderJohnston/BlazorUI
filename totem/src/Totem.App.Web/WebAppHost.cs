@@ -13,6 +13,7 @@ using Serilog.Events;
 using Totem.Runtime.Hosting;
 using Totem.Timeline.EventStore.Hosting;
 using Totem.Timeline.Hosting;
+using Totem.Timeline.SignalR;
 using Totem.Timeline.SignalR.Hosting;
 
 namespace Totem.App.Web
@@ -91,20 +92,24 @@ namespace Totem.App.Web
 
         app.UseStaticFiles();
 
-        app.UseMvc(_configure.ConfigureMvcRoutes);
+        //app.UseMvc(_configure.ConfigureMvcRoutes);
 
-          app.UseSignalR(routes =>
-          {
-              routes.MapQueryHub();
+          //app.UseSignalR(routes =>
+          //{
+          //    routes.MapQueryHub();
 
-              _configure.ConfigureSignalRRoutes(routes);
-          });
+          //    _configure.ConfigureSignalRRoutes(routes);
+          //});
 
           app.UseRouting();
+          app.UseCors();
 
           app.UseEndpoints(endpoints =>
           {
+              endpoints.MapHub<QueryHub>("/hubs/query");
+              endpoints.MapBlazorHub();
               endpoints.MapDefaultControllerRoute();
+              //endpoints.MapControllerRoute("default", "{controller=Imports}/{action=StartImport}/{id?}");
               endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
           });
 
