@@ -28,6 +28,7 @@ else
 
     public async Task StartImport()
     {
-        imports = await Http.GetAsync("api/imports/test");
+        var message = await (Http.GetAsync("api/imports/test"));
+        imports = message.Content.ToString();
     }
 }
