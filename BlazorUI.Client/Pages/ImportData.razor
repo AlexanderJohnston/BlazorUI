@@ -1,0 +1,33 @@
+﻿@page "/importdata"
+@using BlazorUI.Shared
+@inject HttpClient Http
+
+<h1>Hello, world!</h1>
+
+Welcome to the importer.
+
+<h1 style="font-style:@_headingFontStyle">@_headingText</h1>
+
+<button type="button" class="btn btn-primary" @onclick="StartImport">
+    Update heading
+</button>
+
+@if (string.IsNullOrEmpty(imports))
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <p>@imports</p>
+}
+
+@code {
+    private string _headingFontStyle = "italic";
+    private string _headingText = "Put on your new Blazor!";
+    public string imports;
+
+    public async Task StartImport()
+    {
+        imports = await Http.GetAsync("api/imports/test");
+    }
+}

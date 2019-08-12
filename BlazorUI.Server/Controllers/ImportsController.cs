@@ -21,5 +21,8 @@ namespace BlazorUI.Server.Controllers
                 new StartImport(),
                 When<ImportStarted>.ThenOk,
                 When<ImportAlreadyStarted>.ThenConflict);
+
+        [HttpGet("[action]")]
+        public string Test() => "test";
     }
 }

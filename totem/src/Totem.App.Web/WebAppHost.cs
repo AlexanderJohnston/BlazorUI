@@ -109,7 +109,7 @@ namespace Totem.App.Web
               endpoints.MapHub<QueryHub>("/hubs/query");
               endpoints.MapBlazorHub();
               endpoints.MapDefaultControllerRoute();
-              //endpoints.MapControllerRoute("default", "{controller=Imports}/{action=StartImport}/{id?}");
+              //endpoints.MapControllerRoute("Imports", "api/{controller=Imports}/{action=StartImport}");
               endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
           });
 
