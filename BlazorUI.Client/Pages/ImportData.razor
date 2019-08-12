@@ -1,5 +1,6 @@
 ﻿@page "/importdata"
 @using BlazorUI.Shared
+@using System.Net.Http;
 @inject HttpClient Http
 
 <h1>Hello, world!</h1>
@@ -25,10 +26,11 @@ else
     private string _headingFontStyle = "italic";
     private string _headingText = "Put on your new Blazor!";
     public string imports;
+    public HttpResponseMessage _importResponse;
 
     public async Task StartImport()
     {
-        var message = await (Http.GetAsync("api/imports/test"));
-        imports = message.Content.ToString();
+        _importResponse = await Http.PostAsync("api/imports/startimport", new StringContent(""));
+        imports = await _importResponse.Content.ReadAsStringAsync();
     }
 }
