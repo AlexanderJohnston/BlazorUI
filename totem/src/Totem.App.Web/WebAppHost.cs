@@ -15,6 +15,7 @@ using Totem.Timeline.EventStore.Hosting;
 using Totem.Timeline.Hosting;
 using Totem.Timeline.SignalR;
 using Totem.Timeline.SignalR.Hosting;
+using Totem.Timeline.Mvc.Hosting;
 
 namespace Totem.App.Web
 {
@@ -132,10 +133,10 @@ namespace Totem.App.Web
         var mvc = services
           .AddMvc(option => option.EnableEndpointRouting = false)
           .AddRazorRuntimeCompilation()
-          //.AddCommandsAndQueries()
-          .AddApplicationPart(asm);
+          .AddApplicationPart(asm)
+          .AddCommandsAndQueries();
 
-        _configure.ConfigureMvc(context, mvc);
+          _configure.ConfigureMvc(context, mvc);
 
         var signalR = services.AddSignalR().AddQueryNotifications();
 
