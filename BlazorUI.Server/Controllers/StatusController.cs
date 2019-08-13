@@ -3,12 +3,12 @@ using DealerOn.Cam.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Totem.Timeline.Mvc;
 
-namespace DealerOn.Cam.Service.Controllers
+namespace BlazorUI.Server.Controllers
 {
-  /// <summary>
-  /// Controls interactions with the API root
-  /// </summary>
-  public class StatusController : Controller
+    /// <summary>
+    /// Controls interactions with the API root
+    /// </summary>
+    public class StatusController : Controller
   {
     [HttpGet("/api")]
     public Task<IActionResult> GetStatus([FromServices] IQueryServer queries) =>

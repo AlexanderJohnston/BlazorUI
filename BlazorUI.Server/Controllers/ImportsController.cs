@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BlazorUI.Shared;
 using DealerOn.Cam;
 using Microsoft.AspNetCore.Mvc;
 using Totem.Timeline.Mvc;
@@ -28,7 +27,7 @@ namespace BlazorUI.Server.Controllers
                 When<ImportStarted>.ThenOk, 
                 When<ImportAlreadyStarted>.ThenConflict);
 
-        [HttpGet("/test")]
+        [HttpGet("[action]")]
         public string Test() => "test";
     }
 }

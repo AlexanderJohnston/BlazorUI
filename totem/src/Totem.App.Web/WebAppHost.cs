@@ -36,7 +36,7 @@ namespace Totem.App.Web
 
     internal Task Run()
     {
-      var asm = Assembly.GetAssembly(typeof(BlazorUI.Client.Program));
+        var asm = _configure.Server;
 
       SetStartupAssembly(asm);
       SetWebRoot();
@@ -109,7 +109,7 @@ namespace Totem.App.Web
           app.UseRouting();
           app.UseCors();
 
-          //app.UseMvc(_configure.ConfigureMvcRoutes);
+          app.UseMvc(_configure.ConfigureMvcRoutes);
 
           app.UseEndpoints(endpoints =>
           {
@@ -117,8 +117,9 @@ namespace Totem.App.Web
               endpoints.MapRazorPages();
               endpoints.MapBlazorHub();
               endpoints.MapHub<QueryHub>("/hubs/query");
-              //endpoints.MapDefaultControllerRoute();
+              endpoints.MapDefaultControllerRoute();
               endpoints.MapControllerRoute("Imports", "{controller=Imports}/{action=StartImport}");
+              endpoints.MapControllerRoute("ImportTest", "{controller=Imports}/{action=Test}");
               endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
           });
 
@@ -139,7 +140,7 @@ namespace Totem.App.Web
         });
 
         var mvc = services
-          .AddMvc()
+          .AddMvc(option => option.EnableEndpointRouting = false)
           .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
           .AddRazorRuntimeCompilation()
           .AddApplicationPart(asm)
