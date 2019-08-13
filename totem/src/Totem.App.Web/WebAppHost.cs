@@ -16,6 +16,7 @@ using Totem.Timeline.Hosting;
 using Totem.Timeline.SignalR;
 using Totem.Timeline.SignalR.Hosting;
 using Totem.Timeline.Mvc.Hosting;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Totem.App.Web
 {
@@ -89,11 +90,9 @@ namespace Totem.App.Web
           //Type myType = instance.GetType();
           //Type genericType = myType.GetGenericTypeDefinition();
 
-          app.UseClientSideBlazorFiles <BlazorUI.Client.Startup> ();
 
-        app.UseStaticFiles();
+          //app.UseStaticFiles();
 
-        //app.UseMvc(_configure.ConfigureMvcRoutes);
 
           //app.UseSignalR(routes =>
           //{
@@ -102,15 +101,24 @@ namespace Totem.App.Web
           //    _configure.ConfigureSignalRRoutes(routes);
           //});
 
+          app.UseClientSideBlazorFiles<BlazorUI.Client.Startup>();
+
+          app.UseAuthentication();
+          app.UseAuthorization();
+
           app.UseRouting();
           app.UseCors();
 
+          //app.UseMvc(_configure.ConfigureMvcRoutes);
+
           app.UseEndpoints(endpoints =>
           {
-              endpoints.MapHub<QueryHub>("/hubs/query");
+              endpoints.MapControllers();
+              endpoints.MapRazorPages();
               endpoints.MapBlazorHub();
-              endpoints.MapDefaultControllerRoute();
-              //endpoints.MapControllerRoute("Imports", "api/{controller=Imports}/{action=StartImport}");
+              endpoints.MapHub<QueryHub>("/hubs/query");
+              //endpoints.MapDefaultControllerRoute();
+              endpoints.MapControllerRoute("Imports", "{controller=Imports}/{action=StartImport}");
               endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
           });
 
@@ -131,7 +139,8 @@ namespace Totem.App.Web
         });
 
         var mvc = services
-          .AddMvc(option => option.EnableEndpointRouting = false)
+          .AddMvc()
+          .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
           .AddRazorRuntimeCompilation()
           .AddApplicationPart(asm)
           .AddCommandsAndQueries();

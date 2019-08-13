@@ -30,7 +30,8 @@ else
 
     public async Task StartImport()
     {
-        _importResponse = await Http.PostAsync("api/imports/startimport", new StringContent(""));
+        _importResponse = await Http.GetAsync("imports/test");
+        //_importResponse = await Http.PostAsync("imports/startimport", null);
         imports = await _importResponse.Content.ReadAsStringAsync();
     }
 }

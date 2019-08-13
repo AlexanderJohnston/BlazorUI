@@ -12,17 +12,23 @@ namespace BlazorUI.Server.Controllers
     /// <summary>
     /// Controls interactions with the set of imports
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class ImportsController : Controller
     {
+        private ICommandServer _commands { get; set; }
+        public ImportsController(ICommandServer commands)
+        {
+            _commands = commands;
+        }
+
         [HttpPost("[action]")]
-        public Task<IActionResult> StartImport([FromServices] ICommandServer commands) =>
-            commands.Execute(
+        public Task<IActionResult> StartImport() =>
+            _commands.Execute(
                 new StartImport(),
-                When<ImportStarted>.ThenOk,
+                When<ImportStarted>.ThenOk, 
                 When<ImportAlreadyStarted>.ThenConflict);
 
-        [HttpGet("[action]")]
+        [HttpGet("/test")]
         public string Test() => "test";
     }
 }
