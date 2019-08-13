@@ -10,12 +10,12 @@ Welcome to the importer.
 <h1 style="font-style:@_headingFontStyle">@_headingText</h1>
 
 <button type="button" class="btn btn-primary" @onclick="StartImport">
-    Update heading
+    Start Import
 </button>
 
 @if (string.IsNullOrEmpty(imports))
 {
-    <p><em>Loading...</em></p>
+    <p><em>...</em></p>
 }
 else
 {
@@ -32,6 +32,7 @@ else
     {
         //_importResponse = await Http.GetAsync("imports/test");
         _importResponse = await Http.PostAsync("imports/startimport", null);
-        imports = await _importResponse.Content.ReadAsStringAsync();
+        //imports = await _importResponse.Content.ReadAsStringAsync();
+        imports = "Importing...";
     }
 }
