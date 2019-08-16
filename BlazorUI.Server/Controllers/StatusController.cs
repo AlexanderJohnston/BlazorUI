@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using DealerOn.Cam.Queries;
+using BlazorUI.Client.Campaign.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Totem.Timeline.Mvc;
 

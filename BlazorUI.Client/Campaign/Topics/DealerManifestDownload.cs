@@ -1,13 +1,13 @@
-    using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DealerOn.Cam.Data;
+using BlazorUI.Client.Campaign.Data;
 using Totem;
 using Totem.Timeline;
 using static Totem.ManyExtensions;
 
-namespace DealerOn.Cam.Topics
+namespace BlazorUI.Client.Campaign.Topics
 {
   /// <summary>
   /// The timeline of importing a dealer's data from the CAM program
@@ -27,7 +27,7 @@ namespace DealerOn.Cam.Topics
 
     readonly Dictionary<Id, DealerManifest.Campaign> _campaignsById = new Dictionary<Id, DealerManifest.Campaign>();
     Manifest.Dealer _dealer;
-    Pages _pages;
+    Data.Pages _pages;
 
     void Given(ManifestDownloaded e) =>
       _dealer = e.AddedDealers
@@ -39,7 +39,7 @@ namespace DealerOn.Cam.Topics
     {
       _pages = e.Pages;
 
-      if(e.Pages == Pages.None)
+      if(e.Pages == Data.Pages.None)
       {
         _campaignsById.Clear();
       }

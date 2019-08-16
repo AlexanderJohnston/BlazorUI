@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using DealerOn.Cam;
-using DealerOn.Cam.Data;
+using BlazorUI.Client.Campaign;
+using BlazorUI.Client.Campaign.Data;
 using Microsoft.AspNetCore.Mvc;
 using Totem;
 using Totem.Timeline.Mvc;

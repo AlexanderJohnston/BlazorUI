@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DealerOn.Cam;
+using BlazorUI.Client.Campaign;
 using Microsoft.AspNetCore.Mvc;
 using Totem.Timeline.Mvc;
 

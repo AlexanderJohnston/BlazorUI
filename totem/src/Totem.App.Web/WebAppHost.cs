@@ -116,6 +116,7 @@ namespace Totem.App.Web
               endpoints.MapControllers();
               endpoints.MapRazorPages();
               endpoints.MapBlazorHub();
+              // TODO: Extension method in Timeline.SignalR -- relies on future .NET Standard support
               endpoints.MapHub<QueryHub>("/hubs/query");
               endpoints.MapDefaultControllerRoute();
               endpoints.MapControllerRoute("Imports", "{controller=Imports}/{action=StartImport}");
