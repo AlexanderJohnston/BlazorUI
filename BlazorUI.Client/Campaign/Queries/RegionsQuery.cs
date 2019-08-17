@@ -26,7 +26,10 @@ namespace BlazorUI.Client.Campaign.Queries
       public string DetailsLink;
       public bool IsEnrolled;
     }
+    void Given(FakeManifest e)
+    {
 
+    }
     void Given(EnrollmentChanged e) =>
       Regions
       .SelectMany(region => region.Dealers)

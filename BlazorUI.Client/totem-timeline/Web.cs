@@ -7,5 +7,6 @@ namespace BlazorUI.Client.totem_timeline
 {
     public class Web
     {
+
     }
 }

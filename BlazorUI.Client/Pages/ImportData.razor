@@ -1,7 +1,9 @@
 ﻿@page "/importdata"
-@using BlazorUI.Shared
+@using BlazorUI.Shared;
+@using Blazor.Extensions;
 @using System.Net.Http;
 @inject HttpClient Http
+
 
 <h1>Hello, world!</h1>
 
@@ -13,6 +15,14 @@ Welcome to the importer.
     Start Import
 </button>
 
+<button type="button" class="btn btn-primary" @onClick="StartManifest">
+    Start Manifest
+</button>
+
+<p>@Response</p>
+
+<p>Etag: @etag</p>
+
 @if (string.IsNullOrEmpty(imports))
 {
     <p><em>...</em></p>
@@ -20,19 +30,40 @@ Welcome to the importer.
 else
 {
     <p>@imports</p>
+
 }
 
 @code {
+    [Inject]
+    private HubConnectionBuilder _hubBuilder { get; set; }
     private string _headingFontStyle = "italic";
     private string _headingText = "Put on your new Blazor!";
     public string imports;
     public HttpResponseMessage _importResponse;
+    public string Response;
+    public string etag;
+
+    public async Task ReadImport(string response)
+    {
+        Response = response;
+    }
 
     public async Task StartImport()
     {
+        var connection = _hubBuilder.WithUrl("/hubs/query").Build();
+        var regionsResponse = await Http.GetAsync("/api/regions");
+        etag = regionsResponse.Headers.ETag.Tag;
+
+        connection.On<string>(etag, async (message) => { await ReadImport(message); });
+
         //_importResponse = await Http.GetAsync("imports/test");
         _importResponse = await Http.PostAsync("imports/startimport", null);
         //imports = await _importResponse.Content.ReadAsStringAsync();
         imports = "Importing...";
+    }
+
+    public async Task StartManifest()
+    {
+        await Http.PostAsync("/api/regions/fake", null);
     }
 }

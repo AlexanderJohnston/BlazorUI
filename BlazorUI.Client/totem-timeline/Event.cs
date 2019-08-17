@@ -14,6 +14,12 @@ namespace BlazorUI.Client.totem_timeline
             When = Clock.Now;
         }
 
+        public Event(string type, string url)
+        {
+            Traits.Type.Set(this, type);
+            Traits.Endpoint.Set(this, url);
+        }
+
         public Fields Fields => _fields ?? (_fields = new Fields(this));
         private Fields _fields;
         Fields IBindable.Fields => Fields;
@@ -49,6 +55,18 @@ namespace BlazorUI.Client.totem_timeline
             get { return Traits.WhenOccurs; }
             set { Traits.WhenOccurs.Set(this, value); }
         }
+
+        public Field ETag
+        {
+            get { return Traits.ETag; }
+            set { Traits.ETag.Set(this, value); }
+        }
+
+        public Field Endpoint
+        {
+            get { return Traits.Endpoint; }
+            set { Traits.Endpoint.Set(this, value); }
+        }
         public static DateTimeOffset? GetWhenOccurs(Event e) =>
             Traits.WhenOccurs.Get(e);
 
@@ -57,6 +75,8 @@ namespace BlazorUI.Client.totem_timeline
 
         public new static class Traits
         {
+            public static readonly Field<string> Endpoint = Field.Declare(() => Endpoint);
+            public static readonly Field<string> ETag = Field.Declare(() => ETag);
             public static readonly Field<string> Cause = Field.Declare(() => Cause);
             public static readonly Field<string> Type = Field.Declare(() => Type);
             public static readonly Field<int> Position = Field.Declare(() => Position);

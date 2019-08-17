@@ -8,13 +8,16 @@ namespace BlazorUI.Client.totem_timeline_signalr
 {
     public class QueryHub
     {
-        public dynamic Connection = null;
+        /*private List<Query> _queries { get; set; }
 
-        public dynamic ConnectionStart = null;
-
-        public void Enable(object url, object configure)
+        public async Task Enable(HubConnection connection, List<Query> queries)
         {
-            //var onChanged = Timeline.ConfigureQueryHub()
-        }
+            _queries = queries;
+            foreach (var query in _queries)
+            {
+                connection.On<string>(query.Type, async (message) => { await query.ReadQueryAsync(message); });
+            }
+            await connection.StartAsync();
+        }*/
     }
 }

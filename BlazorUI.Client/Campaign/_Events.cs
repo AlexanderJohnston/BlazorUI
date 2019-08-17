@@ -75,7 +75,13 @@ namespace BlazorUI.Client.Campaign
   //
   // Manifest downloads
   //
+  public class FakeManifest : Command
+  {
+  }
+  public class FakeManifestEvent : Event
+    {
 
+    }
   public class ManifestDownloaded : Event
   {
     public ManifestDownloaded(
