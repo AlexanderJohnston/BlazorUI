@@ -3,7 +3,7 @@
 @using Blazor.Extensions;
 @using System.Net.Http;
 @inject HttpClient Http
-
+@inject AppState AppState
 
 <h1>Hello, world!</h1>
 
@@ -21,7 +21,10 @@ Welcome to the importer.
 
 <p>@Response</p>
 
+@foreach (var etag in AppState.Etags)
+{
 <p>Etag: @etag</p>
+}
 
 @if (string.IsNullOrEmpty(imports))
 {
@@ -41,7 +44,7 @@ else
     public string imports;
     public HttpResponseMessage _importResponse;
     public string Response;
-    public string etag;
+    private string etag;
 
     public async Task ReadImport(string response)
     {
@@ -53,6 +56,7 @@ else
         var connection = _hubBuilder.WithUrl("/hubs/query").Build();
         var regionsResponse = await Http.GetAsync("/api/regions");
         etag = regionsResponse.Headers.ETag.Tag;
+        AppState.AddEtag(etag);
 
         connection.On<string>(etag, async (message) => { await ReadImport(message); });
 
