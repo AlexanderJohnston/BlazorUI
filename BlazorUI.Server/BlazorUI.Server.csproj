@@ -6,13 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="3.0.0-preview7.19365.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview7.19365.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview8.19405.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorUI.Client\BlazorUI.Client.csproj" />
     <ProjectReference Include="..\BlazorUI.Shared\BlazorUI.Shared.csproj" />
+    <ProjectReference Include="..\src\DealerOn.Cam\DealerOn.Cam.csproj" />
     <ProjectReference Include="..\totem\src\Totem.App.Web\Totem.App.Web.csproj" />
     <ProjectReference Include="..\totem\src\Totem\Totem.csproj" />
   </ItemGroup>

@@ -120,6 +120,8 @@ namespace Totem.App.Web
               endpoints.MapHub<QueryHub>("/hubs/query");
               endpoints.MapDefaultControllerRoute();
               endpoints.MapControllerRoute("Imports", "{controller=Imports}/{action=StartImport}");
+
+              endpoints.MapControllerRoute("Imports", "{controller=Imports}/{action=StartImport}");
               endpoints.MapControllerRoute("ImportTest", "{controller=Imports}/{action=Test}");
               endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
           });
@@ -130,6 +132,7 @@ namespace Totem.App.Web
     void ConfigureServices(Assembly asm) =>
       _builder.ConfigureServices((context, services) =>
       {
+        services.AddHttpClient();
         services.AddTotemRuntime();
         services.AddTimelineClient<TArea>(timeline =>
         {
@@ -140,12 +143,12 @@ namespace Totem.App.Web
           _configure.ConfigureTimeline(context, timeline);
         });
 
-        var mvc = services
-          .AddMvc(option => option.EnableEndpointRouting = false)
-          .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-          .AddRazorRuntimeCompilation()
-          .AddApplicationPart(asm)
-          .AddCommandsAndQueries();
+          var mvc = services
+            .AddMvc(option => option.EnableEndpointRouting = false)
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            .AddRazorRuntimeCompilation()
+            .AddApplicationPart(asm)
+            .AddCommandsAndQueries();
 
           _configure.ConfigureMvc(context, mvc);
 

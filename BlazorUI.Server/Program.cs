@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using Totem.App.Web;
-using BlazorUI.Client.Campaign;
+using DealerOn.Cam;
 
 namespace BlazorUI.Server
 {
