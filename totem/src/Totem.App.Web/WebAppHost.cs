@@ -17,6 +17,8 @@ using Totem.Timeline.SignalR;
 using Totem.Timeline.SignalR.Hosting;
 using Totem.Timeline.Mvc.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
+using Microsoft.AspNetCore.Components;
 
 namespace Totem.App.Web
 {
@@ -115,12 +117,10 @@ namespace Totem.App.Web
           {
               endpoints.MapControllers();
               endpoints.MapRazorPages();
-              endpoints.MapBlazorHub();
+              endpoints.MapBlazorHub<BlazorUI.Client.App>("app");
               // TODO: Extension method in Timeline.SignalR -- relies on future .NET Standard support
               endpoints.MapHub<QueryHub>("/hubs/query");
               endpoints.MapDefaultControllerRoute();
-              endpoints.MapControllerRoute("Imports", "{controller=Imports}/{action=StartImport}");
-
               endpoints.MapControllerRoute("Imports", "{controller=Imports}/{action=StartImport}");
               endpoints.MapControllerRoute("ImportTest", "{controller=Imports}/{action=Test}");
               endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
@@ -132,6 +132,18 @@ namespace Totem.App.Web
     void ConfigureServices(Assembly asm) =>
       _builder.ConfigureServices((context, services) =>
       {
+        // option goes along with mapping the endpoint BlazorHub "app"
+        services.AddServerSideBlazor();
+          // Server side Blazor doesn't provide HttpClient by default
+        services.AddScoped<HttpClient>(s =>
+        {
+          // Creating the URI helper needs to wait nutil JS Runtime is initialized, so defer it
+          var uriHelper = s.GetRequiredService<IUriHelper>();
+            return new HttpClient
+            {
+                BaseAddress = new Uri(uriHelper.GetBaseUri())
+            };
+        });
         services.AddHttpClient();
         services.AddTotemRuntime();
         services.AddTimelineClient<TArea>(timeline =>

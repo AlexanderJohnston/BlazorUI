@@ -3,7 +3,7 @@
 @using Blazor.Extensions;
 @using System.Net.Http;
 @inject HttpClient Http
-@inject HubConnectionBuilder  Hub
+@inject QueryController _query
 
 
 <h1>Hello, world!</h1>
@@ -47,17 +47,21 @@ else
 @functions {
     protected async override Task OnInitializedAsync()
     {
-        _hub = Hub.WithUrl("/hubs/query").Build();
         var regionsResponse = await Http.GetAsync("/regions/getstatus");
         etag = regionsResponse.Headers.ETag.Tag;
-        _hub.On<string>(etag, async (message) => { await ReadImport(message); });
-
-
+        _query.SubscribeToQuery(etag, ReadRegions);
+    }
+    private Task ReadRegions(string message)
+    {
+        _checkpoint++;
+        Response = message;
+        manifestStatus = "SignalR Received. Checkpoint: " + _checkpoint;
+        return Task.CompletedTask;
     }
 }
 
 @code {
-    private HubConnection _hub { get; set; }
+    private int _checkpoint;
     private string _headingFontStyle = "italic";
     private string _headingText = "Put on your new Blazor!";
     public string imports;
