@@ -32,6 +32,8 @@ Welcome to the importer.
 
 <p>Manifest: @manifestStatus</p>
 
+<p>Regions Data: @manifestData</p>
+
 <p>Test: @TestString</p>
 
 @if (string.IsNullOrEmpty(imports))
@@ -51,11 +53,15 @@ else
         etag = regionsResponse.Headers.ETag.Tag;
         _query.SubscribeToQuery(etag, ReadRegions);
     }
-    private Task ReadRegions(string message)
+    private async Task ReadRegions(string message)
     {
         _checkpoint++;
         manifestStatus = "SignalR Received. Checkpoint: " + _checkpoint;
-        return Task.CompletedTask;
+        var regionsRequest = await Http.GetAsync("/regions/getstatus");
+        if (regionsRequest.IsSuccessStatusCode)
+        {
+            manifestData = await regionsRequest.Content.ReadAsStringAsync();
+        }
     }
 }
 
@@ -67,6 +73,7 @@ else
     public HttpResponseMessage _importResponse;
     public string Response;
     public string etag;
+    public string manifestData = "Not Found";
     public string manifestStatus = "Not Started";
     public string TestString = "-";
 
