@@ -10,7 +10,7 @@ namespace BlazorUI.Server.Controllers
     /// </summary>
     public class StatusController : Controller
   {
-    [HttpGet("/api")]
+    [HttpGet("[action]")]
     public Task<IActionResult> GetStatus([FromServices] IQueryServer queries) =>
       queries.Get<StatusQuery>();
   }
