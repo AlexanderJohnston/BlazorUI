@@ -27,7 +27,7 @@ namespace Totem.Timeline.Client
       Checkpoint > other.Checkpoint ? this : other;
 
     public override string ToString() =>
-      Checkpoint.IsNone ? Key.ToString() : $"{Key}@{Checkpoint.ToInt64()}";
+      Checkpoint.IsNone ? Key.ToString() : $"\"{Key}@{Checkpoint.ToInt64()}\"";
 
     public override bool Equals(object obj) =>
       Equals(obj as QueryETag);
@@ -67,7 +67,11 @@ namespace Totem.Timeline.Client
 
     public static QueryETag From(string value, AreaMap area)
     {
-      if(!TryFrom(value, area, out var etag))
+      if (value.Contains("\""))
+      {
+          value = value.Substring(1, value.Length - 2);
+      }
+      if (!TryFrom(value, area, out var etag))
       {
         throw new FormatException($"Failed to parse query ETag: \"{value}\"");
       }

@@ -49,7 +49,13 @@ namespace Totem.Timeline.Area
 
     public static bool TryFrom(string value, out AreaTypeName name)
     {
+      if (value.Contains("\"")) 
+      {
+                value = value.Substring(1, value.Length - 2);
+      }
       var parts = value.Split('.');
+      
+      
 
       name = parts.Length > 0 && parts.All(Id.IsName) ? new AreaTypeName(value) : null;
 

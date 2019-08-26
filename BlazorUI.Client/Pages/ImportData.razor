@@ -89,7 +89,7 @@ else
     public async Task StartManifest()
     {
         var manifestResponse = await Http.PostAsync("/regions/poststatus", null);
-        manifestStatus = manifestResponse.StatusCode.ToString();
+        //manifestStatus = manifestResponse.StatusCode.ToString();
     }
     public void Test()
     {
