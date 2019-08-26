@@ -54,14 +54,13 @@ else
     private Task ReadRegions(string message)
     {
         _checkpoint++;
-        Response = message;
         manifestStatus = "SignalR Received. Checkpoint: " + _checkpoint;
         return Task.CompletedTask;
     }
 }
 
 @code {
-    private int _checkpoint;
+    private int _checkpoint = 0;
     private string _headingFontStyle = "italic";
     private string _headingText = "Put on your new Blazor!";
     public string imports;

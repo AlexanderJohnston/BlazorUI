@@ -111,7 +111,7 @@ namespace Totem.App.Web
           app.UseRouting();
           app.UseCors();
 
-          app.UseMvc(_configure.ConfigureMvcRoutes);
+          //app.UseMvc(_configure.ConfigureMvcRoutes); //not compatible with endpoint routing. 
 
           app.UseEndpoints(endpoints =>
           {
@@ -156,7 +156,7 @@ namespace Totem.App.Web
         });
 
           var mvc = services
-            .AddMvc(option => option.EnableEndpointRouting = false)
+            .AddMvc()
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
             .AddRazorRuntimeCompilation()
             .AddApplicationPart(asm)
