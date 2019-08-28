@@ -5,8 +5,8 @@
 @using Newtonsoft.Json;
 @using System.IO;
 @inject HttpClient Http
+@inject AppState AppState
 @inject QueryController _query
-
 
 <h1>Hello, world!</h1>
 
@@ -38,10 +38,10 @@ Welcome to the importer.
 
 <p>@Response</p>
 
-<p>Regions Etag: @regionsEtag</p>
-
-<pre>Regions Data: @manifestData</pre>
-
+@foreach (var etag in AppState.Etags)
+{
+<p>Etag: @etag</p>
+}
 
 @if (string.IsNullOrEmpty(imports))
 {
@@ -112,8 +112,6 @@ else
     public string manifestStatus = "Not Started";
     public string TestString = "-";
 
-
-
     public async Task ReadImport(string response)
     {
         Response = response;
@@ -122,6 +120,13 @@ else
 
     public async Task StartImport()
     {
+        var connection = _hubBuilder.WithUrl("/hubs/query").Build();
+        var regionsResponse = await Http.GetAsync("/api/regions");
+        etag = regionsResponse.Headers.ETag.Tag;
+        AppState.AddEtag(etag);
+
+        connection.On<string>(etag, async (message) => { await ReadImport(message); });
+//old
         //_importResponse = await Http.GetAsync("imports/test");
         _importResponse = await Http.PostAsync("imports/startimport", null);
         //imports = await _importResponse.Content.ReadAsStringAsync();
@@ -136,5 +141,10 @@ else
     public void Test()
     {
         TestString = "Clicked.";
+    }
+
+    protected override void OnInit()
+    {
+        AppState.OnChange += StateHasChanged;
     }
 }
