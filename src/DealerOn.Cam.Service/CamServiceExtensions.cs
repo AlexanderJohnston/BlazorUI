@@ -15,6 +15,7 @@ namespace DealerOn.Cam.Service
   {
     public static IServiceCollection AddCam(this IServiceCollection services) =>
       services
+      .AddHttpClient()
       .AddCamOptions()
       .AddDealerOnDb()
       .AddManifests()

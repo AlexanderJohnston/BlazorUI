@@ -9,6 +9,7 @@ namespace BlazorUI.Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<HubConnectionBuilder>();
+            services.AddSingleton<QueryController>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

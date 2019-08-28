@@ -35,7 +35,10 @@ namespace DealerOn.Cam.Topics
     //
     // When
     //
-
+    void When(FakeManifest e)
+    {
+        Then(new FakedManifest());
+    }
     async Task When(ImportStarted e, IManifestFile file)
     {
       try

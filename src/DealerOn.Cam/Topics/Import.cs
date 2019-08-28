@@ -39,6 +39,18 @@ namespace DealerOn.Cam.Topics
       }
     }
 
+    void When(FakeManifest e)
+        {
+            if (_importing)
+            {
+                Then(new FakedManifest());
+            }
+            else
+            {
+                Then(new FakedBad());
+            }
+        }
+
     void When(StartScheduledImport e)
     {
       if(_importing)

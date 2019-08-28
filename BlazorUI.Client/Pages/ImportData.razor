@@ -2,8 +2,11 @@
 @using BlazorUI.Shared;
 @using Blazor.Extensions;
 @using System.Net.Http;
+@using Newtonsoft.Json;
+@using System.IO;
 @inject HttpClient Http
 @inject AppState AppState
+@inject QueryController _query
 
 <h1>Hello, world!</h1>
 
@@ -11,13 +14,27 @@ Welcome to the importer.
 
 <h1 style="font-style:@_headingFontStyle">@_headingText</h1>
 
-<button type="button" class="btn btn-primary" @onclick="StartImport">
+
+<button type="button" class="btn btn-primary manifest" @onclick="@StartManifest">
+    Start Manifest
+</button>
+
+<button type="button" class="btn btn-primary start" @onclick="@StartImport">
     Start Import
 </button>
 
-<button type="button" class="btn btn-primary" @onClick="StartManifest">
-    Start Manifest
+
+<button type="button" class="btn btn-primary test" @onclick="@Test">
+    Test
 </button>
+
+<p>Manifest: @manifestStatus</p>
+
+<p>Test: @TestString</p>
+
+<p>Status Etag: @statusEtag</p>
+
+<pre>Status: @Status</pre>
 
 <p>@Response</p>
 
@@ -36,19 +53,69 @@ else
 
 }
 
+@functions {
+    protected async override Task OnInitializedAsync()
+    {
+        //var statusResponse = await Http.GetAsync("/status/getstatus");
+        //statusEtag = statusResponse.Headers.ETag.Tag;
+        var regionsResponse = await Http.GetAsync("/regions/getstatus");
+        regionsEtag = regionsResponse.Headers.ETag.Tag;
+        //_query.SubscribeToQuery(statusEtag, ReadRegions);
+        _query.SubscribeToQuery(regionsEtag, ReadRegions);
+    }
+    private async Task ReadRegions(string message)
+    {
+        _checkpoint++;
+        manifestStatus = "SignalR Received Regions. Checkpoint: " + _checkpoint;
+        var regionsRequest = await Http.GetAsync("/regions/getstatus");
+        if (regionsRequest.IsSuccessStatusCode)
+        {
+            manifestData = JsonPrettify(await regionsRequest.Content.ReadAsStringAsync());
+        }
+    }
+    private async Task ReadStatus(string message)
+    {
+        _checkpoint++;
+        manifestStatus = "SignalR Received Status. Checkpoint: " + _checkpoint;
+        var statsuRequest = await Http.GetAsync("/regions/getstatus");
+        if (statsuRequest.IsSuccessStatusCode)
+        {
+            Status = JsonPrettify(await statsuRequest.Content.ReadAsStringAsync());
+        }
+    }
+
+    private static string JsonPrettify(string json)
+    {
+        using (var stringReader = new StringReader(json))
+        using (var stringWriter = new StringWriter())
+        {
+            var jsonReader = new JsonTextReader(stringReader);
+            var jsonWriter = new JsonTextWriter(stringWriter) { Formatting = Formatting.Indented };
+            jsonWriter.WriteToken(jsonReader);
+            return stringWriter.ToString();
+        }
+    }
+}
+
 @code {
-    [Inject]
-    private HubConnectionBuilder _hubBuilder { get; set; }
+    public string statusEtag;
+    public string regionsEtag;
+    public string Status;
+    private int _checkpoint = 0;
     private string _headingFontStyle = "italic";
     private string _headingText = "Put on your new Blazor!";
     public string imports;
     public HttpResponseMessage _importResponse;
     public string Response;
-    private string etag;
+    public string etag;
+    public string manifestData = "Not Found";
+    public string manifestStatus = "Not Started";
+    public string TestString = "-";
 
     public async Task ReadImport(string response)
     {
         Response = response;
+        manifestStatus = "SignalR Received.";
     }
 
     public async Task StartImport()
@@ -59,7 +126,7 @@ else
         AppState.AddEtag(etag);
 
         connection.On<string>(etag, async (message) => { await ReadImport(message); });
-
+//old
         //_importResponse = await Http.GetAsync("imports/test");
         _importResponse = await Http.PostAsync("imports/startimport", null);
         //imports = await _importResponse.Content.ReadAsStringAsync();
@@ -68,7 +135,12 @@ else
 
     public async Task StartManifest()
     {
-        await Http.PostAsync("/api/regions/fake", null);
+        var manifestResponse = await Http.PostAsync("/regions/poststatus", null);
+        //manifestStatus = manifestResponse.StatusCode.ToString();
+    }
+    public void Test()
+    {
+        TestString = "Clicked.";
     }
 
     protected override void OnInit()

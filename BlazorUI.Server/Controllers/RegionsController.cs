@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using BlazorUI.Client.Campaign;
-using BlazorUI.Client.Campaign.Queries;
+using DealerOn.Cam;
+using DealerOn.Cam.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Totem.Timeline;
 using Totem.Timeline.Mvc;
@@ -10,16 +10,25 @@ namespace BlazorUI.Server.Controllers
     /// <summary>
     /// Controls interactions with the set of regions
     /// </summary>
+    [Route("[controller]")]
     public class RegionsController : Controller
-  {
-    [HttpGet("/api/regions")]
-    public Task<IActionResult> GetStatus([FromServices] IQueryServer queries) =>
-      queries.Get<RegionsQuery>();
+    {
+        private IQueryServer _queries { get; set; }
+        private ICommandServer _commands { get; set; }
+        public RegionsController(IQueryServer queries, ICommandServer commands)
+        {
+            _queries = queries;
+            _commands = commands;
+        }
 
-        [HttpPost("/api/regions/fake")]
-        public Task<IActionResult> PostStatus([FromServices] ICommandServer commands) =>
-                commands.Execute(new FakeManifest(), new CommandWhen(typeof(string),FakeWhenOk), new CommandWhen(typeof(string),FakeWhenBad));
-
+        [HttpGet("[action]")]
+        public Task<IActionResult> GetStatus() =>
+            _queries.Get<RegionsQuery>();
+    
+          [HttpPost("[action]")]
+        public Task<IActionResult> PostStatus() =>
+            _commands.Execute(new FakeManifest(), When<FakedManifest>.ThenOk, When<FakedBad>.ThenBadRequest);
+    
         public IActionResult FakeWhenOk(Event e)
         {
             return (IActionResult)( new OkResult());
