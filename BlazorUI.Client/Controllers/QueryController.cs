@@ -40,13 +40,7 @@ namespace BlazorUI.Client
         }
         public void SubscribeToQuery(string etag, Func<string, Task> handler)
         {
-            if (etag.Contains("\""))
-            {
-                etag = etag.Substring(1, etag.Length - 2);
-            }
-            Debug.WriteLine("Subscribed to " + etag);
             _connection.InvokeAsync("SubscribeToChanged", etag);
-
             _etagSubscriptions.Add(etag, handler);
         }
         public Task OnChanged(object etag)

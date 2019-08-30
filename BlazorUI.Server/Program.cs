@@ -59,7 +59,8 @@ namespace BlazorUI.Server
                 {
                     services.AddServerSideBlazor();
                     // Server side Blazor doesn't provide HttpClient by default
-                    services.AddScoped<HttpClient>(s =>
+                    // Should probably be Scoped (to the connection) but Blazor only understands Transient currently.
+                    services.AddTransient<HttpClient>(s =>
                     {
                         // Creating the URI helper needs to wait nutil JS Runtime is initialized, so defer it
                         var uriHelper = s.GetRequiredService<IUriHelper>();

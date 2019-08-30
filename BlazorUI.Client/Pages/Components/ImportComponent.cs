@@ -10,8 +10,7 @@ namespace BlazorUI.Client.Pages.Components
     public class ImportComponent : ComponentBase
     {
         [Inject] public HttpClient _http { get; set; }
-        //[Inject] public AppState _appState { get; set; }
-        [Inject] public QueryController _query { get; set; }
-
+        [Inject] public AppState _appState { get; set; }
+        
     }
 }
