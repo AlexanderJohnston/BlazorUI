@@ -27,6 +27,8 @@ Welcome to the importer.
     Test
 </button>
 
+<p>Regions Etag: @regionsEtag</p>
+
 <p>Manifest: @manifestStatus</p>
 
 <p>Test: @TestString</p>
@@ -37,10 +39,6 @@ Welcome to the importer.
 
 <p>@Response</p>
 
-@foreach (var etag in _appState.Etags)
-{
-    <p>Etag: @etag</p>
-}
 
 @if (string.IsNullOrEmpty(imports))
 {
@@ -48,7 +46,7 @@ Welcome to the importer.
 }
 else
 {
-    <p>@imports</p>
+    <pre>@imports</pre>
 
 }
 
@@ -58,19 +56,37 @@ else
         //var statusResponse = await Http.GetAsync("/status/getstatus");
         //statusEtag = statusResponse.Headers.ETag.Tag;
         var regionsResponse = await _http.GetAsync("/regions/getstatus");
-        regionsEtag = regionsResponse.Headers.ETag.Tag;
+        var etag = regionsResponse.Headers.ETag.Tag;
+        var checkpointIndex = etag.ToString().IndexOf("@");
+        string subscription;
+        if (checkpointIndex > 0)
+        {
+            subscription = etag.ToString().Substring(1, checkpointIndex - 1);
+        }
+        else
+        {
+            subscription = etag;
+        }
+        regionsEtag = etag + " => " + subscription;
         //_query.SubscribeToQuery(statusEtag, ReadRegions);
-        _query.SubscribeToQuery(regionsEtag, ReadRegions);
-        _appState.OnChange += StateHasChanged;
+        _query.SubscribeToQuery(subscription, ReadRegions);
+        //_appState.OnChange += StateHasChanged;
     }
     private async Task ReadRegions(string message)
     {
         _checkpoint++;
         manifestStatus = "SignalR Received Regions. Checkpoint: " + _checkpoint;
+        Console.WriteLine("Made it into ReadRegions on the Razor Page.");
         var regionsRequest = await _http.GetAsync("/regions/getstatus");
         if (regionsRequest.IsSuccessStatusCode)
         {
-            manifestData = JsonPrettify(await regionsRequest.Content.ReadAsStringAsync());
+            imports = JsonPrettify(await regionsRequest.Content.ReadAsStringAsync());
+            Console.WriteLine("Success Status in Regions on Razor Page");
+        }
+        else
+        {
+            Console.WriteLine("Fail Status in Regions on Razor Page");
+            imports = regionsRequest.StatusCode.ToString();
         }
     }
     private async Task ReadStatus(string message)
@@ -98,16 +114,15 @@ else
 }
 
 @code {
-    public string statusEtag;
-    public string regionsEtag;
-    public string Status;
+    public string statusEtag = "0";
+    public string regionsEtag = "0";
+    public string Status = "X";
     private int _checkpoint = 0;
     private string _headingFontStyle = "italic";
     private string _headingText = "Put on your new Blazor!";
-    public string imports;
+    public string imports = "Not Imported";
     public HttpResponseMessage _importResponse;
-    public string Response;
-    public string etag;
+    public string Response = "";
     public string manifestData = "Not Found";
     public string manifestStatus = "Not Started";
     public string TestString = "-";
