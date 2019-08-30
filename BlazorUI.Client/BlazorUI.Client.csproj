@@ -28,4 +28,8 @@
     <ProjectReference Include="..\totem\src\Totem\Totem.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>

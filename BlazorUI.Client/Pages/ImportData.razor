@@ -1,12 +1,11 @@
 ﻿@page "/importdata"
 @using BlazorUI.Shared;
 @using Blazor.Extensions;
+@using BlazorUI.Client.Pages.Components;
 @using System.Net.Http;
 @using Newtonsoft.Json;
 @using System.IO;
-@inject HttpClient Http
-@inject QueryController _query
-
+@inherits ImportComponent
 
 <h1>Hello, world!</h1>
 
@@ -38,10 +37,10 @@ Welcome to the importer.
 
 <p>@Response</p>
 
-<p>Regions Etag: @regionsEtag</p>
-
-<pre>Regions Data: @manifestData</pre>
-
+@foreach (var etag in _appState.Etags)
+{
+    <p>Etag: @etag</p>
+}
 
 @if (string.IsNullOrEmpty(imports))
 {
@@ -58,16 +57,17 @@ else
     {
         //var statusResponse = await Http.GetAsync("/status/getstatus");
         //statusEtag = statusResponse.Headers.ETag.Tag;
-        var regionsResponse = await Http.GetAsync("/regions/getstatus");
+        var regionsResponse = await _http.GetAsync("/regions/getstatus");
         regionsEtag = regionsResponse.Headers.ETag.Tag;
         //_query.SubscribeToQuery(statusEtag, ReadRegions);
         _query.SubscribeToQuery(regionsEtag, ReadRegions);
+        _appState.OnChange += StateHasChanged;
     }
     private async Task ReadRegions(string message)
     {
         _checkpoint++;
         manifestStatus = "SignalR Received Regions. Checkpoint: " + _checkpoint;
-        var regionsRequest = await Http.GetAsync("/regions/getstatus");
+        var regionsRequest = await _http.GetAsync("/regions/getstatus");
         if (regionsRequest.IsSuccessStatusCode)
         {
             manifestData = JsonPrettify(await regionsRequest.Content.ReadAsStringAsync());
@@ -77,7 +77,7 @@ else
     {
         _checkpoint++;
         manifestStatus = "SignalR Received Status. Checkpoint: " + _checkpoint;
-        var statsuRequest = await Http.GetAsync("/regions/getstatus");
+        var statsuRequest = await _http.GetAsync("/regions/getstatus");
         if (statsuRequest.IsSuccessStatusCode)
         {
             Status = JsonPrettify(await statsuRequest.Content.ReadAsStringAsync());
@@ -112,8 +112,6 @@ else
     public string manifestStatus = "Not Started";
     public string TestString = "-";
 
-
-
     public async Task ReadImport(string response)
     {
         Response = response;
@@ -122,15 +120,22 @@ else
 
     public async Task StartImport()
     {
+        /*var connection = _hubBuilder.WithUrl("/hubs/query").Build();
+        var regionsResponse = await Http.GetAsync("/api/regions");
+        etag = regionsResponse.Headers.ETag.Tag;
+        AppState.AddEtag(etag);*/
+
+        //connection.On<string>(etag, async (message) => { await ReadImport(message); });
+        //old
         //_importResponse = await Http.GetAsync("imports/test");
-        _importResponse = await Http.PostAsync("imports/startimport", null);
+        _importResponse = await _http.PostAsync("imports/startimport", null);
         //imports = await _importResponse.Content.ReadAsStringAsync();
         imports = "Importing...";
     }
 
     public async Task StartManifest()
     {
-        var manifestResponse = await Http.PostAsync("/regions/poststatus", null);
+        var manifestResponse = await _http.PostAsync("/regions/poststatus", null);
         //manifestStatus = manifestResponse.StatusCode.ToString();
     }
     public void Test()
