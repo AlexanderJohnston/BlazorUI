@@ -72,60 +72,6 @@ namespace Totem.App.Web
     void ConfigureApp() =>
       _builder.Configure(app =>
       {
-        var environment = app.ApplicationServices.GetRequiredService<Microsoft.Extensions.Hosting.IHostEnvironment>();
-
-        if(environment.IsDevelopment())
-        {
-          app.UseDeveloperExceptionPage();
-          app.UseBlazorDebugging();
-        }
-
-          //var assembly = Assembly.GetEntryAssembly();
-          //var native = assembly.GetType("Client.Startup");
-          //var blazor = typeof(BlazorHostingApplicationBuilderExtensions);
-          //var genMethods = blazor.GetMethods();
-          //var builderType = genMethods[0].GetType();
-          //var genType = builderType.MakeGenericType(native.GetType());
-
-          //var instance = (INativeBlazor)Activator.CreateInstance(genType);
-
-          //Type myType = instance.GetType();
-          //Type genericType = myType.GetGenericTypeDefinition();
-
-
-          //app.UseStaticFiles();
-
-
-          //app.UseSignalR(routes =>
-          //{
-          //    routes.MapQueryHub();
-
-          //    _configure.ConfigureSignalRRoutes(routes);
-          //});
-
-          app.UseClientSideBlazorFiles<BlazorUI.Client.Startup>();
-
-          app.UseAuthentication();
-          app.UseAuthorization();
-
-          app.UseRouting();
-          app.UseCors();
-
-          //app.UseMvc(_configure.ConfigureMvcRoutes); //not compatible with endpoint routing. 
-
-          app.UseEndpoints(endpoints =>
-          {
-              endpoints.MapControllers();
-              endpoints.MapRazorPages();
-              endpoints.MapBlazorHub<BlazorUI.Client.App>("app");
-              // TODO: Extension method in Timeline.SignalR -- relies on future .NET Standard support
-              endpoints.MapHub<QueryHub>("/hubs/query");
-              endpoints.MapDefaultControllerRoute();
-              endpoints.MapControllerRoute("Imports", "{controller=Imports}/{action=StartImport}");
-              endpoints.MapControllerRoute("ImportTest", "{controller=Imports}/{action=Test}");
-              endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
-          });
-
           _configure.ConfigureApp(app);
       });
 
