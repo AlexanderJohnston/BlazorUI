@@ -132,19 +132,6 @@ namespace Totem.App.Web
     void ConfigureServices(Assembly asm) =>
       _builder.ConfigureServices((context, services) =>
       {
-        // option goes along with mapping the endpoint BlazorHub "app"
-        services.AddServerSideBlazor();
-          // Server side Blazor doesn't provide HttpClient by default
-        services.AddScoped<HttpClient>(s =>
-        {
-          // Creating the URI helper needs to wait nutil JS Runtime is initialized, so defer it
-          var uriHelper = s.GetRequiredService<IUriHelper>();
-            return new HttpClient
-            {
-                BaseAddress = new Uri(uriHelper.GetBaseUri())
-            };
-        });
-        services.AddHttpClient();
         services.AddTotemRuntime();
         services.AddTimelineClient<TArea>(timeline =>
         {
@@ -157,9 +144,7 @@ namespace Totem.App.Web
 
           var mvc = services
             .AddMvc()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-            .AddRazorRuntimeCompilation()
-            .AddApplicationPart(asm)
+            .AddApplicationPart(Assembly.GetEntryAssembly())
             .AddCommandsAndQueries();
 
           _configure.ConfigureMvc(context, mvc);
