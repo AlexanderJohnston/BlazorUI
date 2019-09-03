@@ -26,17 +26,11 @@ namespace BlazorUI.Client
             }
             Debug.WriteLine("Subscribed to " + etag);
             _query.SubscribeToQuery(etag, handler);
+            NotifyStateChanged();
         }
 
         public event Action OnChange;
 
-        public List<string> Etags { get; } = new List<string>();
-
-        public void AddEtag(string etag, string )
-        {
-            Etags.Add(etag);
-            NotifyStateChanged();
-        }
         private void NotifyStateChanged() => OnChange?.Invoke();
     }
 }
