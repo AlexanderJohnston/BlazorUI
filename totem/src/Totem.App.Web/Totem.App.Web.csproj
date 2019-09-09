@@ -28,19 +28,19 @@
 
     <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
 
-    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview9.19424.4" />
 
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="3.0.0-preview9.19424.4" />
 
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0-preview9.19424.4" />
 
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0-preview8.19405.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0-preview9.19423.4" />
 
-    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.0.1-dev-00099" />
 
-    <PackageReference Include="Serilog.Extensions.Hosting" Version="2.0.0" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.1-dev-00209" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00823" />
   </ItemGroup>
 
   <ItemGroup>

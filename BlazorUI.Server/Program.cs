@@ -46,7 +46,7 @@ namespace BlazorUI.Server
                     {
                         endpoints.MapControllers();
                         endpoints.MapRazorPages();
-                        endpoints.MapBlazorHub<BlazorUI.Client.App>("app");
+                        endpoints.MapBlazorHub();
                         // TODO: Extension method in Timeline.SignalR? -- relies on future .NET Standard Support
                         endpoints.MapHub<QueryHub>("/hubs/query");
                         endpoints.MapDefaultControllerRoute();
@@ -63,10 +63,10 @@ namespace BlazorUI.Server
                     services.AddTransient<HttpClient>(s =>
                     {
                         // Creating the URI helper needs to wait nutil JS Runtime is initialized, so defer it
-                        var uriHelper = s.GetRequiredService<IUriHelper>();
+                        var uriHelper = s.GetRequiredService<NavigationManager>();
                         return new HttpClient
                         {
-                            BaseAddress = new Uri(uriHelper.GetBaseUri())
+                            BaseAddress = new Uri(uriHelper.BaseUri)
                         };
                     });
                     services.AddHttpClient();

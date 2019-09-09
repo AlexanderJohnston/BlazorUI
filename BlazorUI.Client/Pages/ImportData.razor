@@ -69,10 +69,10 @@ else
         }
         regionsEtag = etag + " => " + subscription;
         //_query.SubscribeToQuery(statusEtag, ReadRegions);
-        _query.SubscribeToQuery(subscription, ReadRegions);
+        _appState.Subscribe(subscription, ReadRegions);
         //_appState.OnChange += StateHasChanged;
     }
-    private async Task ReadRegions(string message)
+    public async Task ReadRegions(string message)
     {
         _checkpoint++;
         manifestStatus = "SignalR Received Regions. Checkpoint: " + _checkpoint;
@@ -89,7 +89,7 @@ else
             imports = regionsRequest.StatusCode.ToString();
         }
     }
-    private async Task ReadStatus(string message)
+    public async Task ReadStatus(string message)
     {
         _checkpoint++;
         manifestStatus = "SignalR Received Status. Checkpoint: " + _checkpoint;
@@ -100,7 +100,7 @@ else
         }
     }
 
-    private static string JsonPrettify(string json)
+    public static string JsonPrettify(string json)
     {
         using (var stringReader = new StringReader(json))
         using (var stringWriter = new StringWriter())

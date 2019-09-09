@@ -32,7 +32,7 @@ namespace BlazorUI.Client
 
         public List<string> Etags { get; } = new List<string>();
 
-        public void AddEtag(string etag, string )
+        public void AddEtag(string etag)
         {
             Etags.Add(etag);
             NotifyStateChanged();
