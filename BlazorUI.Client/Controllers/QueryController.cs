@@ -10,16 +10,16 @@ namespace BlazorUI.Client
 {
     public class QueryController : ComponentBase
     {
-        private Dictionary<string, Func<string,Task>> _etagSubscriptions { get; set; }
-        [Inject] private HubConnectionBuilder _builder { get; set; }
-        private HubConnection _connection { get; set; }
+        public Dictionary<string, Func<string,Task>> _etagSubscriptions { get; set; }
+        [Inject] public HubConnectionBuilder _builder { get; set; }
+        public HubConnection _connection { get; set; }
         public QueryController(HubConnectionBuilder hub)
         {
             _builder = hub;
             Connect("/hubs/query");
             _etagSubscriptions = new Dictionary<string, Func<string, Task>>();
         }
-        private void Connect (string hubUrl)
+        public void Connect (string hubUrl)
         {
             _connection = 
                 _builder.WithUrl(hubUrl,

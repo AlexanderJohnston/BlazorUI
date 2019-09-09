@@ -31,6 +31,13 @@ namespace BlazorUI.Client
 
         public event Action OnChange;
 
+        public List<string> Etags { get; } = new List<string>();
+
+        public void AddEtag(string etag)
+        {
+            Etags.Add(etag);
+            NotifyStateChanged();
+        }
         private void NotifyStateChanged() => OnChange?.Invoke();
     }
 }
