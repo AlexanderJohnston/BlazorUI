@@ -26,6 +26,7 @@ namespace BlazorUI.Client
             }
             Debug.WriteLine("Subscribed to " + etag);
             _query.SubscribeToQuery(etag, handler);
+            NotifyStateChanged();
         }
 
         public event Action OnChange;
