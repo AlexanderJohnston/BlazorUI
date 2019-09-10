@@ -11,7 +11,7 @@ namespace BlazorUI.Client
     public class QueryController : ComponentBase
     {
         public Dictionary<string, Func<string,Task>> _etagSubscriptions { get; set; }
-        [Inject] public HubConnectionBuilder _builder { get; set; }
+        public HubConnectionBuilder _builder { get; set; }
         public HubConnection _connection { get; set; }
         public QueryController(HubConnectionBuilder hub)
         {
@@ -40,6 +40,7 @@ namespace BlazorUI.Client
         }
         public void SubscribeToQuery(string etag, Func<string, Task> handler)
         {
+            Console.WriteLine("Entered the SubscribeToQuery method of QueryController.");
             _connection.InvokeAsync("SubscribeToChanged", etag);
             _etagSubscriptions.Add(etag, handler);
         }

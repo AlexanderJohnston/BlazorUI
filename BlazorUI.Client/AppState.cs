@@ -8,9 +8,19 @@ using System.Threading.Tasks;
 
 namespace BlazorUI.Client
 {
-    public class AppState
+    public class AppState : ComponentBase
     {
-        [Inject] public QueryController _query { get; set; }
+        /// <summary>
+        ///     https://docs.microsoft.com/en-us/aspnet/core/blazor/dependency-injection?view=aspnetcore-3.0#use-di-in-services
+        ///     Apparently this is de wae.
+        /// </summary>
+        /// <param name="query"></param>
+        public AppState(QueryController query)
+        {
+            _query = query;
+        }
+
+        public QueryController _query { get; set; }
 
         private Dictionary<Type, View> _views { get; set; } = new Dictionary<Type, View>();
 

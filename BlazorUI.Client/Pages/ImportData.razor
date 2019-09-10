@@ -13,6 +13,9 @@ Welcome to the importer.
 
 <h1 style="font-style:@_headingFontStyle">@_headingText</h1>
 
+<button type="button" class="btn btn-primary manifest" @onclick="@SendEcho">
+    Echo!
+</button>
 
 <button type="button" class="btn btn-primary manifest" @onclick="@StartManifest">
     Start Manifest
@@ -27,13 +30,17 @@ Welcome to the importer.
     Test
 </button>
 
-<p>Regions Etag: @regionsEtag</p>
+<p>Echo Etag: @EchoEtag</p>
+
+<pre>Echo: @Echo</pre>
+
+<p>Regions Etag: @RegionsEtag</p>
 
 <p>Manifest: @manifestStatus</p>
 
 <p>Test: @TestString</p>
 
-<p>Status Etag: @statusEtag</p>
+<p>Status Etag: @StatusEtag</p>
 
 <pre>Status: @Status</pre>
 

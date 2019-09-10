@@ -11,10 +11,10 @@ namespace BlazorUI.Client.Pages.Components
 {
     public class ImportComponent : ComponentBase
     {
-
-
-        public string statusEtag = "0";
-        public string regionsEtag = "0";
+        public string Echo = "No Echo";
+        public string EchoEtag = "No Echo Etag";
+        public string StatusEtag = "0";
+        public string RegionsEtag = "0";
         public string Status = "X";
         private int _checkpoint = 0;
         protected string _headingFontStyle = "italic";
@@ -33,23 +33,53 @@ namespace BlazorUI.Client.Pages.Components
         {
             //var statusResponse = await Http.GetAsync("/status/getstatus");
             //statusEtag = statusResponse.Headers.ETag.Tag;
-            var regionsResponse = await _http.GetAsync("/regions/getstatus");
-            var etag = regionsResponse.Headers.ETag.Tag;
-            var checkpointIndex = etag.ToString().IndexOf("@");
-            string subscription;
-            if (checkpointIndex > 0)
+            var echoResponse = await _http.GetAsync("/status/getecho");
+            var echoEtag = echoResponse.Headers.ETag.Tag;
+            var echoCheckpoint = echoEtag.ToString().IndexOf("@");
+            string echoSubscription;
+            if (echoCheckpoint > 0)
             {
-                subscription = etag.ToString().Substring(1, checkpointIndex - 1);
+                echoSubscription = echoEtag.Substring(1, echoCheckpoint - 1);
             }
             else
             {
-                subscription = etag;
+                echoSubscription = echoEtag;
             }
-            regionsEtag = etag + " => " + subscription;
-            _appState.Subscribe(subscription, ReadRegions);
+            EchoEtag = echoEtag + " => " + echoSubscription;
+            _appState.Subscribe(echoSubscription, ReadEcho);
+
+            var regionsResponse = await _http.GetAsync("/regions/getstatus");
+            var regionsEtag = regionsResponse.Headers.ETag.Tag;
+            var regionsCheckpoint = regionsEtag.ToString().IndexOf("@");
+            string regionsSubscription;
+            if (regionsCheckpoint > 0)
+            {
+                regionsSubscription = regionsEtag.Substring(1, regionsCheckpoint - 1);
+            }
+            else
+            {
+                regionsSubscription = regionsEtag;
+            }
+            RegionsEtag = regionsEtag + " => " + regionsSubscription;
+            _appState.Subscribe(regionsSubscription, ReadRegions);
             _appState.OnChange += StateHasChanged;
         }
-        private async Task ReadRegions(string message)
+        public async Task ReadEcho(string message)
+        {
+            Console.WriteLine("Made it into ReadEcho on the Razor Page.");
+            var echoRequest = await _http.GetAsync("/status/getecho");
+            if (echoRequest.IsSuccessStatusCode)
+            {
+                Echo = JsonPrettify(await echoRequest.Content.ReadAsStringAsync());
+                Console.WriteLine("Success Status in ReadEcho on Razor Page");
+            }
+            else
+            {
+                Console.WriteLine("Fail Status in ReadEcho on Razor Page");
+                Echo = echoRequest.StatusCode.ToString();
+            }
+        }
+        public async Task ReadRegions(string message)
         {
             _checkpoint++;
             manifestStatus = "SignalR Received Regions. Checkpoint: " + _checkpoint;
@@ -66,7 +96,7 @@ namespace BlazorUI.Client.Pages.Components
                 imports = regionsRequest.StatusCode.ToString();
             }
         }
-        private async Task ReadStatus(string message)
+        public async Task ReadStatus(string message)
         {
             _checkpoint++;
             manifestStatus = "SignalR Received Status. Checkpoint: " + _checkpoint;
@@ -77,7 +107,7 @@ namespace BlazorUI.Client.Pages.Components
             }
         }
 
-        private static string JsonPrettify(string json)
+        public static string JsonPrettify(string json)
         {
             using (var stringReader = new StringReader(json))
             using (var stringWriter = new StringWriter())
@@ -114,6 +144,11 @@ namespace BlazorUI.Client.Pages.Components
         {
             var manifestResponse = await _http.PostAsync("/regions/poststatus", null);
             //manifestStatus = manifestResponse.StatusCode.ToString();
+        }
+        public async Task SendEcho()
+        {
+            var echoResponse = await _http.PostAsync("/status/sendecho", null);
+            Console.WriteLine(echoResponse.StatusCode.ToString() + " is the echo status code.");
         }
         public void Test()
         {
