@@ -9,6 +9,7 @@ namespace BlazorUI.Server.Controllers
     /// <summary>
     /// Controls interactions with the API root
     /// </summary>
+    [Route("[controller]")]
     public class StatusController : Controller
     {
         [HttpGet("[action]")]

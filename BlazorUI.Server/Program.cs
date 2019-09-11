@@ -80,9 +80,9 @@ namespace BlazorUI.Server
                             new[] { "application/octet-stream" });
                     });
                     // Register client dependecies.
-                    services.AddTransient<HubConnectionBuilder>();
-                    services.AddSingleton<QueryController>();
-                    services.AddSingleton<AppState>();
+                    //services.AddTransient<HubConnectionBuilder>();
+                    //services.AddTransient<QueryController>();
+                    //services.AddTransient<AppState>();
                 })
             );
         }

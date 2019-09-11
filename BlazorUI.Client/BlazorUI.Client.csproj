@@ -9,18 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazor.Extensions.SignalR" Version="0.3.0" />
+    <PackageReference Include="Blazor.Extensions.SignalR" Version="0.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.0.0-preview9.19424.4" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview9.19424.4" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview9.19424.4" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.0.0-preview9.19424.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0-preview9.19424.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.0.0-preview9.19424.4" /> 
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3-beta1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.0.0-preview9.19424.4" />
+    <PackageReference Include="Microsoft.JSInterop" Version="3.0.0-preview9.19423.4" />
     <PackageReference Include="System.Data.SqlClient" Version="4.7.0-preview9.19421.4" />
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Reactive" Version="4.2.0-preview.625" />
     <PackageReference Include="System.Reactive.Linq" Version="4.2.0-preview.625" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.0-preview.18571.3" />
   </ItemGroup>
 
   <ItemGroup>
