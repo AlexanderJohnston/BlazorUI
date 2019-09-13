@@ -12,14 +12,23 @@ namespace BlazorUI.Server.Controllers
     [Route("[controller]")]
     public class StatusController : Controller
     {
-        [HttpGet("[action]")]
-        public Task<IActionResult> GetStatus([FromServices] IQueryServer queries) => queries.Get<StatusQuery>();
+        private IQueryServer _queries { get; set; }
+        private ICommandServer _commands { get; set; }
+
+        public StatusController(IQueryServer queries, ICommandServer commands)
+        {
+            _queries = queries;
+            _commands = commands;
+        }
 
         [HttpGet("[action]")]
-        public Task<IActionResult> GetEcho([FromServices] IQueryServer queries) => queries.Get<EchoQuery>();
+        public Task<IActionResult> GetStatus() => _queries.Get<StatusQuery>();
+
+        [HttpGet("[action]")]
+        public Task<IActionResult> GetEcho() => _queries.Get<EchoQuery>();
 
         [HttpPost("[action]")]
-        public Task<IActionResult> SendEcho([FromServices] ICommandServer commands) => commands.Execute(new Echo(), 
+        public Task<IActionResult> SendEcho() => _commands.Execute(new Echo(), 
             When<EchoSuccess>.ThenOk, When<EchoFailure>.ThenBadRequest);
     }
 }
