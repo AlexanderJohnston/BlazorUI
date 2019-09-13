@@ -22,12 +22,11 @@ namespace BlazorUI.Server.Controllers
         }
 
         [HttpGet("[action]")]
-        public Task<IActionResult> GetStatus() =>
-            _queries.Get<RegionsQuery>();
+        public Task<IActionResult> GetStatus() => _queries.Get<RegionsQuery>();
     
           [HttpPost("[action]")]
-        public Task<IActionResult> PostStatus() =>
-            _commands.Execute(new FakeManifest(), When<FakedManifest>.ThenOk, When<FakedBad>.ThenBadRequest);
+        public Task<IActionResult> PostStatus() => _commands.Execute(new FakeManifest(), 
+            When<FakedManifest>.ThenOk, When<FakedBad>.ThenBadRequest);
     
         public IActionResult FakeWhenOk(Event e)
         {

@@ -19,6 +19,7 @@ namespace BlazorUI.Server.Controllers
         public Task<IActionResult> GetEcho([FromServices] IQueryServer queries) => queries.Get<EchoQuery>();
 
         [HttpPost("[action]")]
-        public Task<IActionResult> SendEcho([FromServices] ICommandServer commands) => commands.Execute(new Echo(), When<EchoSuccess>.ThenOk, When<EchoFailure>.ThenBadRequest);
+        public Task<IActionResult> SendEcho([FromServices] ICommandServer commands) => commands.Execute(new Echo(), 
+            When<EchoSuccess>.ThenOk, When<EchoFailure>.ThenBadRequest);
     }
 }
