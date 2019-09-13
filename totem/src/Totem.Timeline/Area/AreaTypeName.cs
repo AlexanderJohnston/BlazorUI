@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using Totem.IO;
 
 namespace Totem.Timeline.Area
@@ -51,7 +52,13 @@ namespace Totem.Timeline.Area
     {
       if (value.Contains("\"")) 
       {
-                value = value.Substring(1, value.Length - 2);
+                var span = value.AsSpan();
+                var builder = new StringBuilder();
+                for (int i = 0; i < span.Length; i++)
+                {
+                    builder.Append(span[i]);
+                }
+                value = builder.ToString();
       }
       var parts = value.Split('.');
       

@@ -17,6 +17,7 @@ using BlazorUI.Client;
 using Blazor.Extensions;
 using Microsoft.Extensions.Hosting;
 using Totem.Timeline.SignalR;
+using Totem.Timeline.Mvc.Hosting;
 
 namespace BlazorUI.Server
 {
@@ -73,7 +74,10 @@ namespace BlazorUI.Server
                     services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                     .AddRazorRuntimeCompilation()
-                    .AddNewtonsoftJson();
+                    .AddNewtonsoftJson()
+                    .AddApplicationPart(Assembly.GetEntryAssembly())
+                    .AddCommandsAndQueries();
+
                     services.AddResponseCompression(opts =>
                     {
                         opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(

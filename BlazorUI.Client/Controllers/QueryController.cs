@@ -37,6 +37,7 @@ namespace BlazorUI.Client
                 return Task.CompletedTask;
             });
             _connection.StartAsync();
+            Console.WriteLine("Connection built to SignalR at /hubs/query.");
         }
         public void SubscribeToQuery(string etag, Func<string, Task> handler)
         {

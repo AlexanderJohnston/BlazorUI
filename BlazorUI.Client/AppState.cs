@@ -30,6 +30,7 @@ namespace BlazorUI.Client
         }
         public void Subscribe(string etag, Func<string, Task> handler)
         {
+            Debug.WriteLine("Starting subscription for etag: " + etag);
             if (etag.Contains("\""))
             {
                 etag = etag.Substring(1, etag.Length - 2);
