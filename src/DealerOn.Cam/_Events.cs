@@ -21,26 +21,26 @@ namespace DealerOn.Cam
 
   public class ChangeEnrollment : Command
   {
-    public ChangeEnrollment(Id dealerId, Pages pages)
+    public ChangeEnrollment(Id dealerId, Data.Pages pages)
     {
       DealerId = dealerId;
       Pages = pages;
     }
 
     public readonly Id DealerId;
-    public readonly Pages Pages;
+    public readonly Data.Pages Pages;
   }
 
   public class EnrollmentChanged : Event
   {
-    public EnrollmentChanged(Id dealerId, Pages pages)
+    public EnrollmentChanged(Id dealerId, Data.Pages pages)
     {
       DealerId = dealerId;
       Pages = pages;
     }
 
     public readonly Id DealerId;
-    public readonly Pages Pages;
+    public readonly Data.Pages Pages;
   }
 
   public class EnrollmentUnchanged : Event
@@ -75,7 +75,15 @@ namespace DealerOn.Cam
   //
   // Manifest downloads
   //
-
+  public class FakeManifest : Command
+  {
+  }
+  public class FakedManifest : Event
+  {
+  }
+  public class FakedBad : Event
+  {
+  }
   public class ManifestDownloaded : Event
   {
     public ManifestDownloaded(

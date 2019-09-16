@@ -15,19 +15,19 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.50.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="Serilog.Extensions.Hosting" Version="2.0.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
-    <PackageReference Include="System.Reactive.Linq" Version="4.1.2" />
+    <PackageReference Include="Dapper" Version="2.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0-preview9.19423.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.0.0-preview9.19423.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.0.0-preview9.19423.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0-preview9.19423.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.0-preview9.19423.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0-preview9.19423.4" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0-preview9.19423.4" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0-preview9.19423.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3-beta1" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00823" />
+    <PackageReference Include="System.Reactive.Linq" Version="4.2.0-preview.625" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\totem\src\Totem.App.Service\Totem.App.Service.csproj" />

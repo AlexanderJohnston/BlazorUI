@@ -13,7 +13,12 @@ using Serilog.Events;
 using Totem.Runtime.Hosting;
 using Totem.Timeline.EventStore.Hosting;
 using Totem.Timeline.Hosting;
+using Totem.Timeline.SignalR;
 using Totem.Timeline.SignalR.Hosting;
+using Totem.Timeline.Mvc.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
+using Microsoft.AspNetCore.Components;
 
 namespace Totem.App.Web
 {
@@ -33,7 +38,7 @@ namespace Totem.App.Web
 
     internal Task Run()
     {
-      var asm = Assembly.GetAssembly(typeof(BlazorUI.Client.Program));
+        var asm = _configure.Server;
 
       SetStartupAssembly(asm);
       SetWebRoot();
@@ -67,47 +72,6 @@ namespace Totem.App.Web
     void ConfigureApp() =>
       _builder.Configure(app =>
       {
-        var environment = app.ApplicationServices.GetRequiredService<Microsoft.Extensions.Hosting.IHostEnvironment>();
-
-        if(environment.IsDevelopment())
-        {
-          app.UseDeveloperExceptionPage();
-          app.UseBlazorDebugging();
-        }
-
-          //var assembly = Assembly.GetEntryAssembly();
-          //var native = assembly.GetType("Client.Startup");
-          //var blazor = typeof(BlazorHostingApplicationBuilderExtensions);
-          //var genMethods = blazor.GetMethods();
-          //var builderType = genMethods[0].GetType();
-          //var genType = builderType.MakeGenericType(native.GetType());
-
-          //var instance = (INativeBlazor)Activator.CreateInstance(genType);
-
-          //Type myType = instance.GetType();
-          //Type genericType = myType.GetGenericTypeDefinition();
-
-          app.UseClientSideBlazorFiles <BlazorUI.Client.Startup> ();
-
-        app.UseStaticFiles();
-
-        app.UseMvc(_configure.ConfigureMvcRoutes);
-
-          app.UseSignalR(routes =>
-          {
-              routes.MapQueryHub();
-
-              _configure.ConfigureSignalRRoutes(routes);
-          });
-
-          app.UseRouting();
-
-          app.UseEndpoints(endpoints =>
-          {
-              endpoints.MapDefaultControllerRoute();
-              endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
-          });
-
           _configure.ConfigureApp(app);
       });
 
@@ -124,13 +88,13 @@ namespace Totem.App.Web
           _configure.ConfigureTimeline(context, timeline);
         });
 
-        var mvc = services
-          .AddMvc(option => option.EnableEndpointRouting = false)
-          .AddRazorRuntimeCompilation()
-          //.AddCommandsAndQueries()
-          .AddApplicationPart(asm);
+          var mvc = services
+            .AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            .AddApplicationPart(Assembly.GetEntryAssembly())
+            .AddCommandsAndQueries();
 
-        _configure.ConfigureMvc(context, mvc);
+          _configure.ConfigureMvc(context, mvc);
 
         var signalR = services.AddSignalR().AddQueryNotifications();
 

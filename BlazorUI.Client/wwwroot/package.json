@@ -1,0 +1,46 @@
+{
+  "name": "dealeron-torque-cam",
+  "version": "1.0.0",
+  "description": "Synchronizes banners on the home/SRP/VDP pages with a Toyota manifest",
+  "main": "src/app.jsx",
+  "scripts": {
+    "build-dev": "webpack -d --config webpack.config.dev.js",
+    "build-qa": "webpack -p --config webpack.config.qa.js",
+    "build-prod": "webpack -p --config webpack.config.prod.js"
+  },
+  "keywords": [],
+  "author": "DealerOn",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.3.6"
+  },
+  "dependencies": {
+    "@aspnet/signalr": "^1.0.4",
+    "babel-runtime": "^6.26.0",
+    "jquery": "^3.3.1",
+    "linq": "^3.1.0",
+    "moment": "^2.22.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-draggable": "^3.0.5",
+    "rxjs": "^6.3.3",
+    "totem-timeline": "^1.0.0-beta.5",
+    "totem-timeline-react": "^1.0.0-beta.5",
+    "totem-timeline-signalr": "^1.0.0-beta.5",
+    "tslib": "^1.9.3"
+  }
+}

@@ -1,5 +1,4 @@
-﻿using DealerOn.Cam;
-using Microsoft.AspNetCore.Blazor.Hosting;
+﻿using Microsoft.AspNetCore.Blazor.Hosting;
 using System.Threading.Tasks;
 
 namespace BlazorUI.Client

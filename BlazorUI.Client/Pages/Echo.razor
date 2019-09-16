@@ -1,0 +1,49 @@
+﻿@page "/echo"
+@using  BlazorUI.Client.Pages.Components;
+@inherits EchoComponent
+
+<h3>Echo Interface</h3>
+
+<button name="echoButton" @onclick="@SendEcho">
+    ¯\_(ツ)_/¯
+</button>
+
+<p>Echo Etag: @EchoEtag</p>
+<b>Echo Query:</b>
+<ul>
+    <li>
+        <p>Count: @GetEcho()</p>
+    </li>
+    <li>
+        <p>Time since last echo: (@GetTimeUntilEcho() ?? "-")</p>
+    </li>
+    <li>
+        <p>Time of last echo: (@GetTimeOfLastEcho() ?? "-")</p>
+    </li>
+</ul>
+
+@code{
+    public string GetTimeUntilEcho()
+    {
+        if (Echo?.DelaySinceLastEcho != null)
+        {
+            return Echo.DelaySinceLastEcho.ToString();
+        }
+        else
+        {
+            return TimeSpan.FromSeconds(0).ToString();
+        }
+    }
+    public string GetTimeOfLastEcho()
+    {
+        if (Echo?.TimeOfLastEcho != null)
+        {
+            return Echo.TimeOfLastEcho.ToString();
+        }
+        else
+        {
+            return DateTime.MinValue.ToString();
+        }
+    }
+    public int GetEcho() => Echo != null ? Echo.Count : -1;
+}
