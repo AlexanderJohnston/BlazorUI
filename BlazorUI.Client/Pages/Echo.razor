@@ -23,7 +23,27 @@
 </ul>
 
 @code{
-    public string GetTimeUntilEcho() => Echo.DelaySinceLastEcho?.ToString() ?? TimeSpan.FromSeconds(0).ToString();
-    public string GetTimeOfLastEcho() => Echo.TimeOfLastEcho?.ToString() ?? DateTime.MinValue.ToString();
+    public string GetTimeUntilEcho()
+    {
+        if (Echo?.DelaySinceLastEcho != null)
+        {
+            return Echo.DelaySinceLastEcho.ToString();
+        }
+        else
+        {
+            return TimeSpan.FromSeconds(0).ToString();
+        }
+    }
+    public string GetTimeOfLastEcho()
+    {
+        if (Echo?.TimeOfLastEcho != null)
+        {
+            return Echo.TimeOfLastEcho.ToString();
+        }
+        else
+        {
+            return DateTime.MinValue.ToString();
+        }
+    }
     public int GetEcho() => Echo != null ? Echo.Count : -1;
 }
