@@ -11,14 +11,14 @@ namespace BlazorUI.Client
 {
     public class QueryController : ComponentBase
     {
-        public Dictionary<string, Func<string,Task>> _etagSubscriptions { get; set; }
+        public Dictionary<(string ETag, string Route), Func<string,string,Task>> _etagSubscriptions { get; set; }
         public HubConnectionBuilder _builder { get; set; }
         public HubConnection _connection { get; set; }
         public QueryController(HubConnectionBuilder hub)
         {
             _builder = hub;
             Connect("/hubs/query");
-            _etagSubscriptions = new Dictionary<string, Func<string, Task>>();
+            _etagSubscriptions = new Dictionary<(string, string), Func<string, string, Task>>();
         }
         public void Connect (string hubUrl)
         {
@@ -40,22 +40,20 @@ namespace BlazorUI.Client
             _connection.StartAsync();
             Console.WriteLine("Connection built to SignalR at /hubs/query.");
         }
-        public void SubscribeToQuery(string etag, Func<string, Task> handler)
+        public void SubscribeToQuery<T>(string etag, string route, Func<string, string, Task<T>> handler)
         {
-            Console.WriteLine("Entered the SubscribeToQuery method of QueryController.");
+            Console.WriteLine("Subscribing to changes made on this query: " + etag);
             _connection.InvokeAsync("SubscribeToChanged", etag);
-            _etagSubscriptions.Add(etag, handler);
+            _etagSubscriptions.Add((etag, route), handler);
         }
         public Task OnChanged(object etag)
         {
-            Console.WriteLine("Totem said hello from console.");
-            Debug.WriteLine(etag);
-            Debug.WriteLine("Totem said hello from debug!");
+            Console.WriteLine("Notified of a change to subscription: " + etag);
             var checkpointIndex = etag.ToString().IndexOf("@");
             var subscription = SanitizeETag(etag.ToString(), checkpointIndex);
             Debug.WriteLine("Found a handler to callback for this subscription: " + subscription);
-
-            return _etagSubscriptions.First(sub => sub.Key == subscription).Value.Invoke(subscription.ToString());
+            var subscribed = _etagSubscriptions.First(sub => sub.Key.ETag == subscription);
+            return subscribed.Value.Invoke(subscription, subscribed.Key.Route);
         }
         public string SanitizeETag(string etag, int etagCheckpoint)
         {

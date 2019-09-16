@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using DealerOn.Cam.Queries;
+using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ namespace BlazorUI.Client.Pages.Components
                 echoSubscription = echoEtag;
             }
             EchoEtag = echoEtag + " => " + echoSubscription;
-            _appState.Subscribe(echoSubscription, ReadEcho);
+            _appState.Subscribe<EchoQuery>(echoSubscription, "/status/getecho");
 
             var regionsResponse = await _http.GetAsync("/regions/getstatus");
             var regionsEtag = regionsResponse.Headers.ETag.Tag;
@@ -61,7 +62,7 @@ namespace BlazorUI.Client.Pages.Components
                 regionsSubscription = regionsEtag;
             }
             RegionsEtag = regionsEtag + " => " + regionsSubscription;
-            _appState.Subscribe(regionsSubscription, ReadRegions);
+            _appState.Subscribe<RegionsQuery>(regionsSubscription, "/regions/getstatus");
             _appState.OnChange += StateHasChanged;
         }
         public async Task ReadEcho(string message)

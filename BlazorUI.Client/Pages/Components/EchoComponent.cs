@@ -22,28 +22,17 @@ namespace BlazorUI.Client.Pages.Components
         {
             await ReadEcho("On Initialization");
             Console.WriteLine("EchoEtag = " + EchoEtag);
-            string echoSubscription = EchoEtag.Trim(new char[] { '"' });
-            var echoCheckpoint = echoSubscription.IndexOf("@");
-            if (echoCheckpoint > 0)
-            {
-                echoSubscription = SanitizeETag(echoSubscription, echoCheckpoint);
-            }
-            Console.WriteLine("echoSubscription = " + echoSubscription);
-            //EchoEtag = echoEtag + " => " + echoSubscription;
-            _appState.Subscribe(echoSubscription, ReadEcho);
+            _appState.Subscribe<EchoQuery>(EchoEtag, "/status/getecho", ReadQuery<EchoQuery>);
             StateHasChanged();
         }
 
-        public string SanitizeETag(string etag, int etagCheckpoint)
+        
+
+        public async Task ReadQuery<T>(object query)
         {
-            var span = etag.AsSpan();
-            var builder = new StringBuilder();
-            for (int i = 0; i < span.Length; i++)
-            {
-                if (i < etagCheckpoint)
-                    builder.Append(span[i]);
-            }
-            return builder.ToString();
+            var queryResponse = (EchoQuery)query;
+            this.Echo = queryResponse;
+            StateHasChanged();
         }
 
         public async Task ReadEcho(string message)
