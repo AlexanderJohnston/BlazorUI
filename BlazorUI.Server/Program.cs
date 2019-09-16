@@ -16,6 +16,7 @@ using System.Linq;
 using BlazorUI.Client;
 using Blazor.Extensions;
 using Microsoft.Extensions.Hosting;
+using Totem.Timeline.Hosting;
 using Totem.Timeline.SignalR;
 using Totem.Timeline.Mvc.Hosting;
 using Totem.Timeline.SignalR.Hosting;
@@ -67,6 +68,9 @@ namespace BlazorUI.Server
                 {
                     services.AddServerSideBlazor();
                     services.AddSignalR().AddQueryNotifications();
+                    services.AddTransient<HubConnectionBuilder>();
+                    services.AddTransient<QueryController>();
+                    services.AddTransient<AppState>();
                 })
             );
         }

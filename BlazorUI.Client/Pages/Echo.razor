@@ -12,7 +12,7 @@
 <b>Echo Query:</b>
 <ul>
     <li>
-        <p>Count: @Echo.Count</p>
+        <p>Count: @GetEcho()</p>
     </li>
     <li>
         <p>Time since last echo: (@GetTimeUntilEcho() ?? "-")</p>
@@ -23,6 +23,7 @@
 </ul>
 
 @code{
-    public string GetTimeUntilEcho() => String.Empty; //Echo.TimeUntilCurrentEcho?.ToString() ?? "-";
-    public string GetTimeOfLastEcho() => String.Empty; //Echo.TimeOfLastEcho?.ToString() ?? "-";
+    public string GetTimeUntilEcho() => Echo.DelaySinceLastEcho?.ToString() ?? TimeSpan.FromSeconds(0).ToString();
+    public string GetTimeOfLastEcho() => Echo.TimeOfLastEcho?.ToString() ?? DateTime.MinValue.ToString();
+    public int GetEcho() => Echo != null ? Echo.Count : -1;
 }

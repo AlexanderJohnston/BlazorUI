@@ -56,7 +56,8 @@ namespace Totem.Timeline.Area
                 var builder = new StringBuilder();
                 for (int i = 0; i < span.Length; i++)
                 {
-                    builder.Append(span[i]);
+                    if (span[i] != '"')
+                      builder.Append(span[i]);
                 }
                 value = builder.ToString();
       }

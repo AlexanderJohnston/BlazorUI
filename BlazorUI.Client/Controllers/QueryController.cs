@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BlazorUI.Client
@@ -51,10 +52,21 @@ namespace BlazorUI.Client
             Debug.WriteLine(etag);
             Debug.WriteLine("Totem said hello from debug!");
             var checkpointIndex = etag.ToString().IndexOf("@");
-            var subscription = etag.ToString().Substring(1, checkpointIndex - 1);
-            Debug.WriteLine(subscription);
+            var subscription = SanitizeETag(etag.ToString(), checkpointIndex);
+            Debug.WriteLine("Found a handler to callback for this subscription: " + subscription);
 
             return _etagSubscriptions.First(sub => sub.Key == subscription).Value.Invoke(subscription.ToString());
+        }
+        public string SanitizeETag(string etag, int etagCheckpoint)
+        {
+            var span = etag.AsSpan();
+            var builder = new StringBuilder();
+            for (int i = 0; i < span.Length; i++)
+            {
+                if (i < etagCheckpoint)
+                    builder.Append(span[i]);
+            }
+            return builder.ToString();
         }
         public string Test()
         {
