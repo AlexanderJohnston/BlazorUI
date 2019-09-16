@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Totem.Timeline.Area;
 
 namespace Totem.Timeline.Client
@@ -27,7 +28,7 @@ namespace Totem.Timeline.Client
       Checkpoint > other.Checkpoint ? this : other;
 
     public override string ToString() =>
-      Checkpoint.IsNone ? Key.ToString() : $"\"{Key}@{Checkpoint.ToInt64()}\"";
+      Checkpoint.IsNone ? Key.ToString() : $"{Key}@{Checkpoint.ToInt64()}";
 
     public override bool Equals(object obj) =>
       Equals(obj as QueryETag);
@@ -67,9 +68,16 @@ namespace Totem.Timeline.Client
 
     public static QueryETag From(string value, AreaMap area)
     {
-      if (value.Contains("\""))
+      if (value.Contains("\"")) 
       {
-          value = value.Substring(1, value.Length - 2);
+         var span = value.AsSpan();
+         var builder = new StringBuilder();
+         for (int i = 0; i < span.Length; i++)
+         {
+            if (span[i] != '"')
+              builder.Append(span[i]);
+         }
+         value = builder.ToString();
       }
       if (!TryFrom(value, area, out var etag))
       {

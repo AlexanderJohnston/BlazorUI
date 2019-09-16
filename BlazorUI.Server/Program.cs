@@ -16,8 +16,12 @@ using System.Linq;
 using BlazorUI.Client;
 using Blazor.Extensions;
 using Microsoft.Extensions.Hosting;
+using Totem.Timeline.Hosting;
 using Totem.Timeline.SignalR;
 using Totem.Timeline.Mvc.Hosting;
+using Totem.Timeline.SignalR.Hosting;
+using Serilog;
+using BlazorUI.Server.PostSharp;
 
 namespace BlazorUI.Server
 {
@@ -28,7 +32,8 @@ namespace BlazorUI.Server
             // old method, working method
             //Type type = MethodBase.GetCurrentMethod().DeclaringType;
             //return WebApp.Run<CamArea>(Assembly.GetAssembly(type));
-            return WebApp.Run<CamArea>(Configure
+            var configuration = new ConfigureWebApp();
+            return WebApp.Run<CamArea>(configuration
                 .App(app =>
                 {
                     var environment = app.ApplicationServices
@@ -56,37 +61,16 @@ namespace BlazorUI.Server
                         endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
                     });
                 })
+                .Serilog((context, logger) => {
+                    logger = new LogConfiguration().VerboseLogger(logger);
+                })
                 .Services((context, services) =>
                 {
                     services.AddServerSideBlazor();
-                    // Server side Blazor doesn't provide HttpClient by default
-                    // Should probably be Scoped (to the connection) but Blazor only understands Transient currently.
-                    services.AddTransient<HttpClient>(s =>
-                    {
-                        // Creating the URI helper needs to wait nutil JS Runtime is initialized, so defer it
-                        var uriHelper = s.GetRequiredService<NavigationManager>();
-                        return new HttpClient
-                        {
-                            BaseAddress = new Uri(uriHelper.BaseUri)
-                        };
-                    });
-                    services.AddHttpClient();
-                    services.AddMvc()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-                    .AddRazorRuntimeCompilation()
-                    .AddNewtonsoftJson()
-                    .AddApplicationPart(Assembly.GetEntryAssembly())
-                    .AddCommandsAndQueries();
-
-                    services.AddResponseCompression(opts =>
-                    {
-                        opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                            new[] { "application/octet-stream" });
-                    });
-                    // Register client dependecies.
-                    //services.AddTransient<HubConnectionBuilder>();
-                    //services.AddTransient<QueryController>();
-                    //services.AddTransient<AppState>();
+                    services.AddSignalR().AddQueryNotifications();
+                    services.AddTransient<HubConnectionBuilder>();
+                    services.AddTransient<QueryController>();
+                    services.AddTransient<AppState>();
                 })
             );
         }

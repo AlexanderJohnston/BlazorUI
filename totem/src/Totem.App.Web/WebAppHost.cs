@@ -90,6 +90,7 @@ namespace Totem.App.Web
 
           var mvc = services
             .AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
             .AddApplicationPart(Assembly.GetEntryAssembly())
             .AddCommandsAndQueries();
 

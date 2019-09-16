@@ -26,6 +26,20 @@ namespace DealerOn.Cam.Queries
       public string DetailsLink;
       public bool IsEnrolled;
     }
+    void Given(Echo e)
+        {
+            Regions = Many.Of(new Region()
+            {
+                Name = "test region",
+                Dealers = Many.Of(new Dealer()
+                {
+                    DealerId = Id.From(123),
+                    DetailsLink = "www.google.com",
+                    IsEnrolled = false,
+                    Name = "test dealer"
+                })
+            });
+        }
     void Given(FakedManifest e)
     {
             Regions = Many.Of(new Region()
