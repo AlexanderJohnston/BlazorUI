@@ -47,8 +47,9 @@ namespace BlazorUI.Client
         }
         public Task OnChanged(object etag)
         {
+            Console.WriteLine("Totem said hello from console.");
             Debug.WriteLine(etag);
-            Debug.WriteLine("Totem said hello!");
+            Debug.WriteLine("Totem said hello from debug!");
             var checkpointIndex = etag.ToString().IndexOf("@");
             var subscription = etag.ToString().Substring(1, checkpointIndex - 1);
             Debug.WriteLine(subscription);

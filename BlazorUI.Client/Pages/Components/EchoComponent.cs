@@ -20,7 +20,7 @@ namespace BlazorUI.Client.Pages.Components
         protected async override Task OnInitializedAsync()
         {
             var echoResponse = await _http.GetAsync("/status/getecho");
-            var EchoEtag = echoResponse.Headers.ETag.Tag;
+            EchoEtag = echoResponse.Headers.ETag.Tag;
             var echoCheckpoint = EchoEtag.IndexOf("@");
             string echoSubscription;
             if (echoCheckpoint > 0)

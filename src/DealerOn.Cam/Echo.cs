@@ -7,10 +7,25 @@ namespace DealerOn.Cam
 {
     public class Echo : Command
     {
+        public readonly DateTime? Instantiated;
 
+        public Echo()
+        {
+            Instantiated = DateTime.Now;
+        }
     }
 
-    public class EchoSuccess : Event { }
+    public class Echoed : Event 
+    {
+        public readonly DateTime? Instantiated;
 
-    public class EchoFailure : Event { }
+        public Echoed()
+        {
+            Instantiated = DateTime.Now;
+        }
+    }
+
+    public class EchoSuccess : Event { public readonly DateTime? Instantiated; public EchoSuccess() { Instantiated = DateTime.Now; } }
+
+    public class EchoFailure : Event { public readonly DateTime? Instantiated; public EchoFailure() { Instantiated = DateTime.Now; } }
 }

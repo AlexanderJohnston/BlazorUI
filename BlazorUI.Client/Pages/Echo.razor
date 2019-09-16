@@ -15,14 +15,14 @@
         <p>Count: @Echo.Count</p>
     </li>
     <li>
-        <p>Time since last echo: (@Echo.TimeUntilCurrentEcho ?? "-")</p>
+        <p>Time since last echo: (@GetTimeUntilEcho() ?? "-")</p>
     </li>
     <li>
-        <p>Time of last echo: (@Echo.TimeOfLastEcho ?? "-")</p>
+        <p>Time of last echo: (@GetTimeOfLastEcho() ?? "-")</p>
     </li>
 </ul>
 
 @code{
-    public string GetTimeUntilEcho() => Echo.TimeUntilCurrentEcho?.ToString() ?? "-";
-    public string GetTimeOfLastEcho() => Echo.TimeOfLastEcho?.ToString() ?? "-";
+    public string GetTimeUntilEcho() => String.Empty; //Echo.TimeUntilCurrentEcho?.ToString() ?? "-";
+    public string GetTimeOfLastEcho() => String.Empty; //Echo.TimeOfLastEcho?.ToString() ?? "-";
 }
