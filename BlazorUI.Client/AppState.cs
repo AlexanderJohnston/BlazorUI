@@ -30,8 +30,6 @@ namespace BlazorUI.Client
 
         public QueryController _query { get; set; }
 
-        private Dictionary<Type, View> _views { get; set; } = new Dictionary<Type, View>();
-
         public void Register(Type type)
         {
 

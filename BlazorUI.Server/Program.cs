@@ -22,6 +22,10 @@ using Totem.Timeline.Mvc.Hosting;
 using Totem.Timeline.SignalR.Hosting;
 using Serilog;
 using BlazorUI.Server.PostSharp;
+using BlazorUI.Server.Attributes;
+using System.Collections.Generic;
+using BlazorUI.Client.Queries;
+using System.Text;
 
 namespace BlazorUI.Server
 {
@@ -66,6 +70,7 @@ namespace BlazorUI.Server
                 })
                 .Services((context, services) =>
                 {
+                    GetTimelineQueryControllers();
                     services.AddServerSideBlazor();
                     services.AddSignalR().AddQueryNotifications();
                     services.AddTransient<HubConnectionBuilder>();
@@ -73,6 +78,37 @@ namespace BlazorUI.Server
                     services.AddTransient<AppState>();
                 })
             );
+        }
+
+        public static List<TimelineRoute> GetTimelineQueryControllers()
+        {
+            var actions = Assembly.GetExecutingAssembly().GetTypes()
+                    .Where(type => typeof(Controller).IsAssignableFrom(type))
+                    .SelectMany(type => type.GetMethods())
+                    .Where(method => 
+                        method.IsPublic 
+                        && !method.IsDefined(typeof(NonActionAttribute))
+                        && method.GetCustomAttributes()
+                            .Any(attr => attr.GetType() == typeof(TimelineQueryAttribute)));
+            var queries = new Dictionary<MethodInfo, TimelineQueryAttribute>();
+            foreach(var action in actions)
+            {
+                queries.Add(action, action.GetCustomAttribute<TimelineQueryAttribute>());
+            }
+            var queryRoutes = queries.Select(query => 
+                new TimelineRoute(query.Value.QueryType, ParseRouteFromAction(query.Key)));
+            return queryRoutes.ToList();
+        }
+
+        public static string ParseRouteFromAction(MethodInfo action)
+        {
+            var sb = new StringBuilder();
+            sb.Append('/');
+            var controller = action.DeclaringType.Name.Replace("Controller", String.Empty);
+            sb.Append(controller);
+            sb.Append('/');
+            sb.Append(action.Name);
+            return sb.ToString();
         }
     }
 

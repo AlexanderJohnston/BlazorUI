@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using BlazorUI.Server.Attributes;
 using DealerOn.Cam;
 using DealerOn.Cam.Queries;
 using Microsoft.AspNetCore.Mvc;
@@ -24,17 +25,8 @@ namespace BlazorUI.Server.Controllers
         [HttpGet("[action]")]
         public Task<IActionResult> GetStatus() => _queries.Get<RegionsQuery>();
     
-          [HttpPost("[action]")]
+        [HttpPost("[action]")]
         public Task<IActionResult> PostStatus() => _commands.Execute(new FakeManifest(), 
             When<FakedManifest>.ThenOk, When<FakedBad>.ThenBadRequest);
-    
-        public IActionResult FakeWhenOk(Event e)
-        {
-            return (IActionResult)( new OkResult());
-        }
-        public IActionResult FakeWhenBad(Event e)
-        {
-            return (IActionResult)(new OkResult());
-        }
     }
 }
