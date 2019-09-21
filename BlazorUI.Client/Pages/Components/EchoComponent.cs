@@ -21,12 +21,9 @@ namespace BlazorUI.Client.Pages.Components
         protected async override Task OnInitializedAsync()
         {
             await ReadEcho("On Initialization");
-            Console.WriteLine("EchoEtag = " + EchoEtag);
-            _appState.Subscribe<EchoQuery>(EchoEtag, "/status/getecho", ReadQuery<EchoQuery>);
+            await _appState.Subscribe<EchoQuery>(ReadQuery<EchoQuery>);
             StateHasChanged();
         }
-
-        
 
         public async Task ReadQuery<T>(object query)
         {

@@ -70,17 +70,21 @@ namespace BlazorUI.Server
                 })
                 .Services((context, services) =>
                 {
-                    GetTimelineQueryControllers();
+                    var queryMap = GetTimelineQueryEndpoints();
                     services.AddServerSideBlazor();
                     services.AddSignalR().AddQueryNotifications();
                     services.AddTransient<HubConnectionBuilder>();
                     services.AddTransient<QueryController>();
-                    services.AddTransient<AppState>();
+                    services.AddTransient<RouteService>(service => new RouteService(queryMap));
+                    services.AddTransient<AppState>(state => new AppState(
+                        state.GetRequiredService<RouteService>(), 
+                        state.GetRequiredService<QueryController>(), 
+                        state.GetRequiredService<HttpClient>()));
                 })
             );
         }
 
-        public static List<TimelineRoute> GetTimelineQueryControllers()
+        public static List<TimelineRoute> GetTimelineQueryEndpoints()
         {
             var actions = Assembly.GetExecutingAssembly().GetTypes()
                     .Where(type => typeof(Controller).IsAssignableFrom(type))

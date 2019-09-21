@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorUI.Client.Queries;
+using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,20 +21,64 @@ namespace BlazorUI.Client
         ///     Apparently this is de wae.
         /// </summary>
         /// <param name="query"></param>
-        public AppState(QueryController query, HttpClient http)
+        public AppState(RouteService routes, QueryController query, HttpClient http)
         {
             _query = query;
             _http = http;
+            _queryMap = routes.Map;
         }
 
+        /// <summary>
+        /// Map of queries and their routes injected by the server.
+        /// </summary>
+        private List<TimelineRoute> _queryMap { get; set; }
+
+        /// <summary>
+        /// Stores the list of Query types and the list of callback functions which are interested in changes to that query.
+        /// </summary>
+        private Dictionary<Type, List<Func<object, Task>>> _viewSubscriptions { get; set; }
         private Func<object, Task> QueryCallback;
 
+        /// <summary>
+        /// Subscribes to changes on the server using SignalR.
+        /// </summary>
         public QueryController _query { get; set; }
 
-        public void Register(Type type)
+        /// <summary>
+        ///     Subscribes a callback handler method to a <see cref="Query"/> if there exists known route to it.
+        /// </summary>
+        /// <typeparam name="T">A type inherting from <see cref="Query"/></typeparam>
+        /// <param name="handler">Handler method which accepts a JSON representation of a <see cref="Query"/>.</param>
+        /// <returns></returns>
+        public async Task Subscribe<T>(Func<object, Task> handler = null)
         {
-
+            var type = typeof(T);
+            Debug.WriteLine("Subscribing to a query: " + type.Name);
+            if (_queryMap.Any(map => map.QueryType == type))
+            {
+                var timeline = _queryMap.First(map => map.QueryType == type);
+                var etag = SanitizeETag(await ReadETag(timeline.Route));
+                _query.SubscribeToQuery(etag, timeline.Route, ReadSubscription<T>);
+                if (handler != null && _viewSubscriptions.Any(view => view.Key == typeof(T)))
+                {
+                    var queryView = _viewSubscriptions.First(view => view.Key == typeof(T));
+                    queryView.Value.Add(handler);
+                }
+            }
         }
+
+        private async Task<string> ReadETag(string route)
+        {
+            Debug.WriteLine("Looking up the ETag for: " + route);
+            var request = await _http.GetAsync(route);
+            if (request.IsSuccessStatusCode)
+            {
+                Debug.WriteLine(string.Format("Status: {0} on route {1}", request.StatusCode, route));
+                return request.Headers.ETag.Tag.ToString();
+            }
+            return string.Empty;
+        }
+
         public void Subscribe<T>(string etag, string route, Func<object, Task> handler = null)
         {
             Debug.WriteLine("Sanitizing etag for subscription: " + etag);
@@ -56,6 +101,7 @@ namespace BlazorUI.Client
             NotifyStateChanged();
         }
         private void NotifyStateChanged() => OnChange?.Invoke();
+
         public async Task<T> ReadSubscription<T>(string message, string route)
         {
             Console.WriteLine("Message from SignalR: " + message);
@@ -81,6 +127,7 @@ namespace BlazorUI.Client
                 return default(T);
             }
         }
+
         public string SanitizeETag(string etag)
         {
             string subscription = etag.Trim(new char[] { '"' });
