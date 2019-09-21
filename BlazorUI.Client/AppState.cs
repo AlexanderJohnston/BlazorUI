@@ -21,17 +21,19 @@ namespace BlazorUI.Client
         ///     Apparently this is de wae.
         /// </summary>
         /// <param name="query"></param>
-        public AppState(RouteService routes, QueryController query, HttpClient http)
+        public AppState(IRouteContextFactory routesFactory, QueryController query, HttpClient http)
         {
             _query = query;
             _http = http;
-            _queryMap = routes.Map;
+            _routes = routesFactory.CreateContext();
         }
+
+        private IRouteContext _routes { get; set; }
 
         /// <summary>
         /// Map of queries and their routes injected by the server.
         /// </summary>
-        private List<TimelineRoute> _queryMap { get; set; }
+        private List<TimelineRoute> _queryMap { get { return _routes.Map.ToList(); } }
 
         /// <summary>
         /// Stores the list of Query types and the list of callback functions which are interested in changes to that query.

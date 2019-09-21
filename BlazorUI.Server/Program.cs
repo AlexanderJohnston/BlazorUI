@@ -37,6 +37,8 @@ namespace BlazorUI.Server
             //Type type = MethodBase.GetCurrentMethod().DeclaringType;
             //return WebApp.Run<CamArea>(Assembly.GetAssembly(type));
             var configuration = new ConfigureWebApp();
+            var queryMap = GetTimelineQueryEndpoints();
+            //var routeService = new RouteService(queryMap);
             return WebApp.Run<CamArea>(configuration
                 .App(app =>
                 {
@@ -70,14 +72,14 @@ namespace BlazorUI.Server
                 })
                 .Services((context, services) =>
                 {
-                    var queryMap = GetTimelineQueryEndpoints();
                     services.AddServerSideBlazor();
                     services.AddSignalR().AddQueryNotifications();
                     services.AddTransient<HubConnectionBuilder>();
                     services.AddTransient<QueryController>();
-                    services.AddTransient<RouteService>(service => new RouteService(queryMap));
+                    services.AddTransient<IRouteContext, RouteContext>();
+                    services.AddTransient<IRouteContextFactory, RouteContextFactory>(sp => new RouteContextFactory(() => sp.GetService<IRouteContext>()));
                     services.AddTransient<AppState>(state => new AppState(
-                        state.GetRequiredService<RouteService>(), 
+                        state.GetRequiredService<IRouteContextFactory>(), 
                         state.GetRequiredService<QueryController>(), 
                         state.GetRequiredService<HttpClient>()));
                 })
