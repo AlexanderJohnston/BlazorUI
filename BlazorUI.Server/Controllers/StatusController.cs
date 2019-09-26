@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using BlazorUI.Server.Attributes;
 using DealerOn.Cam;
 using DealerOn.Cam.Queries;
 using Microsoft.AspNetCore.Mvc;
@@ -25,10 +26,13 @@ namespace BlazorUI.Server.Controllers
         public Task<IActionResult> GetStatus() => _queries.Get<StatusQuery>();
 
         [HttpGet("[action]")]
+        [TimelineQuery(typeof(EchoQuery))]
         public Task<IActionResult> GetEcho() => _queries.Get<EchoQuery>();
 
         [HttpPost("[action]")]
         public Task<IActionResult> SendEcho() => _commands.Execute(new Echo(), 
             When<EchoSuccess>.ThenOk, When<EchoFailure>.ThenBadRequest);
+
+
     }
 }

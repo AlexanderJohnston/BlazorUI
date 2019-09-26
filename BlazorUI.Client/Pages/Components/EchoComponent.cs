@@ -20,51 +20,14 @@ namespace BlazorUI.Client.Pages.Components
 
         protected async override Task OnInitializedAsync()
         {
-            await ReadEcho("On Initialization");
-            Console.WriteLine("EchoEtag = " + EchoEtag);
-            string echoSubscription = EchoEtag.Trim(new char[] { '"' });
-            var echoCheckpoint = echoSubscription.IndexOf("@");
-            if (echoCheckpoint > 0)
-            {
-                echoSubscription = SanitizeETag(echoSubscription, echoCheckpoint);
-            }
-            Console.WriteLine("echoSubscription = " + echoSubscription);
-            //EchoEtag = echoEtag + " => " + echoSubscription;
-            _appState.Subscribe(echoSubscription, ReadEcho);
+            await _appState.Subscribe<EchoQuery>(ReadQuery<EchoQuery>);
             StateHasChanged();
         }
 
-        public string SanitizeETag(string etag, int etagCheckpoint)
+        public async Task ReadQuery<T>(object query)
         {
-            var span = etag.AsSpan();
-            var builder = new StringBuilder();
-            for (int i = 0; i < span.Length; i++)
-            {
-                if (i < etagCheckpoint)
-                    builder.Append(span[i]);
-            }
-            return builder.ToString();
-        }
-
-        public async Task ReadEcho(string message)
-        {
-            Console.WriteLine("Message from SignalR: " + message);
-            Console.WriteLine("Made it into ReadEcho on the Razor Page.");
-            var echoRequest = await _http.GetAsync("/status/getecho");
-            if (echoRequest.IsSuccessStatusCode)
-            {
-                Console.WriteLine("Successful retrieved the new " + message);
-                var response = await echoRequest.Content.ReadAsStringAsync();
-                Console.WriteLine("Response: " + response);
-                Echo = JsonConvert.DeserializeObject<EchoQuery>(await echoRequest.Content.ReadAsStringAsync());
-                Console.WriteLine("Deserialized response into type ." + typeof(Echo));
-                EchoEtag = echoRequest.Headers.ETag.Tag.ToString() != null ? echoRequest.Headers.ETag.Tag : ("null etag on message: " + message);
-                Console.WriteLine("Success Status in ReadEcho on Razor Page");
-            }
-            else
-            {
-                Console.WriteLine("Fail Status in ReadEcho on Razor Page");
-            }
+            var queryResponse = (EchoQuery)query;
+            this.Echo = queryResponse;
             StateHasChanged();
         }
 
