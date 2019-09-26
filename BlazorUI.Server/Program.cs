@@ -37,7 +37,7 @@ namespace BlazorUI.Server
             //Type type = MethodBase.GetCurrentMethod().DeclaringType;
             //return WebApp.Run<CamArea>(Assembly.GetAssembly(type));
             var configuration = new ConfigureWebApp();
-            //var queryMap = GetTimelineQueryEndpoints();
+            var queryMap = GetTimelineQueryEndpoints();
             //var routeService = new RouteService(queryMap);
             return WebApp.Run<CamArea>(configuration
                 .App(app =>
@@ -78,8 +78,8 @@ namespace BlazorUI.Server
                     services.AddSignalR().AddQueryNotifications();
                     services.AddTransient<HubConnectionBuilder>();
                     services.AddTransient<QueryController>();
+                    services.AddSingleton<IRouteContext, RouteContext>(sp => new RouteContext(queryMap));
                     // Cannot seem to do this type of injection in client-side WASM right now...
-                    //services.AddSingleton<IRouteContext, RouteContext>(sp => new RouteContext(queryMap));
                     //services.AddTransient<IRouteContextFactory, RouteContextFactory>(sp => new RouteContextFactory(() => sp.GetService<IRouteContext>()));
                     services.AddScoped<AppState>(state => new AppState( 
                         state.GetRequiredService<QueryController>(), 
