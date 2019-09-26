@@ -90,8 +90,9 @@ namespace BlazorUI.Server
 
         public static List<TimelineRoute> GetTimelineQueryEndpoints()
         {
-            var actions = Assembly.GetExecutingAssembly().GetTypes()
-                    .Where(type => typeof(Controller).IsAssignableFrom(type))
+            var controllers = Assembly.GetExecutingAssembly().GetTypes()
+                    .Where(type => typeof(Controller).IsAssignableFrom(type));
+            var actions = controllers
                     .SelectMany(type => type.GetMethods())
                     .Where(method => 
                         method.IsPublic 

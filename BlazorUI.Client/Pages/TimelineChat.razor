@@ -1,0 +1,42 @@
+﻿@page "/chat"
+@using BlazorUI.Client.Pages.Components;
+@inherits ChatComponent
+
+
+<p>Chat Etag: @ChatEtag</p>
+<p>Multi-User Chat:</p>
+<div>
+    <textarea readonly cols="100" rows="10">
+        @if(@GetMessages().Count != 0)
+        {
+            @foreach (var message in @GetMessages())
+            {
+@message<br />
+
+            }
+        }
+        
+    </textarea>
+    <br />
+    <input type="text" @bind="@CurrentMessage" />
+    <button name="messageButton" @onclick="@SendMessage">
+        Send
+    </button>
+    <br />
+    Username: <input type="text" @bind="@CurrentUser" />
+</div>
+
+@code {
+    public string Session = "";
+    public List<string> GetMessages()
+    {
+        if (Chat?.Messages != null)
+        {
+            return Chat.Messages;
+        }
+        else
+        {
+            return new List<string>();
+        }
+    }
+}

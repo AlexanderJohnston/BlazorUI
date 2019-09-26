@@ -1,6 +1,9 @@
 ﻿@page "/echo"
-@using  BlazorUI.Client.Pages.Components;
+@using BlazorUI.Client.Pages.Components;
+@using BlazorUI.Client.Pages;
 @inherits EchoComponent
+
+
 
 <h3>Echo Interface</h3>
 
@@ -21,6 +24,7 @@
         <p>Time of last echo: (@GetTimeOfLastEcho() ?? "-")</p>
     </li>
 </ul>
+
 
 @code{
     public string GetTimeUntilEcho()
