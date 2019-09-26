@@ -31,27 +31,6 @@ namespace BlazorUI.Client.Pages.Components
             StateHasChanged();
         }
 
-        public async Task ReadEcho(string message)
-        {
-            Console.WriteLine("Message from SignalR: " + message);
-            var echoRequest = await _http.GetAsync("/status/getecho");
-            if (echoRequest.IsSuccessStatusCode)
-            {
-                Console.WriteLine("Successful retrieved the new " + message);
-                var response = await echoRequest.Content.ReadAsStringAsync();
-                Console.WriteLine("Response: " + response);
-                Echo = JsonConvert.DeserializeObject<EchoQuery>(await echoRequest.Content.ReadAsStringAsync());
-                Console.WriteLine("Deserialized response into type ." + typeof(Echo));
-                EchoEtag = echoRequest.Headers.ETag.Tag.ToString() != null ? echoRequest.Headers.ETag.Tag : ("null etag on message: " + message);
-                Console.WriteLine("Success Status in ReadEcho on Razor Page");
-            }
-            else
-            {
-                Console.WriteLine("Fail Status in ReadEcho on Razor Page");
-            }
-            StateHasChanged();
-        }
-
         public async Task SendEcho()
         {
             var echoResponse = await _http.PostAsync("/status/sendecho", null);
