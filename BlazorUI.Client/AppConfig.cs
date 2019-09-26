@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorUI.Client.Queries
+namespace BlazorUI.Client
 {
-    public interface IRouteContextFactory
+    public class AppConfig
     {
-        IRouteContext CreateContext();
+        public List<TimelineRoute> Map { get; set; }
     }
 }

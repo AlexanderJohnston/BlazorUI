@@ -32,5 +32,7 @@ namespace BlazorUI.Server.Controllers
         [HttpPost("[action]")]
         public Task<IActionResult> SendEcho() => _commands.Execute(new Echo(), 
             When<EchoSuccess>.ThenOk, When<EchoFailure>.ThenBadRequest);
+
+
     }
 }

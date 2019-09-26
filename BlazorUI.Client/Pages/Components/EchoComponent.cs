@@ -20,7 +20,6 @@ namespace BlazorUI.Client.Pages.Components
 
         protected async override Task OnInitializedAsync()
         {
-            await ReadEcho("On Initialization");
             await _appState.Subscribe<EchoQuery>(ReadQuery<EchoQuery>);
             StateHasChanged();
         }
@@ -35,7 +34,6 @@ namespace BlazorUI.Client.Pages.Components
         public async Task ReadEcho(string message)
         {
             Console.WriteLine("Message from SignalR: " + message);
-            Console.WriteLine("Made it into ReadEcho on the Razor Page.");
             var echoRequest = await _http.GetAsync("/status/getecho");
             if (echoRequest.IsSuccessStatusCode)
             {

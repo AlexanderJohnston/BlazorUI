@@ -21,10 +21,12 @@ namespace BlazorUI.Server
                     new[] { "application/octet-stream" });
             });
         }
-
+        public bool NotHomenet(string id) => id != "homenet";
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var feeds = new string[] { "homenet", "cpo", "chrome" };
+            if (feeds.All(f => NotHomenet(f))) 
             app.UseResponseCompression();
 
             if (env.IsDevelopment())

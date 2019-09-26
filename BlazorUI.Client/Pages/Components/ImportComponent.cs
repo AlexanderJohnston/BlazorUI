@@ -32,54 +32,15 @@ namespace BlazorUI.Client.Pages.Components
 
         protected async override Task OnInitializedAsync()
         {
-            //var statusResponse = await Http.GetAsync("/status/getstatus");
-            //statusEtag = statusResponse.Headers.ETag.Tag;
-            var echoResponse = await _http.GetAsync("/status/getecho");
-            var echoEtag = echoResponse.Headers.ETag.Tag;
-            var echoCheckpoint = echoEtag.ToString().IndexOf("@");
-            string echoSubscription;
-            if (echoCheckpoint > 0)
-            {
-                echoSubscription = echoEtag.Substring(1, echoCheckpoint - 1);
-            }
-            else
-            {
-                echoSubscription = echoEtag;
-            }
-            EchoEtag = echoEtag + " => " + echoSubscription;
-            _appState.Subscribe<EchoQuery>(echoSubscription, "/status/getecho");
-
-            var regionsResponse = await _http.GetAsync("/regions/getstatus");
-            var regionsEtag = regionsResponse.Headers.ETag.Tag;
-            var regionsCheckpoint = regionsEtag.ToString().IndexOf("@");
-            string regionsSubscription;
-            if (regionsCheckpoint > 0)
-            {
-                regionsSubscription = regionsEtag.Substring(1, regionsCheckpoint - 1);
-            }
-            else
-            {
-                regionsSubscription = regionsEtag;
-            }
-            RegionsEtag = regionsEtag + " => " + regionsSubscription;
-            _appState.Subscribe<RegionsQuery>(regionsSubscription, "/regions/getstatus");
-            _appState.OnChange += StateHasChanged;
+            
         }
-        public async Task ReadEcho(string message)
+        public async Task ReadQuery<T>(object query)
         {
-            Console.WriteLine("Made it into ReadEcho on the Razor Page.");
-            var echoRequest = await _http.GetAsync("/status/getecho");
-            if (echoRequest.IsSuccessStatusCode)
-            {
-                Echo = JsonPrettify(await echoRequest.Content.ReadAsStringAsync());
-                Console.WriteLine("Success Status in ReadEcho on Razor Page");
-            }
-            else
-            {
-                Console.WriteLine("Fail Status in ReadEcho on Razor Page");
-                Echo = echoRequest.StatusCode.ToString();
-            }
+            //var queryResponse = (EchoQuery)query;
+            //this.Echo = queryResponse;
+            StateHasChanged();
         }
+
         public async Task ReadRegions(string message)
         {
             _checkpoint++;
@@ -97,6 +58,7 @@ namespace BlazorUI.Client.Pages.Components
                 imports = regionsRequest.StatusCode.ToString();
             }
         }
+
         public async Task ReadStatus(string message)
         {
             _checkpoint++;
@@ -128,16 +90,7 @@ namespace BlazorUI.Client.Pages.Components
 
         public async Task StartImport()
         {
-            /*var connection = _hubBuilder.WithUrl("/hubs/query").Build();
-            var regionsResponse = await Http.GetAsync("/api/regions");
-            etag = regionsResponse.Headers.ETag.Tag;
-            AppState.AddEtag(etag);*/
-
-            //connection.On<string>(etag, async (message) => { await ReadImport(message); });
-            //old
-            //_importResponse = await Http.GetAsync("imports/test");
             _importResponse = await _http.PostAsync("imports/startimport", null);
-            //imports = await _importResponse.Content.ReadAsStringAsync();
             imports = "Importing...";
         }
 

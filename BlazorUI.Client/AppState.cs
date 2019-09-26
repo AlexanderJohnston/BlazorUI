@@ -21,25 +21,21 @@ namespace BlazorUI.Client
         ///     Apparently this is de wae.
         /// </summary>
         /// <param name="query"></param>
-        public AppState(IRouteContextFactory routesFactory, QueryController query, HttpClient http)
+        public AppState(QueryController query, HttpClient http)
         {
             _query = query;
             _http = http;
-            _routes = routesFactory.CreateContext();
         }
-
-        private IRouteContext _routes { get; set; }
 
         /// <summary>
         /// Map of queries and their routes injected by the server.
         /// </summary>
-        private List<TimelineRoute> _queryMap { get { return _routes.Map.ToList(); } }
+        private List<TimelineRoute> _queryMap { get; set; }
 
         /// <summary>
         /// Stores the list of Query types and the list of callback functions which are interested in changes to that query.
         /// </summary>
-        private Dictionary<Type, List<Func<object, Task>>> _viewSubscriptions { get; set; }
-        private Func<object, Task> QueryCallback;
+        private Dictionary<Type, List<Func<object, Task>>> _viewSubscriptions { get; set; } = new Dictionary<Type, List<Func<object, Task>>>();
 
         /// <summary>
         /// Subscribes to changes on the server using SignalR.
@@ -54,10 +50,18 @@ namespace BlazorUI.Client
         /// <returns></returns>
         public async Task Subscribe<T>(Func<object, Task> handler = null)
         {
+            if (_queryMap == null)
+            {
+                var request = await _http.GetAsync("/querymap/get/");
+                var response = await request.Content.ReadAsStringAsync();
+                Console.WriteLine("List of queries and their routes: " + response);
+                _queryMap = JsonConvert.DeserializeObject<List<TimelineRoute>>(response);
+            }
             var type = typeof(T);
             Debug.WriteLine("Subscribing to a query: " + type.Name);
             if (_queryMap.Any(map => map.QueryType == type))
             {
+                Console.WriteLine("Matching route found.");
                 var timeline = _queryMap.First(map => map.QueryType == type);
                 var etag = SanitizeETag(await ReadETag(timeline.Route));
                 _query.SubscribeToQuery(etag, timeline.Route, ReadSubscription<T>);
@@ -66,6 +70,38 @@ namespace BlazorUI.Client
                     var queryView = _viewSubscriptions.First(view => view.Key == typeof(T));
                     queryView.Value.Add(handler);
                 }
+                else if (handler != null)
+                {
+                    _viewSubscriptions.Add(type, new List<Func<object, Task>>() { handler });
+                    // If we don't initialize this handler then it will be null when the subscribing component is rendered.
+                    await ReadSubscription<T>("Initialization of " + typeof(T), timeline.Route);
+                }
+            }
+        }
+
+        public async Task<T> ReadSubscription<T>(string message, string route)
+        {
+            Console.WriteLine("Message from SignalR: " + message);
+            var queryRequest = await _http.GetAsync(route);
+            if (queryRequest.IsSuccessStatusCode)
+            {
+                var response = await queryRequest.Content.ReadAsStringAsync();
+                Console.WriteLine("Response: " + response);
+                var query = JsonConvert.DeserializeObject<T>(response);
+                Console.WriteLine("Deserialized response into type ." + typeof(T));
+                var ETag = queryRequest.Headers.ETag.Tag.ToString() != null
+                    ? queryRequest.Headers.ETag.Tag
+                    : ("null etag on message: " + message);
+                foreach (var callback in _viewSubscriptions.First(view => view.Key == typeof(T)).Value)
+                {
+                    await callback.Invoke(query);
+                }
+                return (query);
+            }
+            else
+            {
+                Console.WriteLine("Failed to retrieve the update from SignalR on: " + route);
+                return default(T);
             }
         }
 
@@ -79,55 +115,6 @@ namespace BlazorUI.Client
                 return request.Headers.ETag.Tag.ToString();
             }
             return string.Empty;
-        }
-
-        public void Subscribe<T>(string etag, string route, Func<object, Task> handler = null)
-        {
-            Debug.WriteLine("Sanitizing etag for subscription: " + etag);
-            var sanitizedTag = SanitizeETag(etag);
-            if (handler != null)
-            {
-                QueryCallback = handler;
-            }
-            _query.SubscribeToQuery(sanitizedTag, route, ReadSubscription<T>);
-            NotifyStateChanged();
-        }
-
-        public event Action OnChange;
-
-        public List<string> Etags { get; } = new List<string>();
-
-        public void AddEtag(string etag)
-        {
-            Etags.Add(etag);
-            NotifyStateChanged();
-        }
-        private void NotifyStateChanged() => OnChange?.Invoke();
-
-        public async Task<T> ReadSubscription<T>(string message, string route)
-        {
-            Console.WriteLine("Message from SignalR: " + message);
-            Console.WriteLine("Made it into ReadEcho on the Razor Page.");
-            var queryRequest = await _http.GetAsync(route);
-            if (queryRequest.IsSuccessStatusCode)
-            {
-                Console.WriteLine("Successful retrieved the new " + message);
-                var response = await queryRequest.Content.ReadAsStringAsync();
-                Console.WriteLine("Response: " + response);
-                var query = JsonConvert.DeserializeObject<T>(response);
-                Console.WriteLine("Deserialized response into type ." + typeof(T));
-                var ETag = queryRequest.Headers.ETag.Tag.ToString() != null 
-                    ? queryRequest.Headers.ETag.Tag 
-                    : ("null etag on message: " + message);
-                Console.WriteLine("Success Status in ReadEcho on Razor Page");
-                await QueryCallback(query);
-                return (query);
-            }
-            else
-            {
-                Console.WriteLine("Fail Status in ReadEcho on Razor Page");
-                return default(T);
-            }
         }
 
         public string SanitizeETag(string etag)

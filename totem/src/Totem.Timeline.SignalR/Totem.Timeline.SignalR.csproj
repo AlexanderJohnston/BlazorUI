@@ -28,8 +28,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
-    <PackageReference Include="PostSharp" Version="6.3.5-preview" />
-    <PackageReference Include="PostSharp.Patterns.Diagnostics" Version="6.3.5-preview" />
+    <PackageReference Include="PostSharp" Version="6.3.6-preview" />
+    <PackageReference Include="PostSharp.Patterns.Diagnostics" Version="6.3.6-preview" />
   </ItemGroup>
 
   <ItemGroup>
