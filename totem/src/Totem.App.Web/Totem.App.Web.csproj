@@ -4,7 +4,7 @@
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
-    <LangVersion>7.1</LangVersion>
+    <LangVersion>preview</LangVersion>
     <RootNamespace>Totem.App.Web</RootNamespace>
     <Company>Totem</Company>
     <Authors>Totem Contributors</Authors>

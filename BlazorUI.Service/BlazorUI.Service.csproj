@@ -1,9 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
@@ -12,10 +24,16 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorUI.Shared\BlazorUI.Shared.csproj" />
+    <ProjectReference Include="..\totem\src\Totem.App.Service\Totem.App.Service.csproj" />
     <ProjectReference Include="..\totem\src\Totem.Runtime\Totem.Runtime.csproj" />
+    <ProjectReference Include="..\totem\src\Totem.Timeline.EventStore\Totem.Timeline.EventStore.csproj" />
     <ProjectReference Include="..\totem\src\Totem.Timeline\Totem.Timeline.csproj" />
     <ProjectReference Include="..\totem\src\Totem\Totem.csproj" />
   </ItemGroup>

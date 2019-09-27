@@ -1,4 +1,4 @@
-﻿using DealerOn.Cam.Queries;
+﻿using BlazorUI.Shared.Query;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 using System;

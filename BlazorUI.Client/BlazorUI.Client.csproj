@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <OutputType>Exe</OutputType>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>preview</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
   </PropertyGroup>
@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorUI.Shared\BlazorUI.Shared.csproj" />
-    <ProjectReference Include="..\src\DealerOn.Cam\DealerOn.Cam.csproj" />
     <ProjectReference Include="..\totem\src\Totem.Runtime\Totem.Runtime.csproj" />
     <ProjectReference Include="..\totem\src\Totem.Timeline\Totem.Timeline.csproj" />
     <ProjectReference Include="..\totem\src\Totem\Totem.csproj" />

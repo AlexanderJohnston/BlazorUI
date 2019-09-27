@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using Totem.App.Web;
-using DealerOn.Cam;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +25,7 @@ using BlazorUI.Server.PostSharp;
 using BlazorUI.Server.Attributes;
 using System.Collections.Generic;
 using System.Text;
+using BlazorUI.Shared;
 
 namespace BlazorUI.Server
 {
@@ -39,7 +39,7 @@ namespace BlazorUI.Server
             var configuration = new ConfigureWebApp();
             var queryMap = GetTimelineQueryEndpoints();
             //var routeService = new RouteService(queryMap);
-            return WebApp.Run<CamArea>(configuration
+            return WebApp.Run<ApplicationArea>(configuration
                 .App(app =>
                 {
                     var environment = app.ApplicationServices

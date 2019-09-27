@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DealerOn.Cam.Queries;
+using BlazorUI.Shared.Query;
 using System.Net.Http;
 using BlazorUI.Client.Pages.Data;
 using Newtonsoft.Json;

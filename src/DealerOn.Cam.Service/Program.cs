@@ -10,5 +10,6 @@ namespace DealerOn.Cam.Service
   {
     public static Task Main() =>
       ServiceApp.Run<CamArea>(services => services.AddCam());
+
   }
 }

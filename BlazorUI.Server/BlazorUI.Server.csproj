@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BlazorUI.Client\BlazorUI.Client.csproj" />
     <ProjectReference Include="..\BlazorUI.Shared\BlazorUI.Shared.csproj" />
-    <ProjectReference Include="..\src\DealerOn.Cam\DealerOn.Cam.csproj" />
     <ProjectReference Include="..\totem\src\Totem.App.Web\Totem.App.Web.csproj" />
     <ProjectReference Include="..\totem\src\Totem\Totem.csproj" />
   </ItemGroup>
