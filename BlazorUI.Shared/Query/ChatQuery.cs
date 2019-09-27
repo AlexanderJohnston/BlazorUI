@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using Totem.Timeline;
 
-namespace BlazorUI.Shared.Query
+namespace BlazorUI.Shared.Queries
 {
-    public class ChatQuery : Totem.Timeline.Query
+    public class ChatQuery : Query
     {
         public int Count;
         public List<string> Messages = new List<string>();

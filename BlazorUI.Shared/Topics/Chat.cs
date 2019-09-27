@@ -1,12 +1,12 @@
-﻿using BlazorUI.Shared.Event.Chat;
+﻿using BlazorUI.Shared.Events.Chat;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Totem.Timeline;
 
-namespace BlazorUI.Shared.Topic
+namespace BlazorUI.Shared.Topics
 {
-    public class Chat : Totem.Timeline.Topic
+    public class Chat : Topic
     {
         public Chat()
         {
