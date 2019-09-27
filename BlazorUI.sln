@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUI.Client", "BlazorUI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUI.Shared", "BlazorUI.Shared\BlazorUI.Shared.csproj", "{71986F49-68C3-4DFE-820B-F22B1E2CC688}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0E23BEA0-17AE-459A-B762-09AC85C54445}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "totem", "totem", "{0E11EAF0-D6BC-4732-9E4D-BEB2AE938919}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Totem", "totem\src\Totem\Totem.csproj", "{0C6C11A1-7C93-42E7-86A7-33C921BE726C}"
@@ -29,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Totem.Timeline.Mvc", "totem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Totem.Timeline.SignalR", "totem\src\Totem.Timeline.SignalR\Totem.Timeline.SignalR.csproj", "{15038EB3-0262-49E5-B07A-C2886D338576}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorUI.Service", "BlazorUI.Service\BlazorUI.Service.csproj", "{F7078528-6EB7-4248-B4C2-6C5D459D7180}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUI.Service", "BlazorUI.Service\BlazorUI.Service.csproj", "{F7078528-6EB7-4248-B4C2-6C5D459D7180}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
