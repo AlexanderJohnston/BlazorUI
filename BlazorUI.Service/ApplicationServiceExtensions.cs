@@ -15,8 +15,8 @@ namespace BlazorUI.Service
         static IServiceCollection AddApplicationOptions(this IServiceCollection services) => services.BindOptionsToConfiguration<ApplicationOptions>("app");
         /*
         static IServiceCollection AddDealerOnDb(this IServiceCollection services) =>
-          services.AddSingleton<IDealerOnDb>(s => new DealerOnDb(s.GetOptions<ApplicationOptions>().DealerOnConnectionString));
-
+          services.AddSingleton<TorqueQAContext>(s => new TorqueQAContext(s.GetOptions<ApplicationOptions>().DealerOnConnectionString));/*
+        /*
         static IServiceCollection AddManifests(this IServiceCollection services) =>
           services
           .AddSingleton<IManifestFile>(s => new ManifestFile(

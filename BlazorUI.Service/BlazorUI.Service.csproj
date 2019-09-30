@@ -1,22 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>preview</LangVersion>
+    <UserSecretsId>d895c483-665b-4589-a130-875f951a049f</UserSecretsId>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -37,7 +35,6 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\BlazorUI.Shared\BlazorUI.Shared.csproj" />
     <ProjectReference Include="..\totem\src\Totem.App.Service\Totem.App.Service.csproj" />
@@ -46,5 +43,4 @@
     <ProjectReference Include="..\totem\src\Totem.Timeline\Totem.Timeline.csproj" />
     <ProjectReference Include="..\totem\src\Totem\Totem.csproj" />
   </ItemGroup>
-
 </Project>
