@@ -5,14 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Totem.Runtime.Hosting;
+using BlazorUI.Service.Models;
+using BlazorUI.Shared.Data;
 
 namespace BlazorUI.Service
 {
     public static class ApplicationServiceExtensions
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services) => services.AddHttpClient().AddApplicationOptions();
+        public static IServiceCollection AddApplication(this IServiceCollection services) => services
+            .AddHttpClient()
+            .AddApplicationOptions()
+            .AddLegacyEventDatabase();
 
         static IServiceCollection AddApplicationOptions(this IServiceCollection services) => services.BindOptionsToConfiguration<ApplicationOptions>("app");
+
+        static IServiceCollection AddLegacyEventDatabase(this IServiceCollection services) => services.AddSingleton<ILegacyEventContext, TorqueQAContext>(s => new TorqueQAContext());
         /*
         static IServiceCollection AddDealerOnDb(this IServiceCollection services) =>
           services.AddSingleton<IDealerOnDb>(s => new DealerOnDb(s.GetOptions<ApplicationOptions>().DealerOnConnectionString));

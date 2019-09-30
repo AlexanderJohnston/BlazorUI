@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BlazorUI.Service.Models
+namespace BlazorUI.Shared.Data
 {
     public partial class Event
     {
@@ -10,7 +10,7 @@ namespace BlazorUI.Service.Models
             InverseCauseNavigation = new HashSet<Event>();
         }
 
-        public long Position { get; set; }
+        public long? Position { get; set; }
         public long? Cause { get; set; }
         public string Type { get; set; }
         public string Json { get; set; }

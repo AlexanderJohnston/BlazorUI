@@ -1,0 +1,36 @@
+﻿@page "/database"
+@using BlazorUI.Client.Pages.Components;
+@using BlazorUI.Client.Pages;
+@using BlazorUI.Shared.Data;
+@using Newtonsoft.Json;
+@inherits DatabaseComponent
+
+
+
+<h3>Database Interface</h3>
+
+<button name="echoButton" @onclick="@FetchEvents">
+    ¯\_(ツ)_/¯
+</button>
+
+<p>Events Etag: @DatabaseTag</p>
+<b>Events Query:</b>
+<ul>
+    @foreach(var legacyEvent in @GetLegacyEvents()) {
+    <li>
+        <pre>@legacyEvent.Json</pre>
+    </li>
+    }
+</ul>
+
+
+@code{
+    public List<LegacyEvent> GetLegacyEvents()
+    {
+        if (Legacy?.Events != null)
+        {
+            return SasfeDeserialize();
+        }
+        return new List<LegacyEvent>();
+    }
+}

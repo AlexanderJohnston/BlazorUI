@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Totem.Timeline;
 
-namespace BlazorUI.Shared.Event.Chat
+namespace BlazorUI.Shared.Events.Chat
 {
-    public class MessageReceived : Totem.Timeline.Event
+    public class MessageReceived : Event
     {
         public readonly string Username;
         public readonly string Message;

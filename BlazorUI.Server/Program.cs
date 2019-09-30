@@ -81,7 +81,7 @@ namespace BlazorUI.Server
                     services.AddSingleton<IRouteContext, RouteContext>(sp => new RouteContext(queryMap));
                     // Cannot seem to do this type of injection in client-side WASM right now...
                     //services.AddTransient<IRouteContextFactory, RouteContextFactory>(sp => new RouteContextFactory(() => sp.GetService<IRouteContext>()));
-                    services.AddScoped<AppState>(state => new AppState( 
+                    services.AddScoped<AppState>(state => new AppState(
                         state.GetRequiredService<QueryController>(), 
                         state.GetRequiredService<HttpClient>()));
                 })

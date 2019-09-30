@@ -1,4 +1,4 @@
-﻿using BlazorUI.Shared.Event.Chat;
+﻿using BlazorUI.Shared.Events.Chat;
 using System;
 using System.Collections.Generic;
 using System.Text;
