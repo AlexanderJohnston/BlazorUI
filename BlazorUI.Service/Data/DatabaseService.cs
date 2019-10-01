@@ -12,13 +12,10 @@ namespace BlazorUI.Service.Data
 {
     public class DatabaseService : ILegacyEventContext
     {
-        public DatabaseService(IConfiguration configuration)
+        public DatabaseService(string connection)
         {
-            Configuration = configuration;
-            _connection = Configuration["LegacyEvents:ConnectionString"];
+            _connection = connection;
         }
-
-        public IConfiguration Configuration { get; set; }
 
         public TorqueQAContext Context { get; set; }
 

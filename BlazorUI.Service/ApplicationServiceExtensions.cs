@@ -13,11 +13,16 @@ namespace BlazorUI.Service
 {
     public static class ApplicationServiceExtensions
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services) => 
+        public static IServiceCollection AddApplicationConfigured(this IServiceCollection services, string connection) => 
+            services.AddApplication().AddDatabaseWithSecrets(connection);
+
+        public static IServiceCollection AddApplicationHardCoded(this IServiceCollection services) =>
+            services.AddApplication().AddLegacyEventDatabase();
+
+        static IServiceCollection AddApplication(this IServiceCollection services) =>
             services
             .AddHttpClient()
-            .AddApplicationOptions()
-            .AddDatabaseWithSecrets();
+            .AddApplicationOptions();
 
         static IServiceCollection AddApplicationOptions(this IServiceCollection services) => 
             services.BindOptionsToConfiguration<ApplicationOptions>("app");
@@ -35,9 +40,9 @@ namespace BlazorUI.Service
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        static IServiceCollection AddDatabaseWithSecrets(this IServiceCollection services)
+        static IServiceCollection AddDatabaseWithSecrets(this IServiceCollection services, string connection)
         {
-            return services.AddSingleton<ILegacyEventContext, DatabaseService>();
+            return services.AddSingleton<ILegacyEventContext, DatabaseService>(s => new DatabaseService(connection));
         }
 
         /*

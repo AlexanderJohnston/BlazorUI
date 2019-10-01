@@ -23,8 +23,8 @@ namespace BlazorUI.Service
                     })
                     .ConfigureServices((context, services) =>
                     {
-                        var legacy = context.Configuration.GetSection(nameof(LegacyEvents));
-                        services.AddApplication();
+                        var legacy = context.Configuration.GetSection("LegacyEvents:ConnectionString");
+                        services.AddApplicationConfigured(legacy.Value);
                     });
                 })
             );
