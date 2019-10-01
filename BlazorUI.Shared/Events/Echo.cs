@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Totem.Timeline;
 
-namespace BlazorUI.Shared
+namespace BlazorUI.Shared.Events
 {
     public class Echo : Command
     {
