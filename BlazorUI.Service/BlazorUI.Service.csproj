@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>preview</LangVersion>
+    <UserSecretsId>d895c483-665b-4589-a130-875f951a049f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
