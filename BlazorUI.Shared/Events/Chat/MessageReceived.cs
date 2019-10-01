@@ -9,10 +9,11 @@ namespace BlazorUI.Shared.Events.Chat
     {
         public readonly string Username;
         public readonly string Message;
-        public MessageReceived(string message, string userName)
+
+        public MessageReceived(string username, string message)
         {
+            Username = username;
             Message = message;
-            Username = userName;
         }
     }
 }

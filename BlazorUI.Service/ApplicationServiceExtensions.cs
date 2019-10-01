@@ -7,19 +7,39 @@ using System.Text;
 using Totem.Runtime.Hosting;
 using BlazorUI.Service.Models;
 using BlazorUI.Shared.Data;
+using BlazorUI.Service.Data;
 
 namespace BlazorUI.Service
 {
     public static class ApplicationServiceExtensions
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services) => services
+        public static IServiceCollection AddApplication(this IServiceCollection services) => 
+            services
             .AddHttpClient()
             .AddApplicationOptions()
-            .AddLegacyEventDatabase();
+            .AddDatabaseWithSecrets();
 
-        static IServiceCollection AddApplicationOptions(this IServiceCollection services) => services.BindOptionsToConfiguration<ApplicationOptions>("app");
+        static IServiceCollection AddApplicationOptions(this IServiceCollection services) => 
+            services.BindOptionsToConfiguration<ApplicationOptions>("app");
 
-        static IServiceCollection AddLegacyEventDatabase(this IServiceCollection services) => services.AddSingleton<ILegacyEventContext, TorqueQAContext>(s => new TorqueQAContext());
+        /// <summary>
+        ///     Legacy method of attaching the database. Hard-coded.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        static IServiceCollection AddLegacyEventDatabase(this IServiceCollection services) => 
+            services.AddSingleton<ILegacyEventContext, TorqueQAContext>(s => new TorqueQAContext("connectionString"));
+
+        /// <summary>
+        ///     User secrets method of attaching the database.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        static IServiceCollection AddDatabaseWithSecrets(this IServiceCollection services)
+        {
+            return services.AddSingleton<ILegacyEventContext, DatabaseService>();
+        }
+
         /*
         static IServiceCollection AddDealerOnDb(this IServiceCollection services) =>
           services.AddSingleton<IDealerOnDb>(s => new DealerOnDb(s.GetOptions<ApplicationOptions>().DealerOnConnectionString));

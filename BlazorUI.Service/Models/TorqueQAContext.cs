@@ -10,8 +10,11 @@ namespace BlazorUI.Service.Models
 {
     public partial class TorqueQAContext : DbContext, ILegacyEventContext
     {
-        public TorqueQAContext()
+        private readonly string _connection;
+
+        public TorqueQAContext(string connection)
         {
+            _connection = connection;
         }
 
         public TorqueQAContext(DbContextOptions<TorqueQAContext> options)
@@ -23,19 +26,26 @@ namespace BlazorUI.Service.Models
 
         public async Task<List<Event>> GetEvents()
         {
-            using (var context = new TorqueQAContext())
+            using (var context = new TorqueQAContext(_connection))
             {
-                return await Event.Where(e => e.Position < 10).ToListAsync();
+                return await context.Event.Where(e => e.Position < 10).ToListAsync();
             }
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (string.IsNullOrEmpty(_connection))
+            {
+                throw new NullReferenceException($"You need to run the following comand: {Environment.NewLine}" +
+                    $"dotnet user-secrets set \"LegacyEvents:ConnectionString\" \"your-string-here\" {Environment.NewLine}" +
+                    "Otherwise check the dependency injection in ApplicationServiceExtensions.");
+            }
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings. 
+#warning To protect potentially sensitive information in your connection string, you should move 9it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings. 
 #warning LOL shut up microsoft. -j
-                optionsBuilder.UseSqlServer("Data Source=SQL-AAG-P2.ashburn.edealertools.com;Initial Catalog=Torque;User Id=TorqueSvc;Password=EZGg4+hA;");
+#warning Somebody tell them it's murder https://www.youtube.com/watch?v=CGOt8dZRsHk -a
+                optionsBuilder.UseSqlServer(_connection);
             }
         }
 
