@@ -37,8 +37,10 @@ namespace BlazorUI.Client.Pages.Components
         {
             var chat = new ChatMessage(CurrentUser, CurrentMessage);
             var content = JsonSerializer.Serialize(chat);
+            Console.WriteLine($"Message: {CurrentMessage}   User: {CurrentUser}{Environment.NewLine}" +
+                $"Serialized: {content}");
             var chatResponse = await _http.PostAsJsonAsync("/chat/send", content);
-            Console.WriteLine(chatResponse.StatusCode.ToString() + " is the echo status code.");
+            Console.WriteLine(chatResponse.StatusCode.ToString() + $" is the chat status code.");
         }
     }
 }

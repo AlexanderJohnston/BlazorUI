@@ -59,10 +59,10 @@ namespace BlazorUI.Client
             }
             var type = typeof(T);
             Debug.WriteLine("Subscribing to a query: " + type.Name);
-            if (_queryMap.Any(map => map.QueryType == type))
+            if (_queryMap.Any(map => map.QueryType == type.FullName))
             {
                 Console.WriteLine("Matching route found.");
-                var timeline = _queryMap.First(map => map.QueryType == type);
+                var timeline = _queryMap.First(map => map.QueryType == type.FullName);
                 var etag = SanitizeETag(await ReadETag(timeline.Route));
                 _query.SubscribeToQuery(etag, timeline.Route, ReadSubscription<T>);
                 if (handler != null && _viewSubscriptions.Any(view => view.Key == typeof(T)))
@@ -88,7 +88,7 @@ namespace BlazorUI.Client
                 var response = await queryRequest.Content.ReadAsStringAsync();
                 Console.WriteLine("Response: " + response);
                 var query = JsonSerializer.Deserialize<T>(response);
-                Console.WriteLine("Deserialized response into type ." + typeof(T));
+                Console.WriteLine("Deserialized response into type: " + typeof(T));
                 var ETag = queryRequest.Headers.ETag.Tag.ToString() != null
                     ? queryRequest.Headers.ETag.Tag
                     : ("null etag on message: " + message);
