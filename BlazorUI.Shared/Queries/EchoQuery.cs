@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using Totem.Timeline;
 
-namespace BlazorUI.Shared.Query
+namespace BlazorUI.Shared.Queries
 {
-    public class EchoQuery : Totem.Timeline.Query
+    public class EchoQuery : Query
     {
         public int Count;
 

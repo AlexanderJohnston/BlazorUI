@@ -2,7 +2,7 @@
 using BlazorUI.Client.Queries;
 using BlazorUI.Server.Attributes;
 using BlazorUI.Shared.Events.Chat;
-using BlazorUI.Shared.Query;
+using BlazorUI.Shared.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;

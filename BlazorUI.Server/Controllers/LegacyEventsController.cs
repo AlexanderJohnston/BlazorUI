@@ -1,7 +1,7 @@
 ﻿using BlazorUI.Server.Attributes;
 using BlazorUI.Shared.Events;
 using BlazorUI.Shared.Events.Database;
-using BlazorUI.Shared.Query;
+using BlazorUI.Shared.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

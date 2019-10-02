@@ -33,17 +33,14 @@ namespace BlazorUI.Server
     {
         public static Task Main()
         {
-            // old method, working method
-            //Type type = MethodBase.GetCurrentMethod().DeclaringType;
-            //return WebApp.Run<CamArea>(Assembly.GetAssembly(type));
             var configuration = new ConfigureWebApp();
             var queryMap = GetTimelineQueryEndpoints();
-            //var routeService = new RouteService(queryMap);
+
             return WebApp.Run<ApplicationArea>(configuration
                 .App(app =>
                 {
                     var environment = app.ApplicationServices
-                        .GetRequiredService<Microsoft.Extensions.Hosting.IHostEnvironment>();
+                        .GetRequiredService<IHostEnvironment>();
                     if (environment.IsDevelopment())
                     {
                         app.UseDeveloperExceptionPage();
@@ -65,15 +62,13 @@ namespace BlazorUI.Server
                         endpoints.MapControllerRoute("Imports", "{controller=Imports}/{action=StartImport}");
                         endpoints.MapControllerRoute("ImportTest", "{controller=Imports}/{action=Test}");
                         endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
-                    });
+                    } );
                 })
                 .Serilog((context, logger) => {
                     logger = new LogConfiguration().VerboseLogger(logger);
                 })
                 .Services((context, services) =>
                 {
-                    //services.AddOptions();
-                    //services.Configure<AppConfig>(config => { config.Map = queryMap; });
                     services.AddServerSideBlazor();
                     services.AddSignalR().AddQueryNotifications();
                     services.AddTransient<HubConnectionBuilder>();

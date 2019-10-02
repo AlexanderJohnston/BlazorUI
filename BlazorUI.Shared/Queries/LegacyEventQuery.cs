@@ -4,10 +4,11 @@ using BlazorUI.Shared.Events.Database;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Totem.Timeline;
 
-namespace BlazorUI.Shared.Query
+namespace BlazorUI.Shared.Queries
 {
-    public class LegacyEventQuery : Totem.Timeline.Query
+    public class LegacyEventQuery : Query
     {
         public List<string> Events { get; set; } = new List<string>();
 
