@@ -15,7 +15,7 @@ namespace BlazorUI.Shared.Events
         }
     }
 
-    public class Echoed : Totem.Timeline.Event 
+    public class Echoed : Event 
     {
         public readonly DateTime? Instantiated;
 
@@ -25,7 +25,7 @@ namespace BlazorUI.Shared.Events
         }
     }
 
-    public class EchoSuccess : Totem.Timeline.Event { public readonly DateTime? Instantiated; public EchoSuccess() { Instantiated = DateTime.Now; } }
+    public class EchoSuccess : Event { public readonly DateTime? Instantiated; public EchoSuccess() { Instantiated = DateTime.Now; } }
 
-    public class EchoFailure : Totem.Timeline.Event { public readonly DateTime? Instantiated; public EchoFailure() { Instantiated = DateTime.Now; } }
+    public class EchoFailure : Event { public readonly DateTime? Instantiated; public EchoFailure() { Instantiated = DateTime.Now; } }
 }

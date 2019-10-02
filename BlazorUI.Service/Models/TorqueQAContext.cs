@@ -22,9 +22,9 @@ namespace BlazorUI.Service.Models
         {
         }
 
-        public virtual DbSet<Event> Event { get; set; }
+        public virtual DbSet<TotemV1Event> Event { get; set; }
 
-        public async Task<List<Event>> GetEvents()
+        public async Task<List<TotemV1Event>> GetEvents()
         {
             using (var context = new TorqueQAContext(_connection))
             {
@@ -51,7 +51,7 @@ namespace BlazorUI.Service.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Event>(entity =>
+            modelBuilder.Entity<TotemV1Event>(entity =>
             {
                 entity.HasKey(e => e.Position);
 

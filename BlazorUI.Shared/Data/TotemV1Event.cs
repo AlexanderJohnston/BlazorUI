@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace BlazorUI.Shared.Data
 {
-    public partial class Event
+    public partial class TotemV1Event
     {
-        public Event()
+        public TotemV1Event()
         {
-            InverseCauseNavigation = new HashSet<Event>();
+            InverseCauseNavigation = new HashSet<TotemV1Event>();
         }
 
         public long? Position { get; set; }
@@ -15,7 +15,7 @@ namespace BlazorUI.Shared.Data
         public string Type { get; set; }
         public string Json { get; set; }
 
-        public virtual Event CauseNavigation { get; set; }
-        public virtual ICollection<Event> InverseCauseNavigation { get; set; }
+        public virtual TotemV1Event CauseNavigation { get; set; }
+        public virtual ICollection<TotemV1Event> InverseCauseNavigation { get; set; }
     }
 }

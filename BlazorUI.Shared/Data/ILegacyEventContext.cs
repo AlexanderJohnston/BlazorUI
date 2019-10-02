@@ -8,6 +8,6 @@ namespace BlazorUI.Shared.Data
 {
     public interface ILegacyEventContext
     {
-        Task<List<Event>> GetEvents();
+        Task<List<TotemV1Event>> GetEvents();
     }
 }

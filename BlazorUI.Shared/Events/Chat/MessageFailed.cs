@@ -5,7 +5,7 @@ using Totem.Timeline;
 
 namespace BlazorUI.Shared.Events.Chat
 {
-    public class MessageFailed : Totem.Timeline.Event
+    public class MessageFailed : Event
     {
     }
 }

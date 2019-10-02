@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using BlazorUI.Shared.Queries;
 using System.Net.Http;
 using BlazorUI.Client.Pages.Data;
-using Newtonsoft.Json;
 using System.Text;
+using System.Text.Json;
 
 namespace BlazorUI.Client.Pages.Components
 {
@@ -36,7 +36,7 @@ namespace BlazorUI.Client.Pages.Components
         public async Task SendMessage()
         {
             var chat = new ChatMessage(CurrentUser, CurrentMessage);
-            var content = JsonConvert.SerializeObject(chat);
+            var content = JsonSerializer.Serialize(chat);
             var chatResponse = await _http.PostAsJsonAsync("/chat/send", content);
             Console.WriteLine(chatResponse.StatusCode.ToString() + " is the echo status code.");
         }

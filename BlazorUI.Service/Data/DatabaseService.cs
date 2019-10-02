@@ -21,7 +21,7 @@ namespace BlazorUI.Service.Data
 
         private readonly string _connection;
 
-        public async Task<List<Event>> GetEvents()
+        public async Task<List<TotemV1Event>> GetEvents()
         {
             using (var context = new TorqueQAContext(_connection))
             {

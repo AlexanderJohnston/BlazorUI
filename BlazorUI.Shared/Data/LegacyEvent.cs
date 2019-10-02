@@ -15,7 +15,7 @@ namespace BlazorUI.Shared.Data
         {
 
         }
-        public LegacyEvent(Event e)
+        public LegacyEvent(TotemV1Event e)
         {
             Position = e.Position ?? 0;
             Cause = e.Cause ?? 0;

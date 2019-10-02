@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlazorUI.Shared.Queries;
 using System.Net.Http;
-using Newtonsoft.Json;
 using BlazorUI.Shared.Data;
+using System.Text.Json;
 
 namespace BlazorUI.Client.Pages.Components
 {
@@ -36,12 +36,12 @@ namespace BlazorUI.Client.Pages.Components
             Console.WriteLine(echoResponse.StatusCode.ToString() + " is the database legacy events status code.");
         }
 
-        public List<LegacyEvent> SasfeDeserialize()
+        public List<LegacyEvent> SafeDeserialize()
         {
             var whatever = new List<LegacyEvent>();
             foreach (var serialized in Legacy.Events)
             {
-                var deserialized = JsonConvert.DeserializeObject<LegacyEvent>(serialized);
+                var deserialized = JsonSerializer.Deserialize<LegacyEvent>(serialized);
                 Console.WriteLine(deserialized.Position + " " + deserialized.Type + " "
                     + deserialized.Cause + " " + deserialized.Json);
                 whatever.Add(deserialized);
