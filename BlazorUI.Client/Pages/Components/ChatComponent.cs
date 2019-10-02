@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BlazorUI.Shared.Query;
+using BlazorUI.Shared.Queries;
 using System.Net.Http;
 using BlazorUI.Client.Pages.Data;
 using Newtonsoft.Json;

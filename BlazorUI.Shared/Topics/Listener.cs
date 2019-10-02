@@ -6,7 +6,7 @@ using Totem.Timeline;
 
 namespace BlazorUI.Shared.Topics
 {
-    public class Listener : Totem.Timeline.Topic
+    public class Listener : Topic
     {
         public DateTime? LastEntered;
         public int EnterCount;

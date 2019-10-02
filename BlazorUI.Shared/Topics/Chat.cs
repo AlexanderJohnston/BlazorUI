@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Totem.Timeline;
 
-namespace BlazorUI.Shared.Topic
+namespace BlazorUI.Shared.Topics
 {
-    public class Chat : Totem.Timeline.Topic
+    public class Chat : Topic
     {
         public Chat()
         {

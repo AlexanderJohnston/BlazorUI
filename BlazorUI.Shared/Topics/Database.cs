@@ -6,10 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Totem.Timeline;
 
-namespace BlazorUI.Shared.Topic
+namespace BlazorUI.Shared.Topics
 {
-    public class Database : Totem.Timeline.Topic
+    public class Database : Topic
     {
         async Task When(QueryEvents e, ILegacyEventContext context)
         {

@@ -1,4 +1,4 @@
-﻿using BlazorUI.Shared.Query;
+﻿using BlazorUI.Shared.Queries;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 using System;
