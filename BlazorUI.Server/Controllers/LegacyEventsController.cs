@@ -1,8 +1,10 @@
-﻿using BlazorUI.Server.Attributes;
+﻿using BlazorUI.Client.Pages.Data;
+using BlazorUI.Server.Attributes;
 using BlazorUI.Shared.Events;
 using BlazorUI.Shared.Events.Database;
 using BlazorUI.Shared.Queries;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +26,19 @@ namespace BlazorUI.Server.Controllers
         }
 
         [HttpPost("[action]")]
-        public Task<IActionResult> FetchEvents() => _commands.Execute(new QueryEvents(),
-            When<LegacyEventsSucceeded>.ThenOk, When<LegacyEventsFailed>.ThenBadRequest);
+        public Task<IActionResult> FetchEvents([FromBody] string batchSize)
+        {
+            var batch = JsonConvert.DeserializeObject<BatchSize>(batchSize);
+            return _commands.Execute(new QueryEvents(batch.Count),
+When<LegacyEventsSucceeded>.ThenOk, When<LegacyEventsFailed>.ThenBadRequest);
+        }
 
         [HttpGet("[action]")]
         [TimelineQuery(typeof(LegacyEventQuery))]
         public Task<IActionResult> Get() => _queries.Get<LegacyEventQuery>();
+
+        [HttpGet("[action]")]
+        [TimelineQuery(typeof(BatchStatusQuery))]
+        public Task<IActionResult> Progress() => _queries.Get<BatchStatusQuery>();
     }
 }

@@ -11,7 +11,7 @@ namespace BlazorUI.Shared.Queries
         public int Count;
         public List<string> Messages = new List<string>();
 
-        public void Given(MessageReceived e)
+        void Given(MessageReceived e)
         {
             Messages.Add(e.Username + ": " + e.Message);
             Count++;

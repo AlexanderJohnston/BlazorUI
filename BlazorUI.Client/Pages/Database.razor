@@ -27,7 +27,7 @@
 @code{
     public List<LegacyEvent> GetLegacyEvents()
     {
-        if (Legacy?.Events != null)
+        if (Legacy != null && Legacy?.Events != null)
         {
             return SafeDeserialize();
         }

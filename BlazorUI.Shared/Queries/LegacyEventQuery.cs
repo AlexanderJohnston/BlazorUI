@@ -12,7 +12,7 @@ namespace BlazorUI.Shared.Queries
     {
         public List<LegacyEvent> Events = new List<LegacyEvent>();
 
-        public void Given(LegacyEventsQueried e)
+        void Given(LegacyEventsQueried e)
         {
             Events = e.Events;
         }

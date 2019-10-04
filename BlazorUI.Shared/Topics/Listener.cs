@@ -16,18 +16,18 @@ namespace BlazorUI.Shared.Topics
             LastEntered = DateTime.Now;
         }
 
-        public void Given (Echoed e)
+        void Given (Echoed e)
         {
             LastEntered = DateTime.Now;
             EnterCount++;
         }
 
-        public void When(Echo e) 
+        void When(Echo e) 
         { 
             Then(new Echoed()); 
         }
 
-        public void When(Echoed e)
+        void When(Echoed e)
         {
             Then(new EchoSuccess());
         }

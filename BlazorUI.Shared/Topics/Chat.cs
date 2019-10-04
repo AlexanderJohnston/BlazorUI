@@ -15,11 +15,11 @@ namespace BlazorUI.Shared.Topics
 
         }
 
-        public async Task When(SendMessage e)
+        async Task When(SendMessage e)
         {
             Then(new MessageReceived(e.Message, e.User));
         }
-        public void When(MessageReceived e)
+        void When(MessageReceived e)
         {
             Then(new MessageSucceeded());
         }
