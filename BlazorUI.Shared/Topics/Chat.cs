@@ -1,5 +1,4 @@
-﻿using BlazorUI.Shared.Data;
-using BlazorUI.Shared.Events.Chat;
+﻿using BlazorUI.Shared.Events.Chat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +15,11 @@ namespace BlazorUI.Shared.Topics
 
         }
 
-        async Task When(SendMessage e)
+        public async Task When(SendMessage e)
         {
             Then(new MessageReceived(e.Message, e.User));
         }
-        void When(MessageReceived e)
+        public void When(MessageReceived e)
         {
             Then(new MessageSucceeded());
         }

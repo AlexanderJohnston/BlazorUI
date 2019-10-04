@@ -6,16 +6,16 @@ namespace BlazorUI.Shared.Data
 {
     public class LegacyEvent
     {
-        public readonly long Position;
-        public readonly long Cause;
-        public readonly string Type;
-        public readonly string Json;
+        public long Position;
+        public long Cause;
+        public string Type;
+        public string Json;
         
         public LegacyEvent()
         {
 
         }
-        public LegacyEvent(Event e)
+        public LegacyEvent(TotemV1Event e)
         {
             Position = e.Position ?? 0;
             Cause = e.Cause ?? 0;

@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Totem.Timeline;
 
@@ -88,7 +89,7 @@ namespace BlazorUI.Client
                 var response = await queryRequest.Content.ReadAsStringAsync();
                 Console.WriteLine("Response: " + response);
                 var query = JsonConvert.DeserializeObject<T>(response);
-                Console.WriteLine("Deserialized response into type ." + typeof(T));
+                Console.WriteLine("Deserialized response into type: " + typeof(T));
                 var ETag = queryRequest.Headers.ETag.Tag.ToString() != null
                     ? queryRequest.Headers.ETag.Tag
                     : ("null etag on message: " + message);

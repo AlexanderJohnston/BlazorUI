@@ -14,7 +14,7 @@ namespace BlazorUI.Shared.Queries
 
         public TimeSpan? DelaySinceLastEcho;
 
-        void Given(Echoed e)
+        public void Given(Echoed e)
         {
             Count++;
             DelaySinceLastEcho = DateTime.Now - (TimeOfLastEcho ?? DateTime.Now);

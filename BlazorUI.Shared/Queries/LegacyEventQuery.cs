@@ -10,9 +10,9 @@ namespace BlazorUI.Shared.Queries
 {
     public class LegacyEventQuery : Query
     {
-        public List<string> Events { get; set; } = new List<string>();
+        public List<LegacyEvent> Events = new List<LegacyEvent>();
 
-        void Given(LegacyEventsQueried e)
+        public void Given(LegacyEventsQueried e)
         {
             Events = e.Events;
         }
