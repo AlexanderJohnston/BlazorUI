@@ -1,5 +1,6 @@
 ﻿using BlazorUI.Client.Queries;
 using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -55,14 +56,14 @@ namespace BlazorUI.Client
                 var request = await _http.GetAsync("/querymap/get/");
                 var response = await request.Content.ReadAsStringAsync();
                 Console.WriteLine("List of queries and their routes: " + response);
-                _queryMap = JsonSerializer.Deserialize<List<TimelineRoute>>(response);
+                _queryMap = JsonConvert.DeserializeObject<List<TimelineRoute>>(response);
             }
             var type = typeof(T);
             Debug.WriteLine("Subscribing to a query: " + type.Name);
-            if (_queryMap.Any(map => map.QueryType == type.FullName))
+            if (_queryMap.Any(map => map.QueryType == type))
             {
                 Console.WriteLine("Matching route found.");
-                var timeline = _queryMap.First(map => map.QueryType == type.FullName);
+                var timeline = _queryMap.First(map => map.QueryType == type);
                 var etag = SanitizeETag(await ReadETag(timeline.Route));
                 _query.SubscribeToQuery(etag, timeline.Route, ReadSubscription<T>);
                 if (handler != null && _viewSubscriptions.Any(view => view.Key == typeof(T)))
@@ -87,7 +88,7 @@ namespace BlazorUI.Client
             {
                 var response = await queryRequest.Content.ReadAsStringAsync();
                 Console.WriteLine("Response: " + response);
-                var query = JsonSerializer.Deserialize<T>(response);
+                var query = JsonConvert.DeserializeObject<T>(response);
                 Console.WriteLine("Deserialized response into type: " + typeof(T));
                 var ETag = queryRequest.Headers.ETag.Tag.ToString() != null
                     ? queryRequest.Headers.ETag.Tag

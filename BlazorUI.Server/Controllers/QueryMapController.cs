@@ -1,10 +1,6 @@
 ﻿using BlazorUI.Client.Queries;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace BlazorUI.Server.Controllers
 {
@@ -19,6 +15,6 @@ namespace BlazorUI.Server.Controllers
         }
 
         [HttpGet("[action]")]
-        public string Get() => JsonSerializer.Serialize(_routes.Map);
+        public string Get() => JsonConvert.SerializeObject(_routes.Map);
     }
 }

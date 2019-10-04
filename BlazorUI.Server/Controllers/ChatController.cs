@@ -4,16 +4,16 @@ using BlazorUI.Server.Attributes;
 using BlazorUI.Shared.Events.Chat;
 using BlazorUI.Shared.Queries;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Totem.Timeline.Mvc;
 
 namespace BlazorUI.Server.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]")] 
     public class ChatController : Controller
     {
         private IQueryServer _queries { get; set; }
@@ -32,7 +32,7 @@ namespace BlazorUI.Server.Controllers
         [HttpPost("[action]")]
         public Task<IActionResult> Send([FromBody] string chatMessage)
         {
-            var chat = JsonSerializer.Deserialize<ChatMessage>(chatMessage);
+            var chat = JsonConvert.DeserializeObject<ChatMessage>(chatMessage);
             return _commands.Execute(new SendMessage(chat.Message, chat.User), When<MessageSucceeded>.ThenOk, When<MessageFailed>.ThenBadRequest);
         }
     }

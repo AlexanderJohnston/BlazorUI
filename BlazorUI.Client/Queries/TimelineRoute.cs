@@ -8,12 +8,12 @@ namespace BlazorUI.Client.Queries
 {
     public class TimelineRoute 
     {
-        public string QueryType { get; set; }
+        public Type QueryType { get; set; }
         public string Route { get; set; }
 
         public TimelineRoute (Type queryType, string route)
         {
-            QueryType = queryType.FullName;
+            QueryType = queryType;
             Route = route;
         }
 

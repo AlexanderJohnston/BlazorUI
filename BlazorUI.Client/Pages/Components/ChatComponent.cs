@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,6 @@ using BlazorUI.Shared.Queries;
 using System.Net.Http;
 using BlazorUI.Client.Pages.Data;
 using System.Text;
-using System.Text.Json;
 
 namespace BlazorUI.Client.Pages.Components
 {
@@ -36,7 +36,7 @@ namespace BlazorUI.Client.Pages.Components
         public async Task SendMessage()
         {
             var chat = new ChatMessage(CurrentUser, CurrentMessage);
-            var content = JsonSerializer.Serialize(chat);
+            var content = JsonConvert.SerializeObject(chat);
             Console.WriteLine($"Message: {CurrentMessage}   User: {CurrentUser}{Environment.NewLine}" +
                 $"Serialized: {content}");
             var chatResponse = await _http.PostAsJsonAsync("/chat/send", content);
