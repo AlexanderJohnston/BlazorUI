@@ -15,13 +15,13 @@ namespace Totem.Timeline.Mvc
   public sealed class QueryServer : IQueryServer
   {
     readonly AreaMap _area;
-    readonly IQueryDb _db;
+    readonly IClientDb _clientDb;
     readonly IHttpContextAccessor _httpContextAccessor;
 
-    public QueryServer(AreaMap area, IQueryDb db, IHttpContextAccessor httpContextAccessor)
+    public QueryServer(AreaMap area, IClientDb clientDb, IHttpContextAccessor httpContextAccessor)
     {
       _area = area;
-      _db = db;
+      _clientDb = clientDb;
       _httpContextAccessor = httpContextAccessor;
     }
 
@@ -29,18 +29,24 @@ namespace Totem.Timeline.Mvc
     {
       var etag = ReadETag(type, id);
 
-      var state = await _db.ReadState(etag);
+      var state = await _clientDb.ReadQuery(etag);
 
       return state.NotModified
         ? new QueryNotModifiedResult(etag)
         : new QueryStateResult(state) as IActionResult;
     }
 
+    public static bool Quoted(ReadOnlySpan<char> etag) => etag[0] != '"' || etag[^1] == '"';
     QueryETag ReadETag(Type type, Id id)
     {
       if(TryGetIfNoneMatch(out var ifNoneMatch))
       {
-        return QueryETag.From(ifNoneMatch, _area);
+        var unmatchedTag = ifNoneMatch.ToString();
+        if(Quoted(unmatchedTag.AsSpan()))
+        {
+          unmatchedTag = unmatchedTag.Substring(1, unmatchedTag.Length - 1);
+        }
+        return QueryETag.From(unmatchedTag, _area);
       }
 
       var key = FlowKey.From(_area.Queries.Get(type), id);

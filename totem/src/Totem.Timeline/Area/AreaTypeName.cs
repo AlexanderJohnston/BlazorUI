@@ -48,22 +48,21 @@ namespace Totem.Timeline.Area
     // Factory
     //
 
+    public static bool Quoted(ReadOnlySpan<char> tag) => tag[0].Equals('\\') || tag[^1].Equals('\\');
     public static bool TryFrom(string value, out AreaTypeName name)
     {
-      if (value.Contains("\"")) 
+      var span = value.AsSpan();
+      if(Quoted(span)) 
       {
-                var span = value.AsSpan();
                 var builder = new StringBuilder();
-                for (int i = 0; i < span.Length; i++)
+                for(int i = 0; i < span.Length; i++)
                 {
-                    if (span[i] != '"')
+                    if(span[i] != '"')
                       builder.Append(span[i]);
                 }
                 value = builder.ToString();
       }
       var parts = value.Split('.');
-      
-      
 
       name = parts.Length > 0 && parts.All(Id.IsName) ? new AreaTypeName(value) : null;
 

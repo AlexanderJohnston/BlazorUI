@@ -46,7 +46,7 @@ namespace Totem.Timeline.Client
     {
       etag = null;
 
-      var parts = value.Split('@');
+      var parts = (value ?? "").Split('@');
 
       if(parts.Length > 0 && FlowKey.TryFrom(parts[0], area, out var key))
       {
@@ -66,20 +66,21 @@ namespace Totem.Timeline.Client
     public static QueryETag From(FlowKey key, TimelinePosition checkpoint) =>
       new QueryETag(key, checkpoint);
 
+    public static bool Quoted(ReadOnlySpan<char> tag) => tag[0].Equals('\\') || tag[^1].Equals('\\');
     public static QueryETag From(string value, AreaMap area)
     {
-      if (value.Contains("\"")) 
+      var span = value.AsSpan();
+      if(Quoted(span)) 
       {
-         var span = value.AsSpan();
-         var builder = new StringBuilder();
-         for (int i = 0; i < span.Length; i++)
-         {
-            if (span[i] != '"')
-              builder.Append(span[i]);
-         }
-         value = builder.ToString();
+        var builder = new StringBuilder();
+        for(int i = 0; i < span.Length; i++)
+        {
+          if(span[i] != '"')
+            builder.Append(span[i]);
+        }
+        value = builder.ToString();
       }
-      if (!TryFrom(value, area, out var etag))
+      if(!TryFrom(value, area, out var etag))
       {
         throw new FormatException($"Failed to parse query ETag: \"{value}\"");
       }
