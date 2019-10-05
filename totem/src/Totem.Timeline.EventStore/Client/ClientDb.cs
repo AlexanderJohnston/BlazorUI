@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using EventStore.ClientAPI;
@@ -76,32 +75,33 @@ namespace Totem.Timeline.EventStore.Client
     public Task<Query> ReadQueryContent(FlowKey key) =>
       ReadQueryCheckpoint(key, () => GetDefaultContent(key), e => GetCheckpointContent(key, e));
 
-    async Task<TResult> ReadQueryCheckpoint<TResult>(FlowKey key, Func<TResult> getDefault, Func<ResolvedEvent, TResult> getCheckpoint)
-    {
-      var stream = key.GetCheckpointStream();
-      EventReadResult result;
-      try
-      {
-        result = await _context.Connection.ReadEventAsync(stream, StreamPosition.End, resolveLinkTos: false);
-      }
-      catch(Exception e)
-      {
-                Debug.WriteLine(e.Message);
-                result = default(EventReadResult);
-      }
-      switch (result.Status)
-      {
-        case EventReadStatus.NoStream:
-        case EventReadStatus.NotFound:
-          return getDefault();
-        case EventReadStatus.Success:
-          return getCheckpoint(result.Event.Value);
-        default:
-          throw new Exception($"Unexpected result when reading {stream}: {result.Status}");
-      }
-    }
+        async Task<TResult> ReadQueryCheckpoint<TResult>(FlowKey key, Func<TResult> getDefault, Func<ResolvedEvent, TResult> getCheckpoint)
+        {
+            var stream = key.GetCheckpointStream();
+            EventReadResult result = default(EventReadResult);
+            try
+            {
+                result = await _context.Connection.ReadEventAsync(stream, StreamPosition.End, resolveLinkTos: false);
 
-    QueryState GetDefaultState(QueryETag etag)
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            switch (result.Status)
+            {
+                case EventReadStatus.NoStream:
+                case EventReadStatus.NotFound:
+                    return getDefault();
+                case EventReadStatus.Success:
+                    return getCheckpoint(result.Event.Value);
+                default:
+                    throw new Exception($"Unexpected result when reading {stream}: {result.Status}");
+            }
+        }
+
+        QueryState GetDefaultState(QueryETag etag)
     {
       var defaultJson = _context.Json.ToJsonUtf8(etag.Key.Type.New());
 

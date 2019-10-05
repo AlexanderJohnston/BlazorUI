@@ -8,7 +8,7 @@
     <Authors>Totem Contributors</Authors>
     <Product>Totem</Product>
     <Version>1.0.0-beta</Version>
-    <Copyright>2019 Totem Contributors</Copyright>
+    <Copyright>2019 Totem Contributors</Copyright> 
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

@@ -77,7 +77,6 @@ namespace Totem.Timeline.EventStore.Hosting
       }
 
       settings.UseCustomLogger(provider.GetRequiredService<ILogger>());
-
       var connection = options.Connection;
       var reconnects = options.Reconnects;
       var heartbeat = options.Heartbeat;

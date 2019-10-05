@@ -38,11 +38,11 @@ namespace Totem.Timeline.Client
     {
       if(error != null)
       {
-        Log.Error(error, "Dropped timeline subscription ({Reason})", reason);
+        Log.Error(error, "Dropped timeline subscription ({reason})", reason);
       }
       else
       {
-        Log.Debug("Dropped timeline subscription ({Reason})", reason);
+        Log.Debug("Dropped timeline subscription ({reason})", reason);
       }
 
       // By this point, one or both subscriptions are dropped. Ensure both are.

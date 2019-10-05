@@ -75,7 +75,7 @@ namespace BlazorUI.Client
                 {
                     _viewSubscriptions.Add(type, new List<Func<object, Task>>() { handler });
                     // If we don't initialize this handler then it will be null when the subscribing component is rendered.
-                    await ReadSubscription<T>("Initialization of " + typeof(T), timeline.Route);
+                    //await ReadSubscription<T>("Initialize " + typeof(T), timeline.Route);
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace BlazorUI.Client
             }
             else
             {
-                Console.WriteLine("Failed to retrieve the update from SignalR on: " + route);
+                Console.WriteLine("Failed to " + message + " the update from SignalR on: " + route + " with status: " + queryRequest.StatusCode);
                 return default(T);
             }
         }

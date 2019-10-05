@@ -36,17 +36,11 @@ namespace Totem.Timeline.Mvc
         : new QueryStateResult(state) as IActionResult;
     }
 
-    public static bool Quoted(ReadOnlySpan<char> etag) => etag[0] != '"' || etag[^1] == '"';
     QueryETag ReadETag(Type type, Id id)
     {
       if(TryGetIfNoneMatch(out var ifNoneMatch))
       {
-        var unmatchedTag = ifNoneMatch.ToString();
-        if(Quoted(unmatchedTag.AsSpan()))
-        {
-          unmatchedTag = unmatchedTag.Substring(1, unmatchedTag.Length - 1);
-        }
-        return QueryETag.From(unmatchedTag, _area);
+        return QueryETag.From(ifNoneMatch, _area);
       }
 
       var key = FlowKey.From(_area.Queries.Get(type), id);
