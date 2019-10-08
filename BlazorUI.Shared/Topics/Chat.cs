@@ -10,12 +10,7 @@ namespace BlazorUI.Shared.Topics
 {
     public class Chat : Topic
     {
-        public Chat()
-        {
-
-        }
-
-        async Task When(SendMessage e)
+        void When(SendMessage e)
         {
             Then(new MessageReceived(e.Message, e.User));
         }

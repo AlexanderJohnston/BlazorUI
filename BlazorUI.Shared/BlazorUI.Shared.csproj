@@ -13,6 +13,12 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
+    <PackageReference Include="PostSharp" Version="6.3.8-rc" />
+    <PackageReference Include="PostSharp.Patterns.Diagnostics" Version="6.3.8-rc" />
+    <PackageReference Include="PostSharp.Patterns.Diagnostics.Serilog" Version="6.3.8-rc" />
+    <PackageReference Include="PostSharp.Patterns.Threading" Version="6.3.8-rc" />
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
 

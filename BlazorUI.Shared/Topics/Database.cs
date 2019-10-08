@@ -1,7 +1,9 @@
 ﻿using BlazorUI.Shared.Data;
 using BlazorUI.Shared.Events;
 using BlazorUI.Shared.Events.Database;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using PostSharp.Patterns.Threading;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,7 @@ namespace BlazorUI.Shared.Topics
     {
         private readonly int BatchProcessingSize = 100;
 
+        [EntryPoint]
         async Task When(QueryEvents e, ILegacyEventContext context)
         {
             bool singleStep = e.Count == BatchProcessingSize;

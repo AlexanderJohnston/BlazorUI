@@ -1,4 +1,5 @@
 ﻿using BlazorUI.Shared.Events;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,11 +12,6 @@ namespace BlazorUI.Shared.Topics
         public DateTime? LastEntered;
         public int EnterCount;
 
-        public Listener()
-        {
-            LastEntered = DateTime.Now;
-        }
-
         void Given (Echoed e)
         {
             LastEntered = DateTime.Now;
@@ -23,7 +19,8 @@ namespace BlazorUI.Shared.Topics
         }
 
         void When(Echo e) 
-        { 
+        {
+            Log.LogInformation("Testing echo logger.");
             Then(new Echoed()); 
         }
 

@@ -26,6 +26,7 @@ using BlazorUI.Server.Attributes;
 using System.Collections.Generic;
 using System.Text;
 using BlazorUI.Shared;
+using Microsoft.Extensions.Logging;
 
 namespace BlazorUI.Server
 {
@@ -63,9 +64,6 @@ namespace BlazorUI.Server
                         endpoints.MapControllerRoute("ImportTest", "{controller=Imports}/{action=Test}");
                         endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
                     } );
-                })
-                .Serilog((context, logger) => {
-                    logger = new LogConfiguration().VerboseLogger(logger);
                 })
                 .Services((context, services) =>
                 {

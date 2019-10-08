@@ -42,7 +42,7 @@ namespace BlazorUI.Client.Pages.Components
 
         public async Task FetchEvents()
         {
-            var content = JsonConvert.SerializeObject(new BatchSize(1000));
+            var content = JsonConvert.SerializeObject(new BatchSize(100));
             var echoResponse = await _http.PostAsJsonAsync("/LegacyEvents/FetchEvents", content);
             Console.WriteLine(echoResponse.StatusCode.ToString() + " is the database legacy events status code.");
         }
