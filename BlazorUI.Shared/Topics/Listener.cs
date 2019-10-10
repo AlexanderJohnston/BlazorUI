@@ -18,7 +18,7 @@ namespace BlazorUI.Shared.Topics
             EnterCount++;
         }
 
-        void When(Echo e) 
+        void When(Echo e)
         {
             Log.LogInformation("Testing echo logger.");
             Then(new Echoed()); 

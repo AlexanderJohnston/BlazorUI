@@ -7,7 +7,7 @@ using System.Text;
 
 [assembly: Log(AttributePriority = 1,
     AttributeTargetElements = MulticastTargets.Method,
-    AttributeTargetMemberAttributes = MulticastAttributes.Private | MulticastAttributes.Public | MulticastAttributes.Internal | MulticastAttributes.Protected )]
+    AttributeTargetMemberAttributes = MulticastAttributes.Private | MulticastAttributes.Public | MulticastAttributes.Internal )]
 [assembly: Log(AttributePriority = 2, AttributeExclude = true, AttributeTargetMembers = "get_*")]
 
 //[assembly: LogWhen(AttributeTargetTypes="BlazorUI.Shared.Topics.*",

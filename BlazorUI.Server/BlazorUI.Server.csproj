@@ -13,8 +13,10 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
     <PackageReference Include="Microsoft.JSInterop" Version="3.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3-beta1" />
-    <PackageReference Include="Serilog" Version="2.9.0-dev-01124" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3-beta2" />
+    <PackageReference Include="PostSharp.Patterns.Diagnostics.CommonLogging" Version="6.3.8-rc" />
+    <PackageReference Include="PostSharp.Patterns.Diagnostics.Microsoft" Version="6.3.8-rc" />
+    <PackageReference Include="Serilog" Version="2.9.0-dev-01133" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.2.0-dev-00747" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.2-dev-00824" />
   </ItemGroup>

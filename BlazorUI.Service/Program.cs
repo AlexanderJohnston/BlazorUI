@@ -1,7 +1,9 @@
 ﻿using BlazorUI.Service.Data;
 using BlazorUI.Service.Models;
 using BlazorUI.Shared;
+using BlazorUI.Shared.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 using Totem.App.Service;
@@ -25,6 +27,7 @@ namespace BlazorUI.Service
                     {
                         var legacy = context.Configuration.GetSection("LegacyEvents:ConnectionString");
                         services.AddApplicationConfigured(legacy.Value);
+                        services.AddHostedService<PostsharpBackendLogging>();
                     });
                 })
             );
