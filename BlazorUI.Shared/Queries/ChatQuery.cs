@@ -1,7 +1,5 @@
 ﻿using BlazorUI.Shared.Events.Chat;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Totem.Timeline;
 
 namespace BlazorUI.Shared.Queries

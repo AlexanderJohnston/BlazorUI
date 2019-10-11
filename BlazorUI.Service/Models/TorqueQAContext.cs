@@ -1,10 +1,9 @@
-﻿using System;
+﻿using BlazorUI.Shared.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BlazorUI.Shared.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BlazorUI.Service.Models
 {

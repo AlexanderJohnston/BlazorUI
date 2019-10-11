@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json.Serialization;
 using System.Linq;
 
 namespace BlazorUI.Server
@@ -26,8 +25,8 @@ namespace BlazorUI.Server
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             var feeds = new string[] { "homenet", "cpo", "chrome" };
-            if (feeds.All(f => NotHomenet(f))) 
-            app.UseResponseCompression();
+            if (feeds.All(f => NotHomenet(f)))
+                app.UseResponseCompression();
 
             if (env.IsDevelopment())
             {

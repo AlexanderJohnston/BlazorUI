@@ -1,4 +1,4 @@
-﻿using BlazorUI.Service.Data;
+﻿using BlazorUI.Service.Metrics;
 using BlazorUI.Service.Models;
 using BlazorUI.Shared;
 using BlazorUI.Shared.Services;
@@ -18,7 +18,8 @@ namespace BlazorUI.Service
         {
             var configuration = new ConfigureServiceApp();
             return ServiceApp.Run<ApplicationArea>(
-                configuration.Host(build => {
+                configuration.Host(build =>
+                {
                     build.ConfigureAppConfiguration((context, configuration) =>
                     {
                         configuration.AddUserSecrets<LegacyEvents>();
@@ -28,6 +29,7 @@ namespace BlazorUI.Service
                         var legacy = context.Configuration.GetSection("LegacyEvents:ConnectionString");
                         services.AddApplicationConfigured(legacy.Value);
                         services.AddHostedService<PostsharpBackendLogging>();
+                        services.AddHostedService(s => new MetricsService(new MetricsClient(), TimeSpan.FromMilliseconds(100)));
                     });
                 })
             );

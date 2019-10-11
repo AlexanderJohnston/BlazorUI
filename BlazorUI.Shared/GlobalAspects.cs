@@ -1,14 +1,13 @@
-﻿using BlazorUI.Shared;
-using PostSharp.Extensibility;
+﻿using PostSharp.Extensibility;
 using PostSharp.Patterns.Diagnostics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 [assembly: Log(AttributePriority = 1,
     AttributeTargetElements = MulticastTargets.Method,
-    AttributeTargetMemberAttributes = MulticastAttributes.Private | MulticastAttributes.Public | MulticastAttributes.Internal | MulticastAttributes.Protected )]
+    AttributeTargetMemberAttributes = MulticastAttributes.Private | MulticastAttributes.Public | MulticastAttributes.Internal | MulticastAttributes.Protected)]
 [assembly: Log(AttributePriority = 2, AttributeExclude = true, AttributeTargetMembers = "get_*")]
+[assembly: Log(AttributePriority = 3, AttributeExclude = true, AttributeTargetMembers = "BlazorUI.Shared.Services*")]
+
+
 
 //[assembly: LogWhen(AttributeTargetTypes="BlazorUI.Shared.Topics.*",
 //    AttributeTargetElements = MulticastTargets.Method,

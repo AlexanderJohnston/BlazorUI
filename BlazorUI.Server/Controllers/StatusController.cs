@@ -1,9 +1,8 @@
-using System.Threading.Tasks;
 using BlazorUI.Server.Attributes;
-using BlazorUI.Shared;
 using BlazorUI.Shared.Events;
 using BlazorUI.Shared.Queries;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Totem.Timeline.Mvc;
 
 namespace BlazorUI.Server.Controllers

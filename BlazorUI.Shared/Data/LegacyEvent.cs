@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BlazorUI.Shared.Data
+﻿namespace BlazorUI.Shared.Data
 {
     public class LegacyEvent
     {
@@ -10,7 +6,7 @@ namespace BlazorUI.Shared.Data
         public long Cause;
         public string Type;
         public string Json;
-        
+
         public LegacyEvent()
         {
 

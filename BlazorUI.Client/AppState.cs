@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Totem.Timeline;
 
@@ -16,7 +15,7 @@ namespace BlazorUI.Client
     public class AppState : ComponentBase
     {
         private HttpClient _http { get; set; }
-        
+
         /// <summary>
         ///     https://docs.microsoft.com/en-us/aspnet/core/blazor/dependency-injection?view=aspnetcore-3.0#use-di-in-services
         ///     Apparently this is de wae.
@@ -133,7 +132,7 @@ namespace BlazorUI.Client
                 }
                 return builder.ToString();
             }
-            else 
+            else
             {
                 return subscription;
             }

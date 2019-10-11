@@ -1,7 +1,4 @@
 ﻿using BlazorUI.Shared.Events.Database;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Totem.Timeline;
 
 namespace BlazorUI.Shared.Queries

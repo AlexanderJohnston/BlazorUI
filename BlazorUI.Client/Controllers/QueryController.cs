@@ -11,7 +11,7 @@ namespace BlazorUI.Client
 {
     public class QueryController : ComponentBase
     {
-        public Dictionary<(string ETag, string Route), Func<string,string,Task>> _etagSubscriptions { get; set; }
+        public Dictionary<(string ETag, string Route), Func<string, string, Task>> _etagSubscriptions { get; set; }
         public HubConnectionBuilder _builder { get; set; }
         public HubConnection _connection { get; set; }
         public QueryController(HubConnectionBuilder hub)
@@ -20,9 +20,9 @@ namespace BlazorUI.Client
             Connect("/hubs/query");
             _etagSubscriptions = new Dictionary<(string, string), Func<string, string, Task>>();
         }
-        public void Connect (string hubUrl)
+        public void Connect(string hubUrl)
         {
-            _connection = 
+            _connection =
                 _builder.WithUrl(hubUrl,
                     options =>
                     {
@@ -31,7 +31,7 @@ namespace BlazorUI.Client
                         options.SkipNegotiation = true;
                     })
                 .Build();
-            _connection.On <string> ("onChanged", OnChanged);
+            _connection.On<string>("onChanged", OnChanged);
             _connection.OnClose(close =>
             {
                 Debug.WriteLine("The SignalR connection was closed! " + close.ToString());

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Totem.Timeline;
 
 namespace BlazorUI.Shared.Events
@@ -15,7 +13,7 @@ namespace BlazorUI.Shared.Events
         }
     }
 
-    public class Echoed : Event 
+    public class Echoed : Event
     {
         public readonly DateTime? Instantiated;
 
