@@ -1,12 +1,8 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PostSharp.Patterns.Diagnostics;
-using PostSharp.Patterns.Diagnostics.Backends.Microsoft;
 using PostSharp.Patterns.Diagnostics.Backends.Serilog;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,6 +10,10 @@ namespace BlazorUI.Shared.Services
 {
     public class PostsharpBackendLogging : IHostedService
     {
+        /// <summary>
+        ///   One day we need to actually implement support for the ILoggerFactory to share context with-
+        ///   the generic host, but for now this is sufficient for Console logging whether semantic or not.
+        /// </summary>
         readonly ILoggerFactory _factory;
 
         public PostsharpBackendLogging(ILoggerFactory factory)
@@ -23,6 +23,7 @@ namespace BlazorUI.Shared.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            // Generic implementation unrelated to Totem unless Serilog is doing magic.
             LoggingServices.DefaultBackend = new SerilogLoggingBackend(
                 VerboseLogger.CreateLogger().ForContext<PostsharpBackendLogging>());
             return Task.CompletedTask;
