@@ -1,6 +1,7 @@
 ﻿using BlazorUI.Service.Data;
 using BlazorUI.Service.Models;
 using BlazorUI.Shared.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Totem.Runtime.Hosting;
 
@@ -11,8 +12,8 @@ namespace BlazorUI.Service
         public static IServiceCollection AddApplicationConfigured(this IServiceCollection services, string connection) =>
             services.AddApplication().AddDatabaseWithSecrets(connection);
 
-        public static IServiceCollection AddApplicationHardCoded(this IServiceCollection services) =>
-            services.AddApplication().AddLegacyEventDatabase();
+        //public static IServiceCollection AddApplicationHardCoded(this IServiceCollection services) =>
+        //    services.AddApplication().AddLegacyEventDatabase();
 
         static IServiceCollection AddApplication(this IServiceCollection services) =>
             services
@@ -27,8 +28,8 @@ namespace BlazorUI.Service
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        static IServiceCollection AddLegacyEventDatabase(this IServiceCollection services) =>
-            services.AddSingleton<ILegacyEventContext, TorqueQAContext>(s => new TorqueQAContext("connectionString"));
+        //static IServiceCollection AddLegacyEventDatabase(this IServiceCollection services) =>
+        //    services.AddSingleton<ILegacyEventContext, TorqueQAContext>(s => new TorqueQAContext(new DbContextOptionsBuilder<TorqueQAContext>().UseSqlServer("connectionString").Options));
 
         /// <summary>
         ///     User secrets method of attaching the database.

@@ -12,7 +12,7 @@ namespace BlazorUI.Shared.Topics
     [Profile]
     public class Database : Topic
     {
-        private readonly int BatchProcessingSize = 100;
+        private readonly int BatchProcessingSize = 10;
 
         [EntryPoint]
         async Task When(QueryEvents e, ILegacyEventContext context)
@@ -29,7 +29,7 @@ namespace BlazorUI.Shared.Topics
             {
                 events.AddRange(await context.GetEvents(BatchProcessingSize, checkpoint));
                 checkpoint = checkpoint + BatchProcessingSize;
-                Then(new BatchStatusUpdated((100 / (float)numberOfSteps) * step));
+                //Then(new BatchStatusUpdated((100 / (float)numberOfSteps) * step));
             }
             if (remainder > 0)
             {
