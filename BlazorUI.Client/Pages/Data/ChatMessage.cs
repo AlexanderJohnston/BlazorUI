@@ -4,9 +4,11 @@
     {
         public string User;
         public string Message;
+        public string Lobby;
 
-        public ChatMessage(string user, string message)
+        public ChatMessage(string lobby, string user, string message)
         {
+            Lobby = lobby;
             User = user;
             Message = message;
         }

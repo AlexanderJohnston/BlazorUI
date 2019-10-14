@@ -1,15 +1,17 @@
 ﻿using BlazorUI.Shared.Events.Chat;
 using BlazorUI.Shared.Services.Aspect;
+using Totem;
 using Totem.Timeline;
 
 namespace BlazorUI.Shared.Topics
 {
-    [Profile]
+    //[Profile]
     public class Chat : Topic
     {
         void When(SendMessage e)
         {
-            Then(new MessageReceived(e.Message, e.User));
+            var lobby = Id.From(e.Lobby);
+            Then(new MessageReceived(e.Message, e.User, lobby));
         }
 
         void When(MessageReceived e)

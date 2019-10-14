@@ -1,4 +1,5 @@
-﻿using Totem.Timeline;
+﻿using Totem;
+using Totem.Timeline;
 
 namespace BlazorUI.Shared.Events.Chat
 {
@@ -6,11 +7,13 @@ namespace BlazorUI.Shared.Events.Chat
     {
         public string Username;
         public string Message;
+        public Id LobbyId;
 
-        public MessageReceived(string username, string message)
+        public MessageReceived(string username, string message, Id lobby)
         {
             Username = username;
             Message = message;
+            LobbyId = lobby;
         }
     }
 }

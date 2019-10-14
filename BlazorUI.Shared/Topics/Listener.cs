@@ -1,4 +1,5 @@
 ﻿using BlazorUI.Shared.Events;
+using BlazorUI.Shared.Events.Game;
 using BlazorUI.Shared.Services.Aspect;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,7 +7,7 @@ using Totem.Timeline;
 
 namespace BlazorUI.Shared.Topics
 {
-    [Profile]
+    //[Profile]
     public class Listener : Topic
     {
         public DateTime? LastEntered;
@@ -21,6 +22,7 @@ namespace BlazorUI.Shared.Topics
         void When(Echo e)
         {
             Log.LogInformation("Testing echo logger.");
+            Then(new CreateLobby("Random", "root"));
             Then(new Echoed());
         }
 

@@ -1,11 +1,22 @@
 ﻿@page "/chat"
 @using BlazorUI.Client.Pages.Components;
+@using Totem;
 @inherits ChatComponent
 
 
 <p>Chat Etag: @ChatEtag</p>
 <p>Multi-User Chat:</p>
 <div>
+    Current Lobby: @Lobby()
+    <br />
+    Users: @if(GetUsers().Count != 0)
+    {
+        @foreach (var user in GetUsers())
+        {
+            <br />@user
+        }
+    }
+    <br />
     <textarea readonly cols="100" rows="10">
         @if(@GetMessages().Count != 0)
         {
@@ -24,6 +35,10 @@
     </button>
     <br />
     Username: <input type="text" @bind="@CurrentUser" />
+    <br />
+    Create Lobby: <input type="text" @bind="@CreateLobbyName" />
+    <br />
+    Join Lobby: <input type="text" @bind="@CurrentLobby" /> <button name="joinLobbyButton" @onclick="@JoinLobby" />
 </div>
 
 @code {
@@ -37,6 +52,28 @@
         else
         {
             return new List<string>();
+        }
+    }
+    public List<Id> GetUsers()
+    {
+        if (Chat?.Users != null)
+        {
+            return Chat.Users;
+        }
+        else
+        {
+            return new List<Id>();
+        }
+    }
+    public Id Lobby()
+    {
+        if (Chat?.LobbyId != null)
+        {
+            return Chat.LobbyId;
+        }
+        else
+        {
+            return Id.From("Disconnected");
         }
     }
 }
