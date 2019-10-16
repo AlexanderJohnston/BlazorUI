@@ -1,5 +1,4 @@
-﻿using BlazorUI.Shared.Data;
-using BlazorUI.Shared.Events.Chat;
+﻿using BlazorUI.Shared.Events.Chat;
 using System;
 using System.Collections.Generic;
 using System.Linq;

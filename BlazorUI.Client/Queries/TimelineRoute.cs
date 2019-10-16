@@ -16,5 +16,10 @@ namespace BlazorUI.Client.Queries
             QueryType = queryType;
             Route = route;
         }
+
+        /// <summary>
+        ///   Required for deserialization.
+        /// </summary>
+        public TimelineRoute() { }
     }
 }

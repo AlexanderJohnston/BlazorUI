@@ -21,11 +21,11 @@ namespace BlazorUI.Service.Data
 
         private readonly string _connection;
 
-        public async Task<List<TotemV1Event>> GetEvents()
+        public async Task<List<TotemV1Event>> GetEvents(int count, int checkpoint)
         {
             using (var context = new TorqueQAContext(_connection))
             {
-                return await context.Event.Where(e => e.Position < 10).ToListAsync();
+                return await context.Event.Where(e => e.Position > checkpoint).OrderBy(e => e.Position).Take(count).ToListAsync();
             }
         }
     }

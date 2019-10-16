@@ -13,7 +13,7 @@ using Totem.Timeline.Mvc;
 
 namespace BlazorUI.Server.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]")] 
     public class ChatController : Controller
     {
         private IQueryServer _queries { get; set; }

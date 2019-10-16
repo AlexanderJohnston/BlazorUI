@@ -24,7 +24,7 @@ namespace BlazorUI.Service.Models
 
         public virtual DbSet<TotemV1Event> Event { get; set; }
 
-        public async Task<List<TotemV1Event>> GetEvents()
+        public async Task<List<TotemV1Event>> GetEvents(int count = 0, int checkpoint = 0)
         {
             using (var context = new TorqueQAContext(_connection))
             {

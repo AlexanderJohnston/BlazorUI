@@ -1,5 +1,6 @@
 ﻿using BlazorUI.Client.Queries;
 using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -55,7 +56,7 @@ namespace BlazorUI.Client
                 var request = await _http.GetAsync("/querymap/get/");
                 var response = await request.Content.ReadAsStringAsync();
                 Console.WriteLine("List of queries and their routes: " + response);
-                _queryMap = JsonSerializer.Deserialize<List<TimelineRoute>>(response);
+                _queryMap = JsonConvert.DeserializeObject<List<TimelineRoute>>(response);
             }
             var type = typeof(T);
             Debug.WriteLine("Subscribing to a query: " + type.Name);
@@ -87,8 +88,8 @@ namespace BlazorUI.Client
             {
                 var response = await queryRequest.Content.ReadAsStringAsync();
                 Console.WriteLine("Response: " + response);
-                var query = JsonSerializer.Deserialize<T>(response);
-                Console.WriteLine("Deserialized response into type ." + typeof(T));
+                var query = JsonConvert.DeserializeObject<T>(response);
+                Console.WriteLine("Deserialized response into type: " + typeof(T));
                 var ETag = queryRequest.Headers.ETag.Tag.ToString() != null
                     ? queryRequest.Headers.ETag.Tag
                     : ("null etag on message: " + message);

@@ -10,8 +10,6 @@ namespace BlazorUI.Client.Pages.Data
         public string User;
         public string Message;
 
-        public ChatMessage() { }
-
         public ChatMessage(string user, string message)
         {
             User = user;
