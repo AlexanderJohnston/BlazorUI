@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
@@ -28,17 +27,8 @@ namespace Totem.App.Web
     Action<WebHostBuilderContext, ISignalRServerBuilder> _signalR;
     Action<IRouteBuilder> _mvcRoutes;
     Action<HubRouteBuilder> _signalRRoutes;
-    public Assembly Server;
 
-    public ConfigureWebApp(Assembly asm)
-    {
-        Server = asm;
-    }
-    public ConfigureWebApp()
-    {
-        Server = Assembly.GetEntryAssembly();
-    }
-        internal void ConfigureHost(IWebHostBuilder host) =>
+    internal void ConfigureHost(IWebHostBuilder host) =>
       _host?.Invoke(host);
 
     internal void ConfigureApp(IApplicationBuilder app) =>
