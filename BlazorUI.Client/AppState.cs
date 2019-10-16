@@ -48,6 +48,7 @@ namespace BlazorUI.Client
         /// </summary>
         /// <typeparam name="T">A type inherting from <see cref="Query"/></typeparam>
         /// <param name="handler">Handler method which accepts a JSON representation of a <see cref="Query"/>.</param>
+        /// <param name="subscriptionId">Optional: Subscribe to an instance of a query if you know the subscription ID (etag) for it.</param>
         /// <returns></returns>
         public async Task Subscribe<T>(Func<object, Task> handler = null, string subscriptionId = null)
         {
