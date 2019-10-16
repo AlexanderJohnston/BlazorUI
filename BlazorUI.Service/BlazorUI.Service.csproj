@@ -7,6 +7,10 @@
     <UserSecretsId>d895c483-665b-4589-a130-875f951a049f</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>F:\CodeNew2\BlazorUI\BlazorUI.Service\BlazorUI.Service.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>

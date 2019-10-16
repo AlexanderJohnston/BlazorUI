@@ -11,7 +11,6 @@ namespace BlazorUI.Client
         }
 
         public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
-            BlazorWebAssemblyHost.CreateDefaultBuilder()
-                .UseBlazorStartup<Startup>();
+            BlazorWebAssemblyHost.CreateDefaultBuilder().UseBlazorStartup<Startup>();
     }
 }

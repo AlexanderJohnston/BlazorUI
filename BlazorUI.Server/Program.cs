@@ -26,6 +26,7 @@ using BlazorUI.Server.Attributes;
 using System.Collections.Generic;
 using System.Text;
 using BlazorUI.Shared;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace BlazorUI.Server
 {
@@ -37,52 +38,19 @@ namespace BlazorUI.Server
             var queryMap = GetTimelineQueryEndpoints();
 
             return WebApp.Run<ApplicationArea>(configuration
-                .App(app =>
-                {
-                    var environment = app.ApplicationServices
-                        .GetRequiredService<IHostEnvironment>();
-                    if (environment.IsDevelopment())
-                    {
-                        app.UseDeveloperExceptionPage();
-                        app.UseBlazorDebugging();
-                    }
-                    app.UseClientSideBlazorFiles<BlazorUI.Client.Startup>();
-                    app.UseAuthentication();
-                    app.UseAuthorization();
-                    app.UseRouting();
-                    app.UseCors();
-                    app.UseEndpoints(endpoints =>
-                    {
-                        endpoints.MapControllers();
-                        endpoints.MapRazorPages();
-                        endpoints.MapBlazorHub();
-                        // TODO: Extension method in Timeline.SignalR? -- relies on future .NET Standard Support
-                        endpoints.MapHub<QueryHub>("/hubs/query");
-                        endpoints.MapDefaultControllerRoute();
-                        endpoints.MapControllerRoute("Imports", "{controller=Imports}/{action=StartImport}");
-                        endpoints.MapControllerRoute("ImportTest", "{controller=Imports}/{action=Test}");
-                        endpoints.MapFallbackToClientSideBlazor<BlazorUI.Client.Startup>("index.html");
-                    } );
-                })
+                .BlazorWebApplication()
+                .ClientUIServices(queryMap)
                 .Serilog((context, logger) => {
                     logger = new LogConfiguration().VerboseLogger(logger);
-                })
-                .Services((context, services) =>
-                {
-                    services.AddServerSideBlazor();
-                    services.AddSignalR().AddQueryNotifications();
-                    services.AddTransient<HubConnectionBuilder>();
-                    services.AddTransient<QueryController>();
-                    services.AddSingleton<IRouteContext, RouteContext>(sp => new RouteContext(queryMap));
-                    // Cannot seem to do this type of injection in client-side WASM right now...
-                    //services.AddTransient<IRouteContextFactory, RouteContextFactory>(sp => new RouteContextFactory(() => sp.GetService<IRouteContext>()));
-                    services.AddScoped<AppState>(state => new AppState(
-                        state.GetRequiredService<QueryController>(), 
-                        state.GetRequiredService<HttpClient>()));
                 })
             );
         }
 
+        /// <summary>
+        ///     Reflects upon all <see cref="Controller"/> for routes marked by the <see cref="TimelineQueryAttribute"/>.
+        ///     This is used to inform the client where it can request specific queries for SignalR subscription.
+        /// </summary>
+        /// <returns>A list of all <see cref="HttpMethodAttribute"/> routes which map back to a specific query.</returns>
         public static List<TimelineRoute> GetTimelineQueryEndpoints()
         {
             var controllers = Assembly.GetExecutingAssembly().GetTypes()
