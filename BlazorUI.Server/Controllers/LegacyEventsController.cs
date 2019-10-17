@@ -25,8 +25,7 @@ namespace BlazorUI.Server.Controllers
         public Task<IActionResult> FetchEvents([FromBody] string batchSize)
         {
             var batch = JsonConvert.DeserializeObject<BatchSize>(batchSize);
-            return _commands.Execute(new QueryEvents(batch.Count),
-When<LegacyEventsSucceeded>.ThenOk, When<LegacyEventsFailed>.ThenBadRequest);
+            return _commands.Execute(new QueryEvents(batch.Count), When<LegacyEventsSucceeded>.ThenOk, When<LegacyEventsFailed>.ThenBadRequest);
         }
 
         [HttpGet("[action]")]
