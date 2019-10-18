@@ -1,6 +1,7 @@
 ﻿using Blazor.Extensions;
 using BlazorUI.Client;
 using BlazorUI.Client.Queries;
+using BlazorUI.Server.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,14 @@ namespace BlazorUI.Server
 {
     public static class ServerExtensions
     {
+        public static ConfigureWebApp EncryptionServices(this ConfigureWebApp configure)
+        {
+            return configure.Services((context, services) =>
+            {
+                services.AddSingleton<EncryptionReader>();
+            });
+        }
+
         /// <summary>
         ///     Adds the <see cref="BlazorUI.Client"/> services for the web assembly UI to perform automatic two-way binding.
         /// </summary>
