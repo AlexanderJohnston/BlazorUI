@@ -2,6 +2,7 @@
 using PostSharp.Patterns.Contracts;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,18 +12,9 @@ namespace BlazorUI.Service.Services
 {
     public class EncryptionReader : Notion
     {
-        public GenericPlatform Platform { get; set; }
-        
+        public GenericPlatform Platform { get; set; } = new GenericPlatform();
         private byte[] _entropy = null;
         private IEncryptionScheme _protectedData { get; set; }
-
-        internal async Task<byte[]> ReadTotemEncryptionKey() => _protectedData.ReadData("Totem");
-        internal async Task StoreTotemEncryptionKey([Required] byte[] key) => _protectedData.WriteData("Totem", key);
-
-        internal async Task<byte[]> ReadClientEncryptionKey([Required] string reason) => 
-            _protectedData.ReadData($"Client.{reason}");
-        internal async Task StoreClientEncryptionKey([Required] string reason, [Required] byte[] initVector) =>
-            _protectedData.WriteData($"Client.{reason}", initVector);
 
         public async Task<ICryptoTransform> Decrypt([Required] string reason)
         {
@@ -47,10 +39,19 @@ namespace BlazorUI.Service.Services
             return algorithm.CreateEncryptor(algorithm.Key, algorithm.IV);
         }
 
-        public EncryptionReader()
-        {
-            Platform = new GenericPlatform();
-        }
+        public async Task<Stream> EncryptedStream([Required] Stream stream, [Required] string reason) =>
+            new CryptoStream(stream, await Encrypt(reason), CryptoStreamMode.Write);
+
+        public async Task<Stream> DecryptedStream([Required] Stream stream, [Required] string reason) =>
+            new CryptoStream(stream, await Decrypt(reason), CryptoStreamMode.Read);
+
+        private async Task<byte[]> ReadTotemEncryptionKey() => _protectedData.ReadData("Totem");
+        private async Task StoreTotemEncryptionKey([Required] byte[] key) => _protectedData.WriteData("Totem", key);
+
+        private async Task<byte[]> ReadClientEncryptionKey([Required] string reason) =>
+            _protectedData.ReadData($"Client.{reason}");
+        private async Task StoreClientEncryptionKey([Required] string reason, [Required] byte[] initVector) =>
+            _protectedData.WriteData($"Client.{reason}", initVector);
 
         private async Task<SymmetricAlgorithm> CryptographicProvider()
         {

@@ -27,13 +27,13 @@ namespace BlazorUI.Service.Native
     {
         [Pure] private Assembly _caller() => Assembly.GetCallingAssembly();
 
-        [Pure] private bool InvalidNamespace([Required] Assembly assembly, [Required] string @namespace) =>
+        [JetBrains.Annotations.Pure] private bool InvalidNamespace([Required] Assembly assembly, [Required] string @namespace) =>
             assembly.GetTypes().All(type => type.Namespace != @namespace);
 
         [Pure] public INativeClass GetNativeClass([Required] string @namespace, [Required] string className) =>
             this.Create(_caller(), @namespace, className);
 
-        [Pure]
+        [JetBrains.Annotations.Pure]
         private INativeClass Create([Required] Assembly assembly, [Required] string @namespace, [Required] string className)
         {
             if (this.InvalidNamespace(assembly, @namespace))
