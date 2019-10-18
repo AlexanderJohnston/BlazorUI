@@ -1,18 +1,23 @@
 ﻿using BlazorUI.Server.Native;
+using Microsoft.Extensions.Hosting;
 using PostSharp.Patterns.Contracts;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Totem.Runtime;
 
 namespace BlazorUI.Server.Services
 {
-    public class EncryptionReader : Notion
+    public class EncryptionReader : Notion, IHostedService
     {
-        public GenericPlatform Platform { get; set; } = new GenericPlatform();
+        public EncryptionReader(IEncryptionScheme nativeProvider)
+        {
+            _protectedData = nativeProvider;
+        }
         private byte[] _entropy = null;
         private IEncryptionScheme _protectedData { get; set; }
 
@@ -92,5 +97,47 @@ namespace BlazorUI.Server.Services
         private AesCryptoServiceProvider AES256Provider(byte[] key) =>
             new AesCryptoServiceProvider { KeySize = 256, BlockSize = 128, Key = key };
 
+        public Task StartAsync(CancellationToken cancellationToken)
+        {
+            Log.Info("Attempting an encryption test.");
+            byte[] output;
+            var plainValue = "Hello encrypted world!";
+            var reason = "None";
+
+            using (var memory = new MemoryStream())
+            {
+                using (Stream encrypted = EncryptedStream(memory, reason).Result)
+                {
+                    //  Stream writer writes our unencrypted text in.
+                    using (var writer = new StreamWriter(encrypted, Encoding.UTF8))
+                        writer.Write(plainValue);
+                    output = memory.ToArray();
+                }
+
+                if (output.Length == 0)
+                    Log.Info("Could not decrypt the test value!");
+            }
+
+            var encryptedValue = Convert.ToBase64String(output);
+            Log.Info($"Encrypted Value: {encryptedValue}");
+
+            Log.Info("Attempting a decryption test.");
+            string decryptedValue = string.Empty;
+            using (var memory = new MemoryStream(Convert.FromBase64String(encryptedValue)))
+            {
+                using (Stream decrypted = DecryptedStream(memory, reason).Result)
+                {
+                    using (var reader = new StreamReader(decrypted, Encoding.UTF8))
+                        decryptedValue = reader.ReadToEnd();
+                }
+            }
+            Log.Info($"Decrypted Value: {decryptedValue}");
+            return Task.CompletedTask;
+        }
+
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

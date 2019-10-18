@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BlazorUI.Server.Native
 {
-    interface IEncryptionScheme
+    public interface IEncryptionScheme
     {
         byte[] ReadData(string name);
         void WriteData(string name, byte[] data);

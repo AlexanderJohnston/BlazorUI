@@ -32,6 +32,7 @@ namespace BlazorUI.Server
             return WebApp.Run<ApplicationArea>(configuration
                 .BlazorWebApplication()
                 .ClientUIServices(queryMap)
+                //EncryptionServices()
                 .Serilog((context, logger) => {
                     logger = new LogConfiguration().VerboseLogger(logger);
                 })

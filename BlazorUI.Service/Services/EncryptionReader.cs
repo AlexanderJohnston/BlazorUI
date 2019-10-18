@@ -12,7 +12,6 @@ namespace BlazorUI.Service.Services
 {
     public class EncryptionReader : Notion
     {
-        public GenericPlatform Platform { get; set; } = new GenericPlatform();
         private byte[] _entropy = null;
         private IEncryptionScheme _protectedData { get; set; }
 

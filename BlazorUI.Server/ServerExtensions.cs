@@ -1,6 +1,8 @@
 ﻿using Blazor.Extensions;
 using BlazorUI.Client;
 using BlazorUI.Client.Queries;
+using BlazorUI.Server.Native;
+using BlazorUI.Server.Native.Win32NT;
 using BlazorUI.Server.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -23,7 +25,7 @@ namespace BlazorUI.Server
         {
             return configure.Services((context, services) =>
             {
-                services.AddSingleton<EncryptionReader>();
+                //services.AddHostedService(er => new EncryptionReader(new DataProtection()));
             });
         }
 
@@ -47,6 +49,7 @@ namespace BlazorUI.Server
                 services.AddScoped<AppState>(state => new AppState(
                     state.GetRequiredService<QueryController>(),
                     state.GetRequiredService<HttpClient>()));
+                services.AddHostedService(er => new EncryptionReader(new DataProtection()));
             });
         }
 
