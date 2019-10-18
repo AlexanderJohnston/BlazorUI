@@ -72,7 +72,7 @@ namespace BlazorUI.Server.Services
 
                 // If this is changed to LocalMachine protection scope then it will be vulnerable to any process.
                 byte[] encryptedKey = ProtectedData.Protect(provider.Key, null, DataProtectionScope.CurrentUser);
-                StoreTotemEncryptionKey(encryptedKey).Wait();
+                await StoreTotemEncryptionKey(encryptedKey);
                 Log.Info("A new key has been created and stored successfully.");
                 return provider;
             }

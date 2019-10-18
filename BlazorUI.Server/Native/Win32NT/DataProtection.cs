@@ -16,7 +16,7 @@ namespace BlazorUI.Server.Native.Win32NT
         }
 
 
-        public byte[] ReadData(string name) => _totemKey?.OpenSubKey("Encrypted")?.GetValue(name) as byte[];
+        public byte[] ReadData(string name) => _totemKey?.GetValue(name) as byte[];
         public void WriteData(string name, byte[] data)
         {
             if (EncryptingData() && HasPermission())
