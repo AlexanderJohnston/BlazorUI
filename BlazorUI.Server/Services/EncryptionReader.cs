@@ -102,7 +102,7 @@ namespace BlazorUI.Server.Services
             Log.Info("Attempting an encryption test.");
             byte[] output;
             var plainValue = "Hello encrypted world!";
-            var reason = "None";
+            var reason = "Some-Reason-Or-Bearer-Token";
 
             using (var memory = new MemoryStream())
             {

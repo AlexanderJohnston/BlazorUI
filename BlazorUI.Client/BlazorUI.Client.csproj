@@ -8,10 +8,6 @@
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>F:\CodeNew2\BlazorUI\BlazorUI.Client\BlazorUI.Client.xml</DocumentationFile>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Blazor.Extensions.SignalR" Version="0.4.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
