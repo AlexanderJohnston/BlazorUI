@@ -28,7 +28,7 @@ namespace BlazorUI.Service
                     {
                         var legacy = context.Configuration.GetSection("LegacyEvents:ConnectionString");
                         services.AddApplicationConfigured(legacy.Value);
-                        services.AddHostedService<PostsharpBackendLogging>();
+                        //services.AddHostedService<PostsharpBackendLogging>();
                         services.AddHostedService(s => new MetricsService(new MetricsClient(), TimeSpan.FromMilliseconds(100)));
                     });
                 })

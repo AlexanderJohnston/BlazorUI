@@ -9,7 +9,7 @@ namespace BlazorUI.Client.Pages.Components
     public class EchoComponent : ComponentBase
     {
         [Inject] public HttpClient _http { get; set; }
-        [Inject] public AppState _appState { get; set; }
+
         public EchoQuery Echo { get; set; }
         public string EchoEtag = "No Echo Etag";
 
@@ -21,8 +21,7 @@ namespace BlazorUI.Client.Pages.Components
 
         public async Task ReadQuery<T>(object query)
         {
-            var queryResponse = (EchoQuery)query;
-            this.Echo = queryResponse;
+            this.Echo = (EchoQuery)query;
             StateHasChanged();
         }
 

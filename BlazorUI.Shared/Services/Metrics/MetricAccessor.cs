@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace BlazorUI.Shared.Services.Metrics
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     public class MetricAccessor
     {
         public static MetricAccessor Empty = new MetricAccessor(null);

@@ -5,7 +5,7 @@ using System.Security;
 
 namespace BlazorUI.Shared.Services.Aspect
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     internal static class Win32
     {
         [DllImport("kernel32.dll", SetLastError = true)]

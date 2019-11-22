@@ -12,7 +12,7 @@ using static PostSharp.Patterns.Diagnostics.SemanticMessageBuilder;
 
 namespace BlazorUI.Service.Metrics
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     public class MetricsClient : Notion, IMetricsClient
     {
         public void TrackEvent(string method, Dictionary<string, double> metrics)

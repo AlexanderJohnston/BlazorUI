@@ -3,7 +3,7 @@ using BlazorUI.Shared.Services.Metrics;
 
 namespace BlazorUI.Shared.Services.Aspect
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     public struct MethodCallData
     {
         internal CapturedMetric MetricData;

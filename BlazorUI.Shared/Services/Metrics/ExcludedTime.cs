@@ -2,7 +2,7 @@
 
 namespace BlazorUI.Shared.Services.Metrics
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     public struct ExcludedTime
     {
         public long CpuTime;

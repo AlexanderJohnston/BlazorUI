@@ -14,7 +14,7 @@ namespace BlazorUI.Shared.Topics
     {
         private readonly int BatchProcessingSize = 10;
 
-        [EntryPoint]
+        //[EntryPoint]
         async Task When(QueryEvents e, ILegacyEventContext context)
         {
             bool singleStep = e.Count == BatchProcessingSize;

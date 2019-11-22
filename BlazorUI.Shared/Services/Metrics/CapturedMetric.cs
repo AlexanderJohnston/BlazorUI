@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace BlazorUI.Shared.Services.Metrics
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     public struct CapturedMetric
     {
         public long CpuTime;

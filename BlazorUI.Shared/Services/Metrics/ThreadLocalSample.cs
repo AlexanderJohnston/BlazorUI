@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace BlazorUI.Shared.Services.Metrics
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     public class ThreadLocalSample
     {
         private readonly Thread _ownerThread = Thread.CurrentThread;

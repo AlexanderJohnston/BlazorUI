@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace BlazorUI.Shared.Services.Metrics
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     public class MetricPublisher : IDisposable
     {
         private readonly MetricsService ProfilingService;

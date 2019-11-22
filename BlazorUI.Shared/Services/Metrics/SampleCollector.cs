@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace BlazorUI.Shared.Services.Metrics
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     public class SampleCollector
     {
         // This is the maximal duration allowed to collect the metrics from all threads for a single method.

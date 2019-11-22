@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlazorUI.Service.Data
 {
-    [Log(AttributeExclude=true)]
+    //[Log(AttributeExclude=true)]
     public class DatabaseService : ILegacyEventContext
     {
         public DatabaseService(string connection)

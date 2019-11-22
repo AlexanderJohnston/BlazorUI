@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlazorUI.Shared.Services
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     public class MetricsService : IHostedService
     {
         public bool IsEnabled => Publisher != null;

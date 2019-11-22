@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace BlazorUI.Shared.Services.Aspect
 {
-    [Log(AttributeExclude = true)]
+    //[Log(AttributeExclude = true)]
     public static class ReferenceFrame
     {
         /// <summary>
