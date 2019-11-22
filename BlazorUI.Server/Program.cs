@@ -1,32 +1,24 @@
-﻿using System;
-using System.Reflection;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
-using Totem.App.Web;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Components;
-using System.Net.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+﻿using Blazor.Extensions;
 using BlazorUI.Client;
-using Blazor.Extensions;
-using Microsoft.Extensions.Hosting;
-using Totem.Timeline.Hosting;
-using Totem.Timeline.SignalR;
-using Totem.Timeline.Mvc.Hosting;
-using Totem.Timeline.SignalR.Hosting;
-using Serilog;
 using BlazorUI.Client.Queries;
-using BlazorUI.Server.PostSharp;
 using BlazorUI.Server.Attributes;
+using BlazorUI.Shared;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using BlazorUI.Shared;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Totem.App.Web;
+using System.Threading.Tasks;
+using BlazorUI.Server.PostSharp;
 
 namespace BlazorUI.Server
 {
@@ -57,17 +49,17 @@ namespace BlazorUI.Server
                     .Where(type => typeof(Controller).IsAssignableFrom(type));
             var actions = controllers
                     .SelectMany(type => type.GetMethods())
-                    .Where(method => 
-                        method.IsPublic 
+                    .Where(method =>
+                        method.IsPublic
                         && !method.IsDefined(typeof(NonActionAttribute))
                         && method.GetCustomAttributes()
                             .Any(attr => attr.GetType() == typeof(TimelineQueryAttribute)));
             var queries = new Dictionary<MethodInfo, TimelineQueryAttribute>();
-            foreach(var action in actions)
+            foreach (var action in actions)
             {
                 queries.Add(action, action.GetCustomAttribute<TimelineQueryAttribute>());
             }
-            var queryRoutes = queries.Select(query => 
+            var queryRoutes = queries.Select(query =>
                 new TimelineRoute(query.Value.QueryType, ParseRouteFromAction(query.Key)));
             return queryRoutes.ToList();
         }

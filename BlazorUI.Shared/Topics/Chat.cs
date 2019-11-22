@@ -1,24 +1,19 @@
 ﻿using BlazorUI.Shared.Events.Chat;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BlazorUI.Shared.Services.Aspect;
+using Totem;
 using Totem.Timeline;
 
 namespace BlazorUI.Shared.Topics
 {
+    //[Profile]
     public class Chat : Topic
     {
-        public Chat()
+        void When(SendMessage e)
         {
-
+            var lobby = Id.From(e.Lobby);
+            Then(new MessageReceived(e.Message, e.User, lobby));
         }
 
-        async Task When(SendMessage e)
-        {
-            Then(new MessageReceived(e.Message, e.User));
-        }
         void When(MessageReceived e)
         {
             Then(new MessageSucceeded());

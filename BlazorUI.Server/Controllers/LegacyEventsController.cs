@@ -1,13 +1,9 @@
 ﻿using BlazorUI.Client.Pages.Data;
 using BlazorUI.Server.Attributes;
-using BlazorUI.Shared.Events;
 using BlazorUI.Shared.Events.Database;
 using BlazorUI.Shared.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Totem.Timeline.Mvc;
 

@@ -14,7 +14,7 @@ namespace BlazorUI.Client
     /// </summary>
     public class QueryController : ComponentBase
     {
-        public Dictionary<(string ETag, string Route), Func<string,string,Task>> _etagSubscriptions { get; set; }
+        public Dictionary<(string ETag, string Route), Func<string, string, Task>> _etagSubscriptions { get; set; }
         public HubConnectionBuilder _builder { get; set; }
         public HubConnection _connection { get; set; }
         public QueryController(HubConnectionBuilder hub)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BlazorUI.Service
+﻿namespace BlazorUI.Service
 {
     /// <summary>
     ///   Placeholder settings used for example. Feel free to remove them and update this comment.

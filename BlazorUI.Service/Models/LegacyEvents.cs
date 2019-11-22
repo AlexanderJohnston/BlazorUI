@@ -1,9 +1,4 @@
-﻿using Microsoft.Extensions.Configuration.UserSecrets;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BlazorUI.Service.Models
+﻿namespace BlazorUI.Service.Models
 {
     public class LegacyEvents
     {

@@ -1,4 +1,5 @@
-﻿using BlazorUI.Client.Queries;
+﻿using BlazorUI.Client.Pages.Data;
+using BlazorUI.Client.Queries;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 using System;
@@ -7,7 +8,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Totem.Timeline;
 
@@ -32,7 +32,7 @@ namespace BlazorUI.Client
     public class AppState : ComponentBase
     {
         private HttpClient _http { get; set; }
-        
+
         /// <summary>
         ///     https://docs.microsoft.com/en-us/aspnet/core/blazor/dependency-injection?view=aspnetcore-3.0#use-di-in-services
         ///     Apparently this is de wae.
@@ -64,23 +64,22 @@ namespace BlazorUI.Client
         /// </summary>
         /// <typeparam name="T">A type inherting from <see cref="Query"/></typeparam>
         /// <param name="handler">Handler method which accepts a JSON representation of a <see cref="Query"/>.</param>
+        /// <param name="subscriptionId">Optional: Subscribe to an instance of a query if you know the subscription ID (etag) for it.</param>
         /// <returns></returns>
-        public async Task Subscribe<T>(Func<object, Task> handler = null)
+        public async Task Subscribe<T>(Func<object, Task> handler = null, string subscriptionId = null)
         {
+            var type = typeof(T);
+            Debug.WriteLine($"Type[{type}]: Subscription Id: {subscriptionId}");
             if (_queryMap == null)
             {
-                var request = await _http.GetAsync("/querymap/get/");
-                var response = await request.Content.ReadAsStringAsync();
-                Console.WriteLine("List of queries and their routes: " + response);
-                _queryMap = JsonConvert.DeserializeObject<List<TimelineRoute>>(response);
+                _queryMap = await ReadQueryMap();
             }
-            var type = typeof(T);
             Debug.WriteLine("Subscribing to a query: " + type.Name);
-            if (_queryMap.Any(map => map.QueryType == type))
+            if (QueryExists(type))
             {
                 Console.WriteLine("Matching route found.");
-                var timeline = _queryMap.First(map => map.QueryType == type);
-                var etag = SanitizeETag(await ReadETag(timeline.Route));
+                var timeline = SelectQuery(type);
+                var etag = SanitizeETag(await ReadETag(timeline.Route, subscriptionId));
                 _query.SubscribeToQuery(etag, timeline.Route, ReadSubscription<T>);
                 if (handler != null && _viewSubscriptions.Any(view => view.Key == typeof(T)))
                 {
@@ -135,14 +134,29 @@ namespace BlazorUI.Client
             }
         }
 
-        private async Task<string> ReadETag(string route)
+        private async Task<string> ReadETag(string route, string subscriptionId = null)
         {
-            Debug.WriteLine("Looking up the ETag for: " + route);
-            var request = await _http.GetAsync(route);
+            HttpResponseMessage request;
+            if (subscriptionId != null)
+            {
+                Debug.WriteLine("Looking up the ETag for: " + route + ", checkpoint: " + subscriptionId);
+                var query = new QueryId(subscriptionId);
+                var content = JsonConvert.SerializeObject(query);
+                request = await _http.PostAsJsonAsync(route, content);
+            }
+            else
+            {
+                Debug.WriteLine("Looking up the ETag for: " + route);
+                request = await _http.GetAsync(route);
+            }
             if (request.IsSuccessStatusCode)
             {
                 Debug.WriteLine(string.Format("Status: {0} on route {1}", request.StatusCode, route));
                 return request.Headers.ETag.Tag.ToString();
+            }
+            else
+            {
+                Debug.WriteLine(string.Format("Status: {0} on route {1}", request.StatusCode, route));
             }
             return string.Empty;
         }
@@ -162,7 +176,7 @@ namespace BlazorUI.Client
                 }
                 return builder.ToString();
             }
-            else 
+            else
             {
                 return subscription;
             }

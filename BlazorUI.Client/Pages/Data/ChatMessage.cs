@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BlazorUI.Client.Pages.Data
+﻿namespace BlazorUI.Client.Pages.Data
 {
     public class ChatMessage
     {
         public string User;
         public string Message;
+        public string Lobby;
 
-        public ChatMessage(string user, string message)
+        public ChatMessage(string lobby, string user, string message)
         {
+            Lobby = lobby;
             User = user;
             Message = message;
         }

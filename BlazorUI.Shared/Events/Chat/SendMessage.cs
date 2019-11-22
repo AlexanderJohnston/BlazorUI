@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Totem.Timeline;
+﻿using Totem.Timeline;
 
 namespace BlazorUI.Shared.Events.Chat
 {
@@ -9,11 +6,13 @@ namespace BlazorUI.Shared.Events.Chat
     {
         public readonly string Message;
         public readonly string User;
+        public readonly string Lobby;
 
-        public SendMessage(string message, string user)
+        public SendMessage(string message, string user, string lobby)
         {
             Message = message;
             User = user;
+            Lobby = lobby;
         }
     }
 }

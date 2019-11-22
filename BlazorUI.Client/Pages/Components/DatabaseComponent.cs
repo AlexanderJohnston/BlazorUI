@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorUI.Client.Pages.Data;
+using BlazorUI.Shared.Data;
+using BlazorUI.Shared.Queries;
+using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BlazorUI.Shared.Queries;
 using System.Net.Http;
-using BlazorUI.Shared.Data;
-using BlazorUI.Client.Pages.Data;
+using System.Threading.Tasks;
 
 namespace BlazorUI.Client.Pages.Components
 {
@@ -18,6 +17,7 @@ namespace BlazorUI.Client.Pages.Components
         public LegacyEventQuery Legacy { get; set; }
         public BatchStatusQuery BatchStatus { get; set; }
         public string DatabaseTag = "No Database Etag";
+        public int NumberOfEvents;
 
         protected async override Task OnInitializedAsync()
         {
@@ -42,7 +42,7 @@ namespace BlazorUI.Client.Pages.Components
 
         public async Task FetchEvents()
         {
-            var content = JsonConvert.SerializeObject(new BatchSize(1000));
+            var content = JsonConvert.SerializeObject(new BatchSize(NumberOfEvents));
             var echoResponse = await _http.PostAsJsonAsync("/LegacyEvents/FetchEvents", content);
             Console.WriteLine(echoResponse.StatusCode.ToString() + " is the database legacy events status code.");
         }

@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Serilog.Sinks.SystemConsole.Themes;
+using System;
 using System.Collections.Generic;
-using System.Text;
-
-using Serilog.Sinks.SystemConsole.Themes;
 
 namespace BlazorUI.Server.PostSharp
 {

@@ -1,9 +1,8 @@
-using System.Threading.Tasks;
 using BlazorUI.Server.Attributes;
-using BlazorUI.Shared;
 using BlazorUI.Shared.Events;
 using BlazorUI.Shared.Queries;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Totem.Timeline.Mvc;
 
 namespace BlazorUI.Server.Controllers
@@ -28,7 +27,12 @@ namespace BlazorUI.Server.Controllers
         public Task<IActionResult> GetEcho() => _queries.Get<EchoQuery>();
 
         [HttpPost("[action]")]
-        public Task<IActionResult> SendEcho() => _commands.Execute(new Echo(), 
-            When<EchoSuccess>.ThenOk, When<EchoFailure>.ThenBadRequest);
+        public Task<IActionResult> SendEcho()
+        {
+            var test = new LogMonitorService();
+            test.Test();
+            return _commands.Execute(new Echo(),
+When<EchoSuccess>.ThenOk, When<EchoFailure>.ThenBadRequest);
+        }
     }
 }
