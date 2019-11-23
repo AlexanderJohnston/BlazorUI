@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlazorUI.Client.Pages.Components
 {
-    public class EchoComponent : ComponentBase
+    public class EchoComponent : BaseComponent<EchoQuery>
     {
-        [Inject] public HttpClient _http { get; set; }
-        [Inject] public AppState _appState { get; set; }
-        public EchoQuery Echo { get; set; }
         public string EchoEtag = "No Echo Etag";
 
         protected async override Task OnInitializedAsync()

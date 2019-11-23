@@ -10,12 +10,8 @@ using System.Threading.Tasks;
 
 namespace BlazorUI.Client.Pages.Components
 {
-    public class DatabaseComponent : ComponentBase
+    public class DatabaseComponent : BaseComponent<BatchStatusQuery>
     {
-        [Inject] public HttpClient _http { get; set; }
-        [Inject] public AppState _appState { get; set; }
-        public LegacyEventQuery Legacy { get; set; }
-        public BatchStatusQuery BatchStatus { get; set; }
         public string DatabaseTag = "No Database Etag";
         public int NumberOfEvents;
 
