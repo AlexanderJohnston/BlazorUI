@@ -68,6 +68,7 @@ namespace BlazorUI.Client
         /// <returns></returns>
         public async Task Subscribe<T>(Func<object, Task> handler = null, string subscriptionId = null)
         {
+            Debug.WriteLine("Starting subscription method in App State.");
             var type = typeof(T);
             Debug.WriteLine($"Type[{type}]: Subscription Id: {subscriptionId}");
             if (_queryMap == null)

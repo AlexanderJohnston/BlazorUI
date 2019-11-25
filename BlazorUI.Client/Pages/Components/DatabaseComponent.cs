@@ -14,6 +14,8 @@ namespace BlazorUI.Client.Pages.Components
     {
         public string DatabaseTag = "No Database Etag";
         public int NumberOfEvents;
+        public BatchStatusQuery BatchStatus {get; set;}
+        public LegacyEventQuery Legacy {get; set;}
 
         protected async override Task OnInitializedAsync()
         {

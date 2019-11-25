@@ -11,6 +11,7 @@ namespace BlazorUI.Client.Pages.Components
 {
     public class ChatComponent : BaseComponent<ChatQuery>
     {
+        public LobbyQuery Chat { get; set; }
         public LobbyList Lobbies { get; set; }
         public string ChatEtag = "No Chat Etag";
         public string CurrentMessage = "";
@@ -21,7 +22,7 @@ namespace BlazorUI.Client.Pages.Components
         protected async override Task OnInitializedAsync()
         {
             Console.WriteLine(CurrentLobby);
-            await _appState.Subscribe<LobbyQuery>(ReadQuery<LobbyQuery>, CurrentLobby);
+            await _appState.Subscribe<LobbyQuery>(ReadLobby<LobbyList>, CurrentLobby);
             //await _appState.Subscribe<LobbyList>(ReadLobby<LobbyList>);
             StateHasChanged();
         }
@@ -44,7 +45,7 @@ namespace BlazorUI.Client.Pages.Components
 
         public async Task JoinLobby()
         {
-            await _appState.Subscribe<LobbyQuery>(ReadQuery<LobbyQuery>, CurrentLobby);
+            await _appState.Subscribe<LobbyQuery>(ReadLobby<LobbyQuery>, CurrentLobby);
             StateHasChanged();
         }
 

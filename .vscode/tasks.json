@@ -4,13 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "npm",
-            "script": "build-dev",
-            "path": "BlazorUI.Client/wwwroot/",
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
             "label": "Build .NET",
             "command": "dotnet",
             "type": "shell",

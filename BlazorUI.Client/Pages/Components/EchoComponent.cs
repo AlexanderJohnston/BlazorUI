@@ -6,14 +6,20 @@ using System.Threading.Tasks;
 
 namespace BlazorUI.Client.Pages.Components
 {
-    public class EchoComponent : BaseComponent<EchoQuery>
+    public class EchoComponent : BaseComponent<EchoComponent>
     {
         public string EchoEtag = "No Echo Etag";
+        public EchoQuery Echo { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
-            await _appState.Subscribe<EchoQuery>(ReadQuery<EchoQuery>);
-            StateHasChanged();
+            await base.OnInitializedAsync();
+            //await _appState.Subscribe<EchoQuery>(ReadQuery<EchoQuery>);
+            //StateHasChanged();
+        }
+        public EchoComponent()
+        {
+
         }
 
         public async Task ReadQuery<T>(object query)
