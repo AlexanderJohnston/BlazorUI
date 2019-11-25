@@ -1,0 +1,29 @@
+@page "/magicsmoke"
+@using BlazorUI.Client.Pages.Components;
+@using BlazorUI.Client.Pages;
+@inherits MagicSmokeComponent
+
+<h3>Magic Smoke</h3>
+
+<p>Ask the magic smoke generator a yes-or-no question!</p>
+
+<input type="text" id="question" @bind-value="@nextQuestion"/>
+
+<button @onclick="@AskQuestion">Ask!</button>
+
+<p>@lastQuestion</p>
+
+<p>@response</p>
+
+@code {
+	string response = string.Empty;
+	string nextQuestion = string.Empty;
+	string lastQuestion = string.Empty;
+
+	void AskQuestion()
+	{
+		lastQuestion = nextQuestion;
+		nextQuestion = string.Empty;
+		response = AskMagicSmoke();
+	}
+}
