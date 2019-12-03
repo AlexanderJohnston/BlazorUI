@@ -22,7 +22,7 @@ namespace BlazorUI.Client.Pages.Components
         protected async override Task OnInitializedAsync()
         {
             Console.WriteLine(CurrentLobby);
-            await _appState.Subscribe<LobbyQuery>(ReadLobby<LobbyList>, CurrentLobby);
+            //await _appState.Subscribe<LobbyQuery>(ReadLobby<LobbyList>, CurrentLobby);
             //await _appState.Subscribe<LobbyList>(ReadLobby<LobbyList>);
             StateHasChanged();
         }
@@ -45,8 +45,8 @@ namespace BlazorUI.Client.Pages.Components
 
         public async Task JoinLobby()
         {
-            await _appState.Subscribe<LobbyQuery>(ReadLobby<LobbyQuery>, CurrentLobby);
-            StateHasChanged();
+            //await _appState.Subscribe<LobbyQuery>(ReadLobby<LobbyQuery>, CurrentLobby);
+            //StateHasChanged();
         }
 
         public async Task CreateLobby()

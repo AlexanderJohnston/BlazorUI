@@ -19,9 +19,9 @@ namespace BlazorUI.Client.Pages.Components
 
         protected async override Task OnInitializedAsync()
         {
-            await _appState.Subscribe<LegacyEventQuery>(ReadQuery<LegacyEventQuery>);
-            await _appState.Subscribe<BatchStatusQuery>(ReadQuery<BatchStatusQuery>);
-            StateHasChanged();
+            //await _appState.Subscribe<LegacyEventQuery>(ReadQuery<LegacyEventQuery>);
+            //await _appState.Subscribe<BatchStatusQuery>(ReadQuery<BatchStatusQuery>);
+            //StateHasChanged();
         }
 
         public async Task ReadQuery<T>(object query)

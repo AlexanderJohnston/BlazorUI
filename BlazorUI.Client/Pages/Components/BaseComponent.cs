@@ -23,25 +23,32 @@ namespace BlazorUI.Client.Pages.Components
             var queries = properties.Where(prop => prop.PropertyType.IsSubclassOf(typeof(Query)));
             foreach (var query in queries) 
             {
-                Console.WriteLine($"Subscribing {query} to the app state.");
-                Console.WriteLine(_appState == null);
+                Console.WriteLine($"Subscribing {query} to the app state!!");
                 var type = query.PropertyType;
                 Console.WriteLine($"Type is {type}");
-                MethodInfo method = typeof(AppState).GetMethod("Subscribe");
-                MethodInfo generic = method.MakeGenericMethod(type);
+                MethodInfo subscribe = typeof(AppState).GetMethod("Subscribe", BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo genericSubscribe = subscribe.MakeGenericMethod(type);
+                Console.WriteLine($"Subscription Invoke: {genericSubscribe}");
 
                 Console.WriteLine("Read Query Method");
-                MethodInfo readMethod = typeof(BaseComponent<T>).GetMethod("ReadQuery");
-                MethodInfo genericRead = method.MakeGenericMethod(type);
-                Console.WriteLine($"Invoke {genericRead}");
+                MethodInfo read = typeof(BaseComponent<T>).GetMethod("ReadQuery", BindingFlags.Public | BindingFlags.Instance);
+                MethodInfo genericRead = read.MakeGenericMethod(type);
+                Console.WriteLine($"Read Invoke: {genericRead}");
+
+                Console.WriteLine($"AppState Not Null: {_appState != null}");
+
+                //var expression = Expression.Lambda<Func<object, Task>>(Expression.Call(genericRead)).Compile();
+                Console.WriteLine("Calling AppState.Subscription() with the ReadQuery callback as parameter 0.");
+                genericSubscribe.Invoke(_appState, new object[]{ genericRead, this, null });
+
 
                 // It's compile time baby!!
-                var input = Expression.Parameter(typeof(object), "input");
-                var expression = Expression.Lambda<Func<object, Task>>(
-                    Expression.Call(
-                        Expression.Constant(_appState), genericRead))
-                    .Compile();                
-                generic.Invoke((BaseComponent<T>)this, new object[2]{expression, null});
+                //var input = Expression.Parameter(typeof(object), "input");
+                //var expression = Expression.Lambda<Func<object, Task>>(
+                //    Expression.Call(
+                //        Expression.Constant(_appState), genericSubscribe))
+                //    .Compile()((BaseComponent<T>)this, new object[2] { genericRead, null });
+                //generic.Invoke((BaseComponent<T>)this, new object[2]{genericRead, null});
             }
         }
 
