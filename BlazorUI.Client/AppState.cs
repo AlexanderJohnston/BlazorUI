@@ -113,9 +113,8 @@ namespace BlazorUI.Client
         {
             var callerType = callback.Instance.GetType();
             var instanceParam = Expression.Parameter(callerType, "instance");
-            var memberParam = Expression.Parameter(typeof(T), "query");
             return Expression.Lambda<Func<object, Task>>(
-                Expression.Call(instanceParam, callback.Handler, memberParam)).Compile();
+                Expression.Call(instanceParam, callback.Handler)).Compile();
         }
 
         private TimelineRoute SelectQuery(Type type) => _queryMap.First(map => map.QueryType == type);
@@ -149,7 +148,10 @@ namespace BlazorUI.Client
                 var queryParameter = Expression.Parameter(typeof(T), "query");
                 var readQueryParameter = Expression.Convert(queryParameter, typeof(object));
                 foreach (var callback in _viewSubscriptions.First(view => view.Key == typeof(T)).Value)
-                    await ConvertMethodInfo<T>(callback).Invoke(query);
+                {
+                    callback.Handler.Invoke(callback.Instance, new object[]{ query });
+                    //await ConvertMethodInfo<T>(callback).Invoke(Expression.Constant(query));
+                }
                 return (query);
             }
             else
