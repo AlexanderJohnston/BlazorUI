@@ -14,20 +14,12 @@ namespace BlazorUI.Client.Pages.Components
         protected async override Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            //await _appState.Subscribe<EchoQuery>(ReadQuery<EchoQuery>);
-            //StateHasChanged();
         }
-        public EchoComponent()
-        {
-
-        }
-
         public async Task ReadQuery<T>(object query)
         {
             this.Echo = (EchoQuery)query;
             StateHasChanged();
         }
-
         public async Task SendEcho()
         {
             var echoResponse = await _http.PostAsync("/status/sendecho", null);
