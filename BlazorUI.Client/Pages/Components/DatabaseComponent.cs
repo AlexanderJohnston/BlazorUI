@@ -10,20 +10,18 @@ using System.Threading.Tasks;
 
 namespace BlazorUI.Client.Pages.Components
 {
-    public class DatabaseComponent : ComponentBase
+    public class DatabaseComponent : BaseComponent<BatchStatusQuery>
     {
-        [Inject] public HttpClient _http { get; set; }
-        [Inject] public AppState _appState { get; set; }
-        public LegacyEventQuery Legacy { get; set; }
-        public BatchStatusQuery BatchStatus { get; set; }
         public string DatabaseTag = "No Database Etag";
         public int NumberOfEvents;
+        public BatchStatusQuery BatchStatus {get; set;}
+        public LegacyEventQuery Legacy {get; set;}
 
         protected async override Task OnInitializedAsync()
         {
-            await _appState.Subscribe<LegacyEventQuery>(ReadQuery<LegacyEventQuery>);
-            await _appState.Subscribe<BatchStatusQuery>(ReadQuery<BatchStatusQuery>);
-            StateHasChanged();
+            //await _appState.Subscribe<LegacyEventQuery>(ReadQuery<LegacyEventQuery>);
+            //await _appState.Subscribe<BatchStatusQuery>(ReadQuery<BatchStatusQuery>);
+            //StateHasChanged();
         }
 
         public async Task ReadQuery<T>(object query)

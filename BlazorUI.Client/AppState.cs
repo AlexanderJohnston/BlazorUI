@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Totem.Timeline;
@@ -31,6 +33,16 @@ namespace BlazorUI.Client
     /// </summary>
     public class AppState : ComponentBase
     {
+        private class UICallBack
+        {
+            public UICallBack(MethodInfo handler, object instance)
+            {
+                Handler = handler;
+                Instance = instance;
+            }
+            public MethodInfo Handler;
+            public object Instance;
+        }
         private HttpClient _http { get; set; }
 
         /// <summary>
@@ -52,7 +64,7 @@ namespace BlazorUI.Client
         /// <summary>
         /// Stores Query types and the list of callback functions which are observing changes to that query.
         /// </summary>
-        private Dictionary<Type, List<Func<object, Task>>> _viewSubscriptions { get; set; } = new Dictionary<Type, List<Func<object, Task>>>();
+        private Dictionary<Type, List<UICallBack>> _viewSubscriptions { get; set; } = new Dictionary<Type, List<UICallBack>>();
 
         /// <summary>
         /// Subscribes to changes on the server using SignalR.
@@ -66,8 +78,9 @@ namespace BlazorUI.Client
         /// <param name="handler">Handler method which accepts a JSON representation of a <see cref="Query"/>.</param>
         /// <param name="subscriptionId">Optional: Subscribe to an instance of a query if you know the subscription ID (etag) for it.</param>
         /// <returns></returns>
-        public async Task Subscribe<T>(Func<object, Task> handler = null, string subscriptionId = null)
+        public async Task Subscribe<T>(MethodInfo handler = null, object instance = null, string subscriptionId = null)
         {
+            Debug.WriteLine("Starting subscription method in App State.");
             var type = typeof(T);
             Debug.WriteLine($"Type[{type}]: Subscription Id: {subscriptionId}");
             if (_queryMap == null)
@@ -84,15 +97,21 @@ namespace BlazorUI.Client
                 if (handler != null && _viewSubscriptions.Any(view => view.Key == typeof(T)))
                 {
                     var queryView = _viewSubscriptions.First(view => view.Key == typeof(T));
-                    queryView.Value.Add(handler);
+                    queryView.Value.Add(new UICallBack(handler, instance));
                 }
                 else if (handler != null)
                 {
-                    _viewSubscriptions.Add(type, new List<Func<object, Task>>() { handler });
+                    _viewSubscriptions.Add(type, new List<UICallBack> { new UICallBack(handler, instance) });
                     // If we don't initialize this handler then it will be null when the subscribing component is rendered.
                     //await ReadSubscription<T>("Initialize " + typeof(T), timeline.Route);
                 }
             }
+        }
+        private Func<object, Task> ConvertMethodInfo<T>(MethodInfo handler, object instance)
+        {
+            var param = Expression.Parameter(typeof(T), "input");
+            return Expression.Lambda<Func<object, Task>>(
+                Expression.Call(Expression.Constant(instance), handler, param)).Compile();
         }
 
         private TimelineRoute SelectQuery(Type type) => _queryMap.First(map => map.QueryType == type);
@@ -124,7 +143,7 @@ namespace BlazorUI.Client
                     ? queryRequest.Headers.ETag.Tag
                     : ("null etag on message: " + message);
                 foreach (var callback in _viewSubscriptions.First(view => view.Key == typeof(T)).Value)
-                    await callback.Invoke(query);
+                    await ConvertMethodInfo<T>(callback.Handler, callback.Instance).Invoke(query);
                 return (query);
             }
             else

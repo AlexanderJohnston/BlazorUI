@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace BlazorUI.Client.Pages.Components
 {
-    public class ChatComponent : ComponentBase
+    public class ChatComponent : BaseComponent<ChatQuery>
     {
-        [Inject] public HttpClient _http { get; set; }
-        [Inject] public AppState _appState { get; set; }
         public LobbyQuery Chat { get; set; }
         public LobbyList Lobbies { get; set; }
         public string ChatEtag = "No Chat Etag";
@@ -24,18 +22,10 @@ namespace BlazorUI.Client.Pages.Components
         protected async override Task OnInitializedAsync()
         {
             Console.WriteLine(CurrentLobby);
-            await _appState.Subscribe<LobbyQuery>(ReadQuery<LobbyQuery>, CurrentLobby);
+            //await _appState.Subscribe<LobbyQuery>(ReadLobby<LobbyList>, CurrentLobby);
             //await _appState.Subscribe<LobbyList>(ReadLobby<LobbyList>);
             StateHasChanged();
         }
-
-        public async Task ReadQuery<T>(object query)
-        {
-            var queryResponse = (LobbyQuery)query;
-            this.Chat = queryResponse;
-            StateHasChanged();
-        }
-
         public async Task ReadLobby<T>(object query)
         {
             var queryResponse = (LobbyList)query;
@@ -55,8 +45,8 @@ namespace BlazorUI.Client.Pages.Components
 
         public async Task JoinLobby()
         {
-            await _appState.Subscribe<LobbyQuery>(ReadQuery<LobbyQuery>, CurrentLobby);
-            StateHasChanged();
+            //await _appState.Subscribe<LobbyQuery>(ReadLobby<LobbyQuery>, CurrentLobby);
+            //StateHasChanged();
         }
 
         public async Task CreateLobby()
