@@ -1,4 +1,5 @@
-﻿using BlazorUI.Client.Pages.Data;
+﻿using BlazorUI.Client.Pages.Components;
+using BlazorUI.Client.Pages.Data;
 using BlazorUI.Client.Queries;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
@@ -33,16 +34,6 @@ namespace BlazorUI.Client
     /// </summary>
     public class AppState : ComponentBase
     {
-        private class UICallBack
-        {
-            public UICallBack(MethodInfo handler, object instance)
-            {
-                Handler = handler;
-                Instance = instance;
-            }
-            public MethodInfo Handler;
-            public object Instance;
-        }
         private HttpClient _http { get; set; }
 
         /// <summary>
@@ -52,7 +43,7 @@ namespace BlazorUI.Client
         /// <param name="query"></param>
         public AppState(QueryController query, HttpClient http)
         {
-            _query = query;
+            _hub = query;
             _http = http;
         }
 
@@ -69,7 +60,39 @@ namespace BlazorUI.Client
         /// <summary>
         /// Subscribes to changes on the server using SignalR.
         /// </summary>
-        public QueryController _query { get; set; }
+        public QueryController _hub { get; set; }
+
+        /// <summary>
+        ///     Called by the Query Hub after server notifies a change to a known query. This will call any Component on the UI which is interested.
+        /// </summary>
+        /// <typeparam name="T">The type of query to read after deserialization.</typeparam>
+        /// <param name="message">The serialized query.</param>
+        /// <param name="route">The route it can be fetched from on the server.</param>
+        /// <returns></returns>
+        public async Task<T> ReadSubscription<T>(string message, string route)
+        {
+            var queryRequest = await _http.GetAsync(route);
+            if (queryRequest.IsSuccessStatusCode)
+            {
+                Debug.WriteLine("Received an update to the query: " + typeof(T));
+                var response = await queryRequest.Content.ReadAsStringAsync();
+                var query = JsonConvert.DeserializeObject<T>(response);
+                var ETag = queryRequest.Headers.ETag.Tag.ToString() != null
+                    ? queryRequest.Headers.ETag.Tag
+                    : ($"null etag on route: {route}");
+
+                var queryParameter = Expression.Parameter(typeof(T), "query");
+                var readQueryParameter = Expression.Convert(queryParameter, typeof(object));
+                foreach (var callback in _viewSubscriptions.First(view => view.Key == typeof(T)).Value)
+                    callback.Handler.Invoke(callback.Instance, new object[] { query });
+                return (query);
+            }
+            else
+            {
+                Debug.WriteLine("Failed to " + message + " the update from SignalR on: " + route + " with status: " + queryRequest.StatusCode);
+                return default;
+            }
+        }
 
         /// <summary>
         ///     Subscribes a callback handler method to a <see cref="Query"/> if there exists known route to it.
@@ -78,44 +101,34 @@ namespace BlazorUI.Client
         /// <param name="handler">Handler method which accepts a JSON representation of a <see cref="Query"/>.</param>
         /// <param name="subscriptionId">Optional: Subscribe to an instance of a query if you know the subscription ID (etag) for it.</param>
         /// <returns></returns>
-        public async Task Subscribe<T>(MethodInfo handler = null, object instance = null, string subscriptionId = null)
+        public async Task Subscribe<T>(MethodInfo handler = null, object instance = null, string subscriptionId = null, Type instanceType = null)
         {
-            Debug.WriteLine("Starting subscription method in App State.");
             var type = typeof(T);
-            Debug.WriteLine($"Type[{type}]: Subscription Id: {subscriptionId}");
-            if (_queryMap == null)
-            {
-                _queryMap = await ReadQueryMap();
-            }
-            Debug.WriteLine("Subscribing to a query: " + type.Name);
+            Debug.WriteLine($"Starting subscription to Type[{type}]: Subscription Id: [{subscriptionId}].");
+            await RefreshQuerymap();
             if (QueryExists(type))
             {
-                Console.WriteLine("Matching route found.");
+                Debug.WriteLine($"Matching route found for {type.Name}.");
                 var timeline = SelectQuery(type);
                 var etag = SanitizeETag(await ReadETag(timeline.Route, subscriptionId));
-                _query.SubscribeToQuery(etag, timeline.Route, ReadSubscription<T>);
-                if (handler != null && _viewSubscriptions.Any(view => view.Key == typeof(T)))
-                {
-                    var queryView = _viewSubscriptions.First(view => view.Key == typeof(T));
-                    queryView.Value.Add(new UICallBack(handler, instance));
-                }
-                else if (handler != null)
-                {
-                    _viewSubscriptions.Add(type, new List<UICallBack> { new UICallBack(handler, instance) });
-                    // If we don't initialize this handler then it will be null when the subscribing component is rendered.
-                    //await ReadSubscription<T>("Initialize " + typeof(T), timeline.Route);
-                }
+                _hub.SubscribeToQuery(etag, timeline.Route, ReadSubscription<T>);
+                if (handler == null) return;
+                if (ComponentPreviouslySeen(typeof(T)))
+                    ExistingUICallback(typeof(T)).Add(new UICallBack(handler, instance, instanceType));
+                else
+                    _viewSubscriptions.Add(type, new List<UICallBack> { new UICallBack(handler, instance, instanceType) });
             }
         }
-        private Func<object, Task> ConvertMethodInfo<T>(MethodInfo handler, object instance)
-        {
-            var param = Expression.Parameter(typeof(T), "input");
-            return Expression.Lambda<Func<object, Task>>(
-                Expression.Call(Expression.Constant(instance), handler, param)).Compile();
-        }
 
+        private List<UICallBack> ExistingUICallback(Type t) => _viewSubscriptions.First(view => view.Key == t).Value;
+        private bool ComponentPreviouslySeen(Type t) => _viewSubscriptions.Any(view => view.Key == t);
         private TimelineRoute SelectQuery(Type type) => _queryMap.First(map => map.QueryType == type);
         private bool QueryExists(Type type) => _queryMap.Any(map => map.QueryType == type);
+        private async Task RefreshQuerymap()
+        {
+            if (_queryMap == null)
+                _queryMap = await ReadQueryMap();
+        }
 
         /// <summary>
         ///     Downloads a map from the server which matches a Query type to a controller route.
@@ -127,30 +140,6 @@ namespace BlazorUI.Client
             var response = await request.Content.ReadAsStringAsync();
             Debug.WriteLine("List of queries and their routes: " + response);
             return JsonConvert.DeserializeObject<List<TimelineRoute>>(response);
-        }
-
-        public async Task<T> ReadSubscription<T>(string message, string route)
-        {
-            Debug.WriteLine("Message from SignalR: " + message);
-            var queryRequest = await _http.GetAsync(route);
-            if (queryRequest.IsSuccessStatusCode)
-            {
-                var response = await queryRequest.Content.ReadAsStringAsync();
-                Debug.WriteLine("Response: " + response);
-                var query = JsonConvert.DeserializeObject<T>(response);
-                Debug.WriteLine("Deserialized response into type: " + typeof(T));
-                var ETag = queryRequest.Headers.ETag.Tag.ToString() != null
-                    ? queryRequest.Headers.ETag.Tag
-                    : ("null etag on message: " + message);
-                foreach (var callback in _viewSubscriptions.First(view => view.Key == typeof(T)).Value)
-                    await ConvertMethodInfo<T>(callback.Handler, callback.Instance).Invoke(query);
-                return (query);
-            }
-            else
-            {
-                Debug.WriteLine("Failed to " + message + " the update from SignalR on: " + route + " with status: " + queryRequest.StatusCode);
-                return default;
-            }
         }
 
         private async Task<string> ReadETag(string route, string subscriptionId = null)
@@ -180,7 +169,7 @@ namespace BlazorUI.Client
             return string.Empty;
         }
 
-        public string SanitizeETag(string etag)
+        private string SanitizeETag(string etag)
         {
             string subscription = etag.Trim(new char[] { '"' });
             var checkpoint = subscription.IndexOf("@");
