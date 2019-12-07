@@ -10,7 +10,11 @@ using System.Threading.Tasks;
 
 namespace BlazorUI.Client.Pages.Components
 {
-    public class DatabaseComponent : BaseComponent<BatchStatusQuery>
+    /// <summary>
+    ///     This component is absolutely broken right now other than for initialization purposes.
+    ///     It provides a viable path to display SQL data but the implementation is messy on the server side.
+    /// </summary>
+    public class DatabaseComponent : BaseComponent<DatabaseComponent>
     {
         public string DatabaseTag = "No Database Etag";
         public int NumberOfEvents;

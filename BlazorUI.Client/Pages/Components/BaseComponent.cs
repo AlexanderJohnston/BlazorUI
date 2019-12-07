@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Totem.Timeline;
+using System.Diagnostics;
 
 namespace BlazorUI.Client.Pages.Components
 {
@@ -15,14 +16,14 @@ namespace BlazorUI.Client.Pages.Components
     {
         [Inject] public HttpClient _http { get; set; }
         [Inject] public AppState _appState { get; set; }
-        protected async override Task OnInitializedAsync() 
+        protected async override Task OnInitializedAsync()
         {
             Console.WriteLine("Initialized Properties");
             var properties = GetType().GetProperties();
             var queries = properties.Where(prop => prop.PropertyType.IsSubclassOf(typeof(Query)));
             foreach (var query in queries) 
             {
-                Console.WriteLine($"Subscribing {query} to the app state!!");
+                Console.WriteLine($"Subscribing {query.Name} to the app state from {GetType().Name}.");
                 var type = query.PropertyType;
                 var flags = BindingFlags.Public | BindingFlags.Instance;
                 MethodInfo subscribe = typeof(AppState).GetMethod("Subscribe", flags);
@@ -33,7 +34,8 @@ namespace BlazorUI.Client.Pages.Components
                 Console.WriteLine("Calling AppState.Subscription() with the ReadQuery callback as parameter 0.");
                 var caller = this;
                 object queryRouteId = null;
-                genericSubscribe.Invoke(_appState, new object[]{ genericRead, caller, queryRouteId, GetType() });
+                var finalizedCallback = new UICallBack(genericRead, caller, GetType(), query);
+                genericSubscribe.Invoke(_appState, new object[]{ finalizedCallback, queryRouteId});
             }
         }
         public BaseComponent() { }

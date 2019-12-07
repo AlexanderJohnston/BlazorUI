@@ -81,10 +81,8 @@ namespace BlazorUI.Client
                     ? queryRequest.Headers.ETag.Tag
                     : ($"null etag on route: {route}");
 
-                var queryParameter = Expression.Parameter(typeof(T), "query");
-                var readQueryParameter = Expression.Convert(queryParameter, typeof(object));
                 foreach (var callback in _viewSubscriptions.First(view => view.Key == typeof(T)).Value)
-                    callback.Handler.Invoke(callback.Instance, new object[] { query });
+                    callback.AssignableProperty.SetValue(callback.Instance, query);
                 return (query);
             }
             else
@@ -101,7 +99,7 @@ namespace BlazorUI.Client
         /// <param name="handler">Handler method which accepts a JSON representation of a <see cref="Query"/>.</param>
         /// <param name="subscriptionId">Optional: Subscribe to an instance of a query if you know the subscription ID (etag) for it.</param>
         /// <returns></returns>
-        public async Task Subscribe<T>(MethodInfo handler = null, object instance = null, string subscriptionId = null, Type instanceType = null)
+        public async Task Subscribe<T>(UICallBack readQueryToComponent = null, string subscriptionId = null)
         {
             var type = typeof(T);
             Debug.WriteLine($"Starting subscription to Type[{type}]: Subscription Id: [{subscriptionId}].");
@@ -109,14 +107,14 @@ namespace BlazorUI.Client
             if (QueryExists(type))
             {
                 Debug.WriteLine($"Matching route found for {type.Name}.");
-                var timeline = SelectQuery(type);
-                var etag = SanitizeETag(await ReadETag(timeline.Route, subscriptionId));
-                _hub.SubscribeToQuery(etag, timeline.Route, ReadSubscription<T>);
-                if (handler == null) return;
+                var query = SelectQuery(type);
+                var etag = SanitizeETag(await ReadETag(query.Route, subscriptionId));
+                _hub.SubscribeToQuery(etag, query.Route, ReadSubscription<T>);
+                if (readQueryToComponent == null) return;
                 if (ComponentPreviouslySeen(typeof(T)))
-                    ExistingUICallback(typeof(T)).Add(new UICallBack(handler, instance, instanceType));
+                    ExistingUICallback(typeof(T)).Add(readQueryToComponent);
                 else
-                    _viewSubscriptions.Add(type, new List<UICallBack> { new UICallBack(handler, instance, instanceType) });
+                    _viewSubscriptions.Add(type, new List<UICallBack> { readQueryToComponent });
             }
         }
 
@@ -124,6 +122,11 @@ namespace BlazorUI.Client
         private bool ComponentPreviouslySeen(Type t) => _viewSubscriptions.Any(view => view.Key == t);
         private TimelineRoute SelectQuery(Type type) => _queryMap.First(map => map.QueryType == type);
         private bool QueryExists(Type type) => _queryMap.Any(map => map.QueryType == type);
+
+        /// <summary>
+        ///     Downloads the query map from the server or returns if it has been done already.
+        /// </summary>
+        /// <returns></returns>
         private async Task RefreshQuerymap()
         {
             if (_queryMap == null)
@@ -138,9 +141,25 @@ namespace BlazorUI.Client
         {
             var request = await _http.GetAsync("/querymap/get/");
             var response = await request.Content.ReadAsStringAsync();
-            Debug.WriteLine("List of queries and their routes: " + response);
-            return JsonConvert.DeserializeObject<List<TimelineRoute>>(response);
+            var routes = JsonConvert.DeserializeObject<List<TimelineRoute>>(response);
+            Debug.WriteLine("List of queries and their routes: " + FormatRoutes(routes));
+            return routes;
         }
+
+        private string FormatRoutes(List<TimelineRoute> routes)
+        {
+            var sb = new StringBuilder();
+            foreach (var map in routes)
+            {
+                var queryName = PaddedString($"Type: {map.QueryType.Name}", 30);
+                var endpoint = PaddedString($"Route: {map.Route}", 80);
+                sb.Append(queryName);
+                sb.Append(endpoint);
+                sb.Append(Environment.NewLine);
+            }
+            return sb.ToString();
+        }
+        private string PaddedString(string value, int maxWidth) => value.PadRight(maxWidth, ' ');
 
         private async Task<string> ReadETag(string route, string subscriptionId = null)
         {

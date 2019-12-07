@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlazorUI.Client.Pages.Components
 {
-    public class ChatComponent : BaseComponent<ChatQuery>
+    public class ChatComponent : BaseComponent<ChatComponent>
     {
         public LobbyQuery Chat { get; set; }
         public LobbyList Lobbies { get; set; }
@@ -19,13 +19,6 @@ namespace BlazorUI.Client.Pages.Components
         public string CurrentLobby = "Random";
         public string CreateLobbyName = "Random";
 
-        protected async override Task OnInitializedAsync()
-        {
-            Console.WriteLine(CurrentLobby);
-            //await _appState.Subscribe<LobbyQuery>(ReadLobby<LobbyList>, CurrentLobby);
-            //await _appState.Subscribe<LobbyList>(ReadLobby<LobbyList>);
-            StateHasChanged();
-        }
         public async Task ReadLobby<T>(object query)
         {
             var queryResponse = (LobbyList)query;

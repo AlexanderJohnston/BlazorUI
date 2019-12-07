@@ -11,10 +11,6 @@ namespace BlazorUI.Client.Pages.Components
         public string EchoEtag = "No Echo Etag";
         public EchoQuery Echo { get; set; }
 
-        protected async override Task OnInitializedAsync()
-        {
-            await base.OnInitializedAsync();
-        }
         public async Task ReadQuery<T>(object query)
         {
             this.Echo = (EchoQuery)query;
