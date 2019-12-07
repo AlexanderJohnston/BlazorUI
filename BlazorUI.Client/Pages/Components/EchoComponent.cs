@@ -11,11 +11,6 @@ namespace BlazorUI.Client.Pages.Components
         public string EchoEtag = "No Echo Etag";
         public EchoQuery Echo { get; set; }
 
-        public async Task ReadQuery<T>(object query)
-        {
-            this.Echo = (EchoQuery)query;
-            StateHasChanged();
-        }
         public async Task SendEcho()
         {
             var echoResponse = await _http.PostAsync("/status/sendecho", null);

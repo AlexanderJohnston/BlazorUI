@@ -28,13 +28,11 @@ namespace BlazorUI.Client.Pages.Components
                 var flags = BindingFlags.Public | BindingFlags.Instance;
                 MethodInfo subscribe = typeof(AppState).GetMethod("Subscribe", flags);
                 MethodInfo genericSubscribe = subscribe.MakeGenericMethod(type);
-                MethodInfo read = GetType().GetMethod("ReadQuery", flags);
-                MethodInfo genericRead = read.MakeGenericMethod(type);
 
                 Console.WriteLine("Calling AppState.Subscription() with the ReadQuery callback as parameter 0.");
                 var caller = this;
                 object queryRouteId = null;
-                var finalizedCallback = new UICallBack(genericRead, caller, GetType(), query);
+                var finalizedCallback = new UICallBack(caller, GetType(), query);
                 genericSubscribe.Invoke(_appState, new object[]{ finalizedCallback, queryRouteId});
             }
         }

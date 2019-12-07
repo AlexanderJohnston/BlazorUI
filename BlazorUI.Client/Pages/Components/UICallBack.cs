@@ -8,15 +8,13 @@ namespace BlazorUI.Client.Pages.Components
 {
     public class UICallBack
     {
-        public UICallBack(MethodInfo handler, object instance, Type type, PropertyInfo property)
+        public UICallBack(object instance, Type type, PropertyInfo property)
         {
-            Handler = handler;
             Instance = instance;
             InstanceType = type;
             AssignableProperty = property;
         }
         public Type InstanceType;
-        public MethodInfo Handler;
         public object Instance;
         public PropertyInfo AssignableProperty;
     }
