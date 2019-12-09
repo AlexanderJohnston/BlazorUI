@@ -23,13 +23,13 @@ namespace BlazorUI.Client.Pages.Components
             var queries = properties.Where(prop => prop.PropertyType.IsSubclassOf(typeof(Query)));
             foreach (var query in queries) 
             {
-                Console.WriteLine($"Subscribing {query.Name} to the app state from {GetType().Name}.");
+                Console.WriteLine($"Subscribing the property {query.Name} to receive queries of {query.PropertyType.Name} on the {typeof(T).Name}.");
                 var type = query.PropertyType;
                 var flags = BindingFlags.Public | BindingFlags.Instance;
                 MethodInfo subscribe = typeof(AppState).GetMethod("Subscribe", flags);
                 MethodInfo genericSubscribe = subscribe.MakeGenericMethod(type);
 
-                Console.WriteLine("Calling AppState.Subscription() with the ReadQuery callback as parameter 0.");
+                Console.WriteLine($"Calling AppState.Subscription() with the relevant callback information for {query.Name} on {typeof(T).Name}.");
                 var caller = this;
                 object queryRouteId = null;
                 var finalizedCallback = new UICallBack(caller, GetType(), query);

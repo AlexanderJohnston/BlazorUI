@@ -149,6 +149,7 @@ namespace BlazorUI.Client
         private string FormatRoutes(List<TimelineRoute> routes)
         {
             var sb = new StringBuilder();
+            sb.Append(Environment.NewLine);
             foreach (var map in routes)
             {
                 var queryName = PaddedString($"Type: {map.QueryType.Name}", 30);
