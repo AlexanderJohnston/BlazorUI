@@ -19,6 +19,13 @@ namespace BlazorUI.Client.Pages.Components
         public string CurrentLobby = "Random";
         public string CreateLobbyName = "Random";
 
+        protected async override Task OnInitializedAsync()
+        {
+            var finalizedCallback = new UICallBack(this, GetType(), typeof(LobbyQuery));
+            await base.OnInitializedAsync();
+            await _appState.Subscribe<LobbyQuery>(finalizedCallback, "General Chat");
+        }
+
         public async Task ReadLobby<T>(object query)
         {
             var queryResponse = (LobbyList)query;
