@@ -10,31 +10,29 @@ namespace BlazorUI.Shared.Queries.Game
 {
     public class LobbyList : Query
     {
-        public Dictionary<Id, List<Id>> Lobbies = new Dictionary<Id, List<Id>>();
+        public List<Lobby> Lobbies = new List<Lobby>();
 
-        void Given(LobbyCreated e)
+        void Given(UpdatedLobbyList e)
         {
-            var admins = e.UserIds.ToList();
-            var lobby = e.LobbyId;
-            Lobbies.Add(lobby, admins);
+            Lobbies.AddRange(e.Lobbies);
         }
         void Given(LeaveLobby e) 
         {
             if (LobbyExists(e.LobbyId) && UserInLobby(e.LobbyId, e.UserId))
             {
-                SelectLobby(e.LobbyId).Value.Remove(e.UserId);
+                SelectLobby(e.LobbyId).Users.Remove(e.UserId);
             }
         }
         void Given(JoinLobby e) 
         {
             if (LobbyExists(e.LobbyId))
             {
-                SelectLobby(e.LobbyId).Value.Add(e.UserId);
+                SelectLobby(e.LobbyId).Users.Add(e.UserId);
             }
         }
 
-        private KeyValuePair<Id, List<Id>> SelectLobby(Id lobbyId) => Lobbies.First(lobby => lobby.Key == lobbyId);
-        private bool LobbyExists(Id lobbyId) => Lobbies.Any(lobby => lobby.Key == lobbyId);
-        private bool UserInLobby(Id lobbyId, Id userId) => SelectLobby(lobbyId).Value.Any(user => user == userId);
+        private Lobby SelectLobby(Id lobbyId) => Lobbies.First(lobby => lobby.LobbyId == lobbyId);
+        private bool LobbyExists(Id lobbyId) => Lobbies.Any(lobby => lobby.LobbyId == lobbyId);
+        private bool UserInLobby(Id lobbyId, Id userId) => SelectLobby(lobbyId).Users.Any(user => user == userId);
     }
 }

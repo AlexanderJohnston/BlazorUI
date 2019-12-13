@@ -6,12 +6,13 @@ using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Totem;
 
 namespace BlazorUI.Client.Pages.Components
 {
     public class ChatComponent : BaseComponent<ChatComponent>
     {
-        public LobbyQuery Chat { get; set; }
+        public LobbyQuery Chat { get; set; } = new LobbyQuery().Bind(Id.From("General Chat"));
         public LobbyList Lobbies { get; set; }
         public string ChatEtag = "No Chat Etag";
         public string CurrentMessage = "";
@@ -19,12 +20,12 @@ namespace BlazorUI.Client.Pages.Components
         public string CurrentLobby = "Random";
         public string CreateLobbyName = "Random";
 
-        protected async override Task OnInitializedAsync()
-        {
-            var finalizedCallback = new UICallBack(this, GetType(), typeof(LobbyQuery));
-            await base.OnInitializedAsync();
-            await _appState.Subscribe<LobbyQuery>(finalizedCallback, "General Chat");
-        }
+        //protected async override Task OnInitializedAsync()
+        //{
+        //    var finalizedCallback = new UICallBack(this, GetType(), typeof(LobbyQuery));
+        //    await base.OnInitializedAsync();
+        //    await _appState.Subscribe<LobbyQuery>(finalizedCallback, "General Chat");
+        //}
 
         public async Task ReadLobby<T>(object query)
         {

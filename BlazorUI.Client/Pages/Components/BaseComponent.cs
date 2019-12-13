@@ -23,6 +23,14 @@ namespace BlazorUI.Client.Pages.Components
             var queries = properties.Where(prop => prop.PropertyType.IsSubclassOf(typeof(Query)));
             foreach (var query in queries) 
             {
+
+                // See if the query already exists so that we can bind to its previous instance.
+                if (query.CanRead)
+                {
+                    var value = query.GetValue(this);
+                    Console.WriteLine($"The value found at Query: {query.Name} is {value}.");
+                }
+
                 Console.WriteLine($"Subscribing the property {query.Name} to receive queries of {query.PropertyType.Name} on the {typeof(T).Name}.");
                 var propType = query.PropertyType;
                 var flags = BindingFlags.Public | BindingFlags.Instance;
@@ -36,6 +44,6 @@ namespace BlazorUI.Client.Pages.Components
                 genericSubscribe.Invoke(_appState, new object[]{ finalizedCallback, queryRouteId});
             }
         }
-        public BaseComponent() { }
+        
     }
 }

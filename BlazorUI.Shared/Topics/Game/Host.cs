@@ -11,13 +11,13 @@ namespace BlazorUI.Shared.Topics.Game
 {
     public class Host : Topic
     {
-        public Dictionary<Id, List<Id>> Lobbies = new Dictionary<Id, List<Id>>();
+        public List<Lobby> Lobbies = new List<Lobby>();
 
         void When(JoinLobby e)
         {
             if (LobbyExists(e.LobbyId))
             {
-                SelectLobby(e.LobbyId).Value.Add(e.UserId);
+                SelectLobby(e.LobbyId).Users.Add(e.UserId);
                 Then(new UserJoined(e.LobbyId, e.UserId));
             }
         }
@@ -26,7 +26,7 @@ namespace BlazorUI.Shared.Topics.Game
         {
             if (LobbyExists(e.LobbyId) && UserInLobby(e.LobbyId, e.UserId))
             {
-                SelectLobby(e.LobbyId).Value.Remove(e.UserId);
+                SelectLobby(e.LobbyId).Users.Remove(e.UserId);
                 Then(new UserLeft(e.LobbyId, e.UserId));
             }
         }
@@ -40,8 +40,8 @@ namespace BlazorUI.Shared.Topics.Game
                 return;
             }
             var admins = new List<Id>() { Id.From(e.AdminName) };
-            Lobbies.Add(lobby, admins);
-            Then(new LobbyCreated(lobby, admins));
+            Lobbies.Add(new Lobby(lobby, admins));
+            Then(new UpdatedLobbyList(Lobbies));
         }
 
         void When(MessageReceived e)
@@ -53,8 +53,8 @@ namespace BlazorUI.Shared.Topics.Game
             }
         }
 
-        private KeyValuePair<Id, List<Id>> SelectLobby(Id lobbyId) => Lobbies.First(lobby => lobby.Key == lobbyId);
-        private bool LobbyExists(Id lobbyId) => Lobbies.Any(lobby => lobby.Key == lobbyId);
-        private bool UserInLobby(Id lobbyId, Id userId) => SelectLobby(lobbyId).Value.Any(user => user == userId);
+        private Lobby SelectLobby(Id lobbyId) => Lobbies.First(lobby => lobby.LobbyId == lobbyId);
+        private bool LobbyExists(Id lobbyId) => Lobbies.Any(lobby => lobby.LobbyId == lobbyId);
+        private bool UserInLobby(Id lobbyId, Id userId) => SelectLobby(lobbyId).Users.Any(user => user == userId);
     }
 }

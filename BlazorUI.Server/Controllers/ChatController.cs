@@ -51,7 +51,7 @@ namespace BlazorUI.Server.Controllers
         public Task<IActionResult> Create([FromBody] string newLobby)
         {
             var lobby = JsonConvert.DeserializeObject<ClientLobby>(newLobby);
-            return _commands.Execute(new CreateLobby(lobby.LobbyId, lobby.User), When<LobbyCreated>.ThenOk, When<LobbyFailed>.ThenBadRequest);
+            return _commands.Execute(new CreateLobby(lobby.LobbyId, lobby.User), When<UpdatedLobbyList>.ThenOk, When<LobbyFailed>.ThenBadRequest);
         }
     }
 }

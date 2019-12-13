@@ -11,12 +11,12 @@ namespace BlazorUI.Shared.Queries.Game
 {
     public class LobbyQuery : Query
     {
-        static Id RouteFirst(LobbyCreated e) => e.LobbyId;
+        static Many<Id> RouteFirst(UpdatedLobbyList e) => Many.Of(e.LobbyIds);
         static Id Route(UserJoined e) => e.LobbyId;
         static Id Route(UserLeft e) => e.LobbyId;
         static Id Route(MessageAccepted e) => e.LobbyId;
 
-        public Id LobbyId;
+        public Id Lobby;
         public List<Id> Users = new List<Id>();
         public List<string> Messages = new List<string>();
 
@@ -29,13 +29,11 @@ namespace BlazorUI.Shared.Queries.Game
             Messages.Add(sb.ToString());
         }
 
-        void Given(LobbyCreated e)
+        void Given(UpdatedLobbyList e)
         {
-            LobbyId = e.LobbyId;
-            if (e.UserIds.Any())
-            {
-                Users = e.UserIds.ToList();
-            }
+            Lobby = Id;
+            var lobby = e.Lobbies.Where(room => room.LobbyId == Id).First();
+            Users = lobby.Users.ToList();
         }
 
         void Given(UserJoined e)
