@@ -1,6 +1,5 @@
 ﻿using BlazorUI.Server.Native;
 using Microsoft.Extensions.Hosting;
-using PostSharp.Patterns.Contracts;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +20,7 @@ namespace BlazorUI.Server.Services
         private byte[] _entropy = null;
         private IEncryptionScheme _protectedData { get; set; }
 
-        public async Task<ICryptoTransform> Decrypt([Required] string reason)
+        public async Task<ICryptoTransform> Decrypt(string reason)
         {
             var encryptedInitVector = await ReadClientEncryptionKey(reason);
             if (encryptedInitVector == null) throw new ArgumentException($"{reason} is not a valid reason to decrypt anything.");
@@ -33,7 +32,7 @@ namespace BlazorUI.Server.Services
             return algorithm.CreateDecryptor(algorithm.Key, algorithm.IV);
         }
 
-        public async Task<ICryptoTransform> Encrypt([Required] string reason)
+        public async Task<ICryptoTransform> Encrypt(string reason)
         {
             var algorithm = await CryptographicProvider();
             algorithm.GenerateIV();
@@ -44,18 +43,18 @@ namespace BlazorUI.Server.Services
             return algorithm.CreateEncryptor(algorithm.Key, algorithm.IV);
         }
 
-        public async Task<Stream> EncryptedStream([Required] Stream stream, [Required] string reason) =>
+        public async Task<Stream> EncryptedStream(Stream stream, string reason) =>
             new CryptoStream(stream, await Encrypt(reason), CryptoStreamMode.Write);
 
-        public async Task<Stream> DecryptedStream([Required] Stream stream, [Required] string reason) =>
+        public async Task<Stream> DecryptedStream(Stream stream, string reason) =>
             new CryptoStream(stream, await Decrypt(reason), CryptoStreamMode.Read);
 
         private async Task<byte[]> ReadTotemEncryptionKey() => _protectedData.ReadData("Totem");
-        private async Task StoreTotemEncryptionKey([Required] byte[] key) => _protectedData.WriteData("Totem", key);
+        private async Task StoreTotemEncryptionKey(byte[] key) => _protectedData.WriteData("Totem", key);
 
-        private async Task<byte[]> ReadClientEncryptionKey([Required] string reason) =>
+        private async Task<byte[]> ReadClientEncryptionKey(string reason) =>
             _protectedData.ReadData($"Client.{reason}");
-        private async Task StoreClientEncryptionKey([Required] string reason, [Required] byte[] initVector) =>
+        private async Task StoreClientEncryptionKey(string reason, byte[] initVector) =>
             _protectedData.WriteData($"Client.{reason}", initVector);
 
         private async Task<SymmetricAlgorithm> CryptographicProvider()
@@ -80,7 +79,7 @@ namespace BlazorUI.Server.Services
             catch (Exception ex) { Log.Info(ex, "Failed to generate the key."); }
             return new AesCryptoServiceProvider();
         }
-        private async Task<SymmetricAlgorithm> ExistingKey([Required] byte[] encrypted)
+        private async Task<SymmetricAlgorithm> ExistingKey(byte[] encrypted)
         {
             // If this is set to LocalMachine protection scope then it will be vulnerable to any process.
             var key = ProtectedData.Unprotect(encrypted, null, DataProtectionScope.CurrentUser);

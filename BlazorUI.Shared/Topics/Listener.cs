@@ -1,6 +1,5 @@
 ﻿using BlazorUI.Shared.Events;
 using BlazorUI.Shared.Events.Game;
-using BlazorUI.Shared.Services.Aspect;
 using Microsoft.Extensions.Logging;
 using System;
 using Totem.Timeline;

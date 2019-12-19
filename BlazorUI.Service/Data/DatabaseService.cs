@@ -1,8 +1,6 @@
 ﻿using BlazorUI.Service.Models;
 using BlazorUI.Shared.Data;
-using BlazorUI.Shared.Services.Aspect;
 using Microsoft.EntityFrameworkCore;
-using PostSharp.Patterns.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +19,7 @@ namespace BlazorUI.Service.Data
 
         private readonly string _connection;
 
-        [Profile]
+        //[Profile]
         public async Task<List<TotemV1Event>> GetEvents(int count, int checkpoint)
         {
             var contextBuilder = new DbContextOptionsBuilder<TorqueQAContext>();

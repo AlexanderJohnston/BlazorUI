@@ -33,9 +33,9 @@ namespace BlazorUI.Server
                 .BlazorWebApplication()
                 .ClientUIServices(queryMap)
                 //EncryptionServices()
-                .Serilog((context, logger) => {
-                    logger = new LogConfiguration().VerboseLogger(logger);
-                })
+                //.Serilog((context, logger) => {
+                //    logger = new LogConfiguration().VerboseLogger(logger);
+                //})
             );
         }
 
