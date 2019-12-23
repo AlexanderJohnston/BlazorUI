@@ -13,7 +13,7 @@
   </PropertyGroup>
    
   <ItemGroup>
-    <PackageReference Include="Blazor.Extensions.SignalR" Version="1.0.0" />
+    <PackageReference Include="Blazor.Extensions.SignalR" Version="1.1.0-preview3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.1.0-preview4.19579.2" />
