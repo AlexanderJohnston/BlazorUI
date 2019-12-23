@@ -35,6 +35,7 @@ namespace BlazorUI.Server
             }
 
             app.UseClientSideBlazorFiles<Client.Startup>();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
