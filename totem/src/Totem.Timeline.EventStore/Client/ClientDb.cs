@@ -69,59 +69,34 @@ namespace Totem.Timeline.EventStore.Client
       return new TimelinePosition(result.NextExpectedVersion);
     }
 
-    public Task<QueryState> ReadQuery(QueryETag etag) =>
-      ReadQueryCheckpoint(etag.Key, () => GetDefaultState(etag), e => GetCheckpointState(etag, e));
-
-    public Task<Query> ReadQueryContent(FlowKey key) =>
-      ReadQueryCheckpoint(key, () => GetDefaultContent(key), e => GetCheckpointContent(key, e));
-
-        async Task<TResult> ReadQueryCheckpoint<TResult>(FlowKey key, Func<TResult> getDefault, Func<ResolvedEvent, TResult> getCheckpoint)
-        {
-            var stream = key.GetCheckpointStream();
-            EventReadResult result = default(EventReadResult);
-            try
-            {
-                result = await _context.Connection.ReadEventAsync(stream, StreamPosition.End, resolveLinkTos: false);
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            switch (result.Status)
-            {
-                case EventReadStatus.NoStream:
-                case EventReadStatus.NotFound:
-                    return getDefault();
-                case EventReadStatus.Success:
-                    return getCheckpoint(result.Event.Value);
-                default:
-                    throw new Exception($"Unexpected result when reading {stream}: {result.Status}");
-            }
-        }
-
-        QueryState GetDefaultState(QueryETag etag)
+    public async Task<Query> ReadQuery(FlowKey key)
     {
-      var defaultJson = _context.Json.ToJsonUtf8(etag.Key.Type.New());
+      var query = await ReadQueryCheckpoint(key, () => GetDefaultContent(key), e => GetCheckpointContent(key, e));
 
-      return new QueryState(etag.WithoutCheckpoint(), new MemoryStream(defaultJson));
+      FlowContext.Bind(query, key);
+
+      return query;
     }
 
-    QueryState GetCheckpointState(QueryETag etag, ResolvedEvent e)
+    public Task<QueryContent> ReadQueryContent(QueryETag etag) =>
+      ReadQueryCheckpoint(etag.Key, () => GetDefaultContent(etag), e => GetCheckpointContent(etag, e));
+
+    async Task<TResult> ReadQueryCheckpoint<TResult>(FlowKey key, Func<TResult> getDefault, Func<ResolvedEvent, TResult> getCheckpoint)
     {
-      var metadata = _context.ReadCheckpointMetadata(e);
+      var stream = key.GetCheckpointStream();
 
-      if(metadata.ErrorPosition.IsSome)
+      var result = await _context.Connection.ReadEventAsync(stream, StreamPosition.End, resolveLinkTos: false);
+
+      switch(result.Status)
       {
-        throw new Exception($"Query is stopped at {metadata.ErrorPosition} with the following error: {metadata.ErrorMessage}");
+        case EventReadStatus.NoStream:
+        case EventReadStatus.NotFound:
+          return getDefault();
+        case EventReadStatus.Success:
+          return getCheckpoint(result.Event.Value);
+        default:
+          throw new Exception($"Unexpected result when reading {stream}: {result.Status}");
       }
-
-      var checkpoint = new TimelinePosition(e.Event.EventNumber);
-
-      return checkpoint == etag.Checkpoint
-        ? new QueryState(etag)
-        : new QueryState(etag.WithCheckpoint(checkpoint), new MemoryStream(e.Event.Data));
     }
 
     Query GetDefaultContent(FlowKey key) =>
@@ -137,6 +112,29 @@ namespace Totem.Timeline.EventStore.Client
       }
 
       return (Query) _context.Json.FromJsonUtf8(e.Event.Data, key.Type.DeclaredType);
+    }
+
+    QueryContent GetDefaultContent(QueryETag etag)
+    {
+      var defaultJson = _context.Json.ToJsonUtf8(etag.Key.Type.New());
+
+      return new QueryContent(etag.WithoutCheckpoint(), new MemoryStream(defaultJson));
+    }
+
+    QueryContent GetCheckpointContent(QueryETag etag, ResolvedEvent e)
+    {
+      var metadata = _context.ReadCheckpointMetadata(e);
+
+      if(metadata.ErrorPosition.IsSome)
+      {
+        throw new Exception($"Query is stopped at {metadata.ErrorPosition} with the following error: {metadata.ErrorMessage}");
+      }
+
+      var checkpoint = new TimelinePosition(e.Event.EventNumber);
+
+      return checkpoint == etag.Checkpoint
+        ? new QueryContent(etag)
+        : new QueryContent(etag.WithCheckpoint(checkpoint), new MemoryStream(e.Event.Data));
     }
   }
 }

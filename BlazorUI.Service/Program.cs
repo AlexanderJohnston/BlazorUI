@@ -16,7 +16,7 @@ namespace BlazorUI.Service
         {
             var configuration = new ConfigureServiceApp();
             return ServiceApp.Run<ApplicationArea>(
-                configuration.Host(build =>
+                configuration.BeforeHost(build =>
                 {
                     build.ConfigureAppConfiguration((context, configuration) =>
                     {

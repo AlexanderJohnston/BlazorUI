@@ -23,7 +23,7 @@ namespace BlazorUI.Server
     {
         public static ConfigureWebApp EncryptionServices(this ConfigureWebApp configure)
         {
-            return configure.Services((context, services) =>
+            return configure.AfterServices((context, services) =>
             {
                 //services.AddHostedService(er => new EncryptionReader(new DataProtection()));
             });
@@ -37,7 +37,7 @@ namespace BlazorUI.Server
         /// <returns></returns>
         public static ConfigureWebApp ClientUIServices(this ConfigureWebApp configure, List<TimelineRoute> queryMap)
         {
-            return configure.Services((context, services) =>
+            return configure.BeforeServices((context, services) =>
             {
                 services.AddServerSideBlazor();
                 services.AddSignalR().AddQueryNotifications();
@@ -60,7 +60,7 @@ namespace BlazorUI.Server
         /// <returns></returns>
         public static ConfigureWebApp BlazorWebApplication(this ConfigureWebApp configure)
         {
-            return configure.App(app =>
+            return configure.BeforeApp(app =>
             {
                 var environment = app.ApplicationServices
                     .GetRequiredService<IHostEnvironment>();

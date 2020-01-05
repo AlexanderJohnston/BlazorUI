@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Totem;
+using Totem.Reflection;
 using Totem.Timeline;
 using Totem.Timeline.Area;
 
@@ -14,7 +15,7 @@ namespace BlazorUI.Client.Pages.Components
         {
             var queryType = query.GetType();
             var areaMap = AreaMap.From(new[] { queryType });
-            AreaTypeName.TryFrom(queryType.Name, out var areaType);
+            TypeName.TryFrom(queryType.Name, out var areaType);
             var flowType = areaMap.GetFlow(areaType);
             var subscriptionKey = FlowKey.From(flowType, instanceId);
             FlowContext.Bind(query, subscriptionKey);

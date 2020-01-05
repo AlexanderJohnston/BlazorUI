@@ -29,7 +29,7 @@ namespace Totem.Runtime
     protected IClock Clock => Traits.Clock.Get(this);
 
     [Transient, DebuggerHidden, DebuggerNonUserCode, DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public ILogger Log => Traits.Log.Get(this);
+    protected ILogger Log => Traits.Log.Get(this);
 
     /// <summary>
     /// Declares the Clock and Log fields common to the runtime

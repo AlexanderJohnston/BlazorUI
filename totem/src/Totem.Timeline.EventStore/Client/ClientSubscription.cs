@@ -53,7 +53,7 @@ namespace Totem.Timeline.EventStore.Client
         eventAppeared: (_, e) => OnNextFromClient(e),
         subscriptionDropped: (_, reason, error) => OnDropped(reason, error));
 
-      task.Wait();
+      _clientSubscription = await task.ConfigureAwait(false);
     }
 
     Task OnNextFromTimeline(ResolvedEvent e) =>
