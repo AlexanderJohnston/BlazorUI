@@ -33,7 +33,7 @@
     "babel-runtime": "^6.26.0",
     "jquery": "^3.4.0",
     "linq": "^3.1.0",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-draggable": "^3.0.5",
